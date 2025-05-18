@@ -1,0 +1,60 @@
+.feature-section {
+  background-color: #1a1a1a;
+  padding: 5rem 5rem;
+  color: white;
+}
+
+.feature-content {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 2.5rem;
+}
+.feature-content:last-child {
+  margin-bottom: 0;
+}
+
+.feature-content img {
+  width: 65%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.feature-text {
+  flex: 1;
+}
+
+.feature-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #f3f4f6;
+}
+
+.feature-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .feature-content {
+    flex-direction: column;
+  }
+  
+  .feature-content img {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 2rem;
+  }
+  
+  .feature-text h2 {
+    font-size: 2rem;
+  }
+}
+
+/* input::placeholder {
+  color: #fff;
+  opacity: 1; 
+} */

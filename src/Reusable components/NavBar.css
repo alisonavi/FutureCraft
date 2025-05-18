@@ -1,0 +1,114 @@
+.navbar {
+  background: linear-gradient(to right, rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.85));
+  backdrop-filter: blur(10px);
+  padding: 1rem 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled {
+  background: linear-gradient(to right, rgba(17, 24, 39, 0.98), rgba(17, 24, 39, 0.95));
+  padding: 0.8rem 5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.7rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+  opacity: 1;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #6366f1;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Animation for navbar items */
+/* @keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-links a {
+  animation: fadeInDown 0.5s ease-out forwards;
+  animation-delay: calc(var(--i) * 0.1s);
+  opacity: 0;
+} */
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem 2rem;
+  }
+  
+  .navbar.scrolled {
+    padding: 0.8rem 2rem;
+  }
+  
+  .nav-links {
+    gap: 1rem;
+  }
+}
+
+.navbar, .logo, .nav-links a {
+  transition: all 0.8s cubic-bezier(0.4,0,0.2,1) !important;
+}
