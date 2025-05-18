@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-
+import logo from '../assets/FutureCraftLogo.png';
 const Navbar = () => {
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -18,9 +18,10 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-header">
-        <h1 className="logo" onClick={() => {
-          navigate('/')
-        }}>FutureCraft</h1>
+        <div className="logo-container" onClick={() => { navigate('/') }}>
+          <img alt="FutureCraft logo" src={logo} className="logo-img" />
+          <h1 className="logo-text">FutureCraft</h1>
+        </div>
         <nav className="nav-links">
           <Link to="/">Home</Link>
           <Link to="#test">Preference Test</Link>

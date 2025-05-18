@@ -1,7 +1,9 @@
 import React from 'react'
-import './Explore.css'
-export const Explore = () => {
+
+const Explore = () => {
   return (
     <div>Explore</div>
   )
 }
+
+export default Explore

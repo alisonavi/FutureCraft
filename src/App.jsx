@@ -12,6 +12,7 @@ import LoginPage from './Login page/Login';
 import { AnimatePresence } from 'framer-motion';
 import UserProfile from './User Page/UserProfile';
 import UnityGame from './Reusable components/UnityGame';
+import Explore from './ExplorePaths page/Explore'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<UserProfile />} />
+        <Route path="/preferencetest" element={<Explore />} />
       </Routes>
       <AnimatePresence />
       <Footer />
