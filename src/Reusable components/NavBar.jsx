@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Navbar.css';
+import './NavBar.css';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import logo from '../assets/FutureCraftLogo.png';
 const Navbar = () => {
