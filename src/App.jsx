@@ -14,6 +14,7 @@ import UserProfile from './User Page/UserProfile';
 import UnityGame from './Reusable components/UnityGame';
 import Explore from './ExplorePaths page/Explore'
 import Preference from './PrefenceTest page/Preference'
+import PreferencePage from './PrefenceTest page/PreferencePage';
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<UserProfile />} />
-        <Route path="/preftest" element={<Preference />} />
+        <Route path="/preftest" element={<PreferencePage />} />
         <Route path="/explore" element={<Explore />} />
       </Routes>
       <AnimatePresence />

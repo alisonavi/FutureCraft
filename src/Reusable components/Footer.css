@@ -1,5 +1,6 @@
 .footer {
-  background-color: #1a1a1a;
+  /* background-color: #1a1a1a; */
+  background: linear-gradient(to right, rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.85));
   padding: 2rem 4rem;
   color: white;
   border-top: 0.25rem solid #0d6efd;
