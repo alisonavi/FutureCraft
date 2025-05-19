@@ -54,6 +54,31 @@
   }
 }
 
+@media (max-width: 600px) {
+  .feature-section {
+    padding: 1.2rem 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1.2rem;
+    background: #232946;
+  }
+  .feature-content {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .feature-content img {
+    width: 100%;
+    height: 10rem;
+    margin-bottom: 1rem;
+    border-radius: 0.7rem;
+  }
+  .feature-text h2 {
+    font-size: 1.2rem;
+  }
+  .feature-text p {
+    font-size: 0.9rem;
+  }
+}
+
 /* input::placeholder {
   color: #fff;
   opacity: 1; 

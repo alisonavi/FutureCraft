@@ -140,6 +140,73 @@
   }
 }
 
+@media (max-width: 600px) {
+  .navbar, .navbar.scrolled {
+    padding: 0.5rem 0.5rem;
+    min-height: 3.5rem;
+  }
+  .navbar-content {
+    max-width: 100vw;
+    padding: 0;
+  }
+  .logo-img {
+    width: 2rem;
+    height: 2rem;
+  }
+  .logo-text {
+    font-size: 1.2rem;
+  }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 3.5rem;
+    left: 0;
+    width: 100vw;
+    background: linear-gradient(to right, rgba(17, 24, 39, 0.98), rgba(17, 24, 39, 0.95));
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 0;
+    z-index: 1001;
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.15);
+  }
+  .navbar.mobile-open .nav-links {
+    display: flex;
+  }
+  .hamburger {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1002;
+    margin-left: auto;
+  }
+  .hamburger span, .hamburger span:before, .hamburger span:after {
+    display: block;
+    position: absolute;
+    width: 1.5rem;
+    height: 0.2rem;
+    background: #fff;
+    border-radius: 2px;
+    transition: 0.3s;
+    left: 0.25rem;
+  }
+  .hamburger span {
+    top: 0.9rem;
+  }
+  .hamburger span:before {
+    content: '';
+    top: -0.5rem;
+  }
+  .hamburger span:after {
+    content: '';
+    top: 0.5rem;
+  }
+}
+
 .navbar, .logo, .nav-links a {
   transition: all 0.8s cubic-bezier(0.4,0,0.2,1) !important;
 }

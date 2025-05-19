@@ -83,3 +83,30 @@
 .cta-button, h1, h2, p {
   transition: all 0.8s cubic-bezier(0.4,0,0.2,1) !important;
 }
+
+@media (max-width: 600px) {
+  .hero-container {
+    padding: 3.5rem 1rem 0.5rem 1rem;
+    height: 15rem;
+    border-radius: 0 0 1.2rem 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+  .hero-content {
+    margin-top: 2rem;
+    max-width: 95vw;
+  }
+  .hero-content h1 {
+    font-size: 1.5rem;
+  }
+  .hero-content h2 {
+    font-size: 0.9rem;
+  }
+  .hero-content p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  .cta-button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
