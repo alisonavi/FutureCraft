@@ -17,18 +17,20 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="navbar-header">
-        <div className="logo-container" onClick={() => { navigate('/') }}>
-          <img alt="FutureCraft logo" src={logo} className="logo-img" />
-          <h1 className="logo-text">FutureCraft</h1>
+      <div className="navbar-content">
+        <div className="navbar-header">
+          <div className="logo-container" onClick={() => { navigate('/') }}>
+            <img alt="FutureCraft logo" src={logo} className="logo-img" />
+            <h1 className="logo-text">FutureCraft</h1>
+          </div>
+          <nav className="nav-links">
+            <Link to="/">Home</Link>
+            <Link to="/preftest">Preference Test</Link>
+            <Link to="/explore">Explore Paths</Link>
+            <Link to="/register">Registration</Link>
+            <Link to="#contact">Contact</Link>
+          </nav>
         </div>
-        <nav className="nav-links">
-          <Link to="/">Home</Link>
-          <Link to="/preftest">Preference Test</Link>
-          <Link to="/explore">Explore Paths</Link>
-          <Link to="/register">Registration</Link>
-          <Link to="#contact">Contact</Link>
-        </nav>
       </div>
     </nav>
   );
