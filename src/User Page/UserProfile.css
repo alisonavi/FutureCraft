@@ -2,6 +2,7 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
   padding: 2rem;
+  padding-top: 5.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -136,6 +137,7 @@
 @media (max-width: 48rem) {
   .profile-container {
     padding: 1rem;
+    padding-top: 4rem;
   }
   
   .profile-content {

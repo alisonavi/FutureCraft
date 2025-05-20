@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import './UserProfile.css';
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(false);
-  const token = localStorage.getItem('auth_token');
+  let token = localStorage.getItem('auth_token');
+  if (!token) {
+    token = getCookie('auth_token');
+  }
 
   // Redirect immediately if no token
   if (!token) {
@@ -19,7 +30,6 @@ const UserProfile = () => {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
-            'ngrok-skip-browser-warning': 'true'
           }
         });
 
@@ -40,6 +50,7 @@ const UserProfile = () => {
 
   if (error) {
     localStorage.removeItem('auth_token');
+    document.cookie = 'auth_token=; Max-Age=0; path=/;';
     return <Navigate to="/login" />;
   }
 
@@ -49,14 +60,28 @@ const UserProfile = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('auth_token');
+    document.cookie = 'auth_token=; Max-Age=0; path=/;';
     window.location.href = '/login';
   };
 
   return (
     <div className="profile-container">
-      <h2>Welcome, {user.name}</h2>
-      <p>Email: {user.email}</p>
-      <button onClick={handleLogout}>Logout</button>
+      <div className="profile-content">
+        <div className="profile-header">
+          <h2>Welcome, {user.name}</h2>
+        </div>
+        <div className="profile-info">
+          <div className="info-group">
+            <div className="info-label">Name</div>
+            <div className="info-value">{user.name}</div>
+          </div>
+          <div className="info-group">
+            <div className="info-label">Email</div>
+            <div className="info-value">{user.email}</div>
+          </div>
+        </div>
+        <button className="edit-button" onClick={handleLogout}>Logout</button>
+      </div>
     </div>
   );
 };

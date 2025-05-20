@@ -40,6 +40,7 @@ const LoginPage = () => {
 
       const data = await response.json();
       localStorage.setItem('auth_token', data.token);
+      document.cookie = `auth_token=${data.token}; path=/;`;
       console.log("User successfully logged in")
       navigate('/profile');
     } catch (error) {
