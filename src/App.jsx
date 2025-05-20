@@ -11,7 +11,7 @@ import HeroSection from './Main page/HeroSection';
 import LoginPage from './Login page/Login';
 import { AnimatePresence } from 'framer-motion';
 import UserProfile from './User Page/UserProfile';
-import UnityGame from './Reusable components/UnityGame';
+import GameContainer from './Reusable components/GameContainer';
 import Explore from './ExplorePaths page/Explore'
 import Preference from './PrefenceTest page/Preference'
 import PreferencePage from './PrefenceTest page/PreferencePage';
@@ -27,7 +27,7 @@ function App() {
             <FeatureSection />
             <Carousel />
             <ThreeCardsSection />
-            <UnityGame />
+            <GameContainer />
           </>
         } />
         <Route path="/register" element={<RegisterPage />} />
