@@ -15,6 +15,7 @@ import GameContainer from './Reusable components/GameContainer';
 import Explore from './ExplorePaths page/Explore'
 import Preference from './PrefenceTest page/Preference'
 import PreferencePage from './PrefenceTest page/PreferencePage';
+import Contact from './Contact us page/Contact';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/preftest" element={<PreferencePage />} />
         <Route path="/explore" element={<Explore />} />
+        <Route path='/contact' element={<Contact />} />
       </Routes>
       <AnimatePresence />
       <Footer />

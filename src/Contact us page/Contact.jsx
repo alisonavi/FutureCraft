@@ -54,11 +54,11 @@ const Contact = () => {
                 </div>
                 <div className="info-item">
                   <i className="fas fa-phone"></i>
-                  <p>+1 (555) 123-4567</p>
+                  <p>+1 (251) 324-7355</p>
                 </div>
                 <div className="info-item">
                   <i className="fas fa-map-marker-alt"></i>
-                  <p>123 Career Street, Future City, FC 12345</p>
+                  <p>Orange Beach, AL 36561</p>
                 </div>
               </div>
             </div>

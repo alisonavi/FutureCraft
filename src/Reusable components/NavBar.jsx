@@ -19,7 +19,7 @@ const Navbar = () => {
             <Link to="/preftest">Preference Test</Link>
             <Link to="/explore">Explore Paths</Link>
             <Link to="/register">Registration</Link>
-            <Link to="#contact">Contact</Link>
+            <Link to="/contact">Contact</Link>
           </nav>
         </div>
       </div>
