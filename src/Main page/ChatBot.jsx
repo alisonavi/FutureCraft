@@ -9,11 +9,12 @@ const ChatBot = () => {
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(true);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, open]);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -48,9 +49,42 @@ const ChatBot = () => {
     }
   };
 
+  if (!open) {
+    return (
+      <button
+        className="chatbot-fab"
+        onClick={() => setOpen(true)}
+        aria-label="Open chat"
+        style={{
+          position: 'fixed',
+          bottom: '1.5rem',
+          right: '1.5rem',
+          zIndex: 2001,
+          width: 60,
+          height: 60,
+          borderRadius: '50%',
+          background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+          color: '#fff',
+          border: 'none',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
+          fontSize: 32,
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <span role="img" aria-label="Chat">💬</span>
+      </button>
+    );
+  }
+
   return (
     <div className="chatbot-container">
-      <div className="chatbot-header">Career AI Chat</div>
+      <div className="chatbot-header">
+        Career AI Chat
+        <button className="chatbot-close-btn" onClick={() => setOpen(false)} title="Close chat">×</button>
+      </div>
       <div className="chatbot-messages">
         {messages.map((msg, idx) => (
           <div

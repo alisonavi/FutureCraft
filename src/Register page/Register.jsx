@@ -40,6 +40,7 @@ const RegisterPage = () => {
     try {
       const response = await fetch('http://192.168.0.106:8000/api/register', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },

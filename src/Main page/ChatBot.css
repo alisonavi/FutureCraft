@@ -1,35 +1,56 @@
 .chatbot-container {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 0.5rem;
+  right: 0.5rem;
   width: 350px;
   max-width: 90vw;
   height: 480px;
-  background: #181c2f;
-  border-radius: 1.2rem;
+  background: rgba(24, 28, 47, 0.85);
+  border-radius: 1.2rem 1.2rem 0.7rem 0.7rem;
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
   z-index: 2000;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   border: 1.5px solid #6366f1;
+  backdrop-filter: blur(8px);
 }
 
 .chatbot-header {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(135deg, rgba(99,102,241,0.95), rgba(139,92,246,0.95));
   color: #fff;
-  padding: 1rem 1.2rem;
+  padding: 1rem 1.2rem 1rem 1.2rem;
   font-weight: bold;
   font-size: 1.1rem;
   letter-spacing: 0.03em;
   text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chatbot-close-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 1rem;
+  transition: color 0.2s;
+  opacity: 0.7;
+}
+
+.chatbot-close-btn:hover {
+  color: #ff6b6b;
+  opacity: 1;
 }
 
 .chatbot-messages {
   flex: 1 1 auto;
   padding: 1rem;
   overflow-y: auto;
-  background: #232946;
+  background: rgba(35, 41, 70, 0.85);
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
@@ -47,13 +68,13 @@
 
 .chatbot-message.user {
   align-self: flex-end;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(135deg, rgba(99,102,241,0.95), rgba(139,92,246,0.95));
   color: #fff;
 }
 
 .chatbot-message.ai {
   align-self: flex-start;
-  background: #181c2f;
+  background: rgba(24, 28, 47, 0.7);
   color: #a5b4fc;
   border: 1px solid #6366f1;
 }
@@ -61,7 +82,7 @@
 .chatbot-input-row {
   display: flex;
   padding: 1rem;
-  background: #181c2f;
+  background: rgba(24, 28, 47, 0.85);
   border-top: 1px solid #232946;
   gap: 0.5rem;
 }
@@ -71,7 +92,7 @@
   padding: 0.7rem 1rem;
   border-radius: 1rem;
   border: 1px solid #6366f1;
-  background: #232946;
+  background: rgba(35, 41, 70, 0.85);
   color: #fff;
   font-size: 1rem;
   outline: none;
@@ -86,6 +107,9 @@
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .chatbot-send-btn:hover {
