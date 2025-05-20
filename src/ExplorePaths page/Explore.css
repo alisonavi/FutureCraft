@@ -1,0 +1,283 @@
+.explore-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #232946 0%, #3b3b5b 100%);
+  padding: 6rem 2rem 4rem 2rem;
+  color: white;
+}
+
+.explore-header {
+  text-align: center;
+  max-width: 50rem;
+  margin: 0 auto 4rem auto;
+  animation: fadeIn 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+.explore-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.explore-header p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+.paths-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 75rem;
+  margin: 0 auto;
+}
+
+.path-card {
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(0.625rem);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.path-card::before {
+  content: '';
+  position: absolute;
+  top: -0.125rem;
+  left: -0.125rem;
+  right: -0.125rem;
+  bottom: -0.125rem;
+  background: linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899);
+  border-radius: 1.375rem;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.path-card:hover::before,
+.path-card.selected::before {
+  opacity: 0.5;
+}
+
+.path-card:hover,
+.path-card.selected {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.path-icon {
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.4s ease;
+}
+
+.path-card:hover .path-icon {
+  transform: scale(1.1);
+}
+
+.path-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #a5b4fc;
+}
+
+.path-card p {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.career-list {
+  display: none;
+  margin-top: 1.5rem;
+}
+
+.path-card.selected .career-list {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+.career-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.career-item:last-child {
+  margin-bottom: 0;
+}
+
+.career-item h4 {
+  color: #6366f1;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.career-item p {
+  font-size: 0.9rem;
+  margin-bottom: 0;
+  opacity: 0.7;
+}
+
+.explore-cta {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 3rem;
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(0.625rem);
+  border-radius: 1.25rem;
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.1);
+}
+
+.explore-cta h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.explore-cta p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+.explore-cta button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 1.5625rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.explore-cta button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.explore-cta button:hover {
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.3125rem 0.9375rem rgba(99, 102, 241, 0.4);
+}
+
+.explore-cta button:hover::before {
+  left: 100%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 48rem) {
+  .explore-container {
+    padding: 5rem 1rem 3rem 1rem;
+  }
+
+  .explore-header h1 {
+    font-size: 2rem;
+  }
+
+  .explore-header p {
+    font-size: 1rem;
+  }
+
+  .paths-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .path-card {
+    padding: 1.5rem;
+  }
+
+  .explore-cta {
+    padding: 2rem;
+    margin-top: 3rem;
+  }
+
+  .explore-cta h2 {
+    font-size: 1.5rem;
+  }
+
+  .explore-cta p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .explore-container {
+    padding: 4rem 0.5rem 2rem 0.5rem;
+  }
+
+  .explore-header {
+    margin-bottom: 2rem;
+  }
+
+  .explore-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .path-card {
+    padding: 1rem;
+  }
+
+  .path-icon {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .path-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .explore-cta {
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .explore-cta h2 {
+    font-size: 1.2rem;
+  }
+
+  .explore-cta button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}

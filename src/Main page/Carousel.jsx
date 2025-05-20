@@ -3,27 +3,32 @@ import './Carousel.css';
 import slide1 from '../assets/carousel1.png';
 import slide2 from '../assets/carousel2.jpg';
 import slide3 from '../assets/carousel3.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const Carousel = () => {
+  const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
   const slides = [
     {
       image: slide1,
       title: 'Join Our Thriving Community',
       description: 'Connect with individuals who share your aspirations. Together, we can learn, grow, and support each other in our career endeavors.',
-      buttonText: 'Get Involved'
+      buttonText: 'Get Involved',
+      action: () => navigate('/register')
     },
     {
       image: slide2,
       title: 'Discover Your Potential',
       description: "Unearth your unique skills and interests with FutureCraft's engaging preference test. Begin your journey towards a career that truly fits you.",
-      buttonText: 'Take the Test'
+      buttonText: 'Take the Test',
+      action: () => navigate('/preftest')
     },
     {
       image: slide3,
       title: 'Explore Diverse Opportunities',
       description: 'Navigate through various career paths tailored to your preferences. FutureCraft offers insights to help you make informed career choices.',
-      buttonText: 'Learn More'
+      buttonText: 'Learn More',
+      action: () => navigate('/explore')
     }
   ];
 
@@ -51,7 +56,7 @@ const Carousel = () => {
             <div className="slide-content">
               <h2 className="fade-in fade-in-2">{slide.title}</h2>
               <p className="fade-in fade-in-3">{slide.description}</p>
-              <button className="fade-in fade-in-4">{slide.buttonText}</button>
+              <button className="fade-in fade-in-4" onClick={slide.action}>{slide.buttonText}</button>
             </div>
           </div>
         ))}
