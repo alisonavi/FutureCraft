@@ -37,6 +37,7 @@ function App() {
         <Route path="/preftest" element={<PreferencePage />} />
         <Route path="/explore" element={<Explore />} />
         <Route path='/contact' element={<Contact />} />
+        <Route path='/profile' element={<UserProfile />} />
       </Routes>
       <AnimatePresence />
       <Footer />

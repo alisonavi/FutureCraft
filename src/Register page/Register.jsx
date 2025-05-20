@@ -60,9 +60,8 @@ const RegisterPage = () => {
       }
 
       // After successful registration
-      const data = await response.json();
-      localStorage.setItem('auth_token', data.token);
-      console.log("User successfully added")
+      setError('Registration successful! Redirecting to login...');
+      setTimeout(() => navigate('/login'), 1500);
     } catch (error) {
       console.error(error);
       setError('Network error. Please try again.');
@@ -81,7 +80,11 @@ const RegisterPage = () => {
         <div className="register-content">
           <div className="new-user">
             <h2>Create Your Account</h2>
-            {error && <p className="error-message">{error}</p>}
+            {(error && error.toLowerCase().includes('success')) ? (
+              <p className="success-message">{error}</p>
+            ) : error ? (
+              <p className="error-message">{error}</p>
+            ) : null}
             <form className="register-form" onSubmit={handleSubmit}>
               <input
                 className='register-input'

@@ -41,6 +41,7 @@ const LoginPage = () => {
       const data = await response.json();
       localStorage.setItem('auth_token', data.token);
       console.log("User successfully logged in")
+      navigate('/profile');
     } catch (error) {
       console.error(error);
       setError('Network error. Please try again.');
