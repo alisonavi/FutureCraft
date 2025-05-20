@@ -192,6 +192,30 @@
 }
 
 @media (max-width: 600px) {
+  .contact-container,
+  .contact-content,
+  .contact-grid,
+  .contact-form {
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+  .contact-form {
+    padding: 0;
+    margin: 0;
+  }
+  .form-group,
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .contact-form button {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
   .contact-container {
     padding: 4rem 0.5rem 2rem 0.5rem;
   }

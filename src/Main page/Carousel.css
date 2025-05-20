@@ -188,7 +188,7 @@
     font-size: 0.9rem;
     width: 7rem;
     padding: 0.5rem 1rem;
-    margin: 0 auto 1.2rem auto;
+    margin: 0 auto 2.2rem auto;
     display: block;
   }
   .carousel-nav {
@@ -221,7 +221,7 @@
     left: 50%;
     transform: translateX(-50%);
     z-index: 11;
-    margin-top: 0.5rem;
+    margin-top: 1.2rem;
   }
   .indicator {
     width: 0.7rem;

@@ -68,38 +68,40 @@ const Explore = () => {
   ];
 
   return (
-    <div className="explore-container">
-      <div className="explore-header">
-        <h1>Explore Career Paths</h1>
-        <p>Discover your potential and find the perfect career path that matches your interests and skills.</p>
-      </div>
+    <div className="page-content">
+      <div className="explore-container">
+        <div className="explore-header">
+          <h1>Explore Career Paths</h1>
+          <p>Discover your potential and find the perfect career path that matches your interests and skills.</p>
+        </div>
 
-      <div className="paths-grid">
-        {careerPaths.map((path) => (
-          <div
-            key={path.id}
-            className={`path-card ${selectedPath === path.id ? 'selected' : ''}`}
-            onClick={() => setSelectedPath(path.id)}
-          >
-            <img src={path.icon} alt={path.title} className="path-icon" />
-            <h3>{path.title}</h3>
-            <p>{path.description}</p>
-            <div className="career-list">
-              {path.careers.map((career, index) => (
-                <div key={index} className="career-item">
-                  <h4>{career.title}</h4>
-                  <p>{career.description}</p>
-                </div>
-              ))}
+        <div className="paths-grid">
+          {careerPaths.map((path) => (
+            <div
+              key={path.id}
+              className={`path-card ${selectedPath === path.id ? 'selected' : ''}`}
+              onClick={() => setSelectedPath(path.id)}
+            >
+              <img src={path.icon} alt={path.title} className="path-icon" />
+              <h3>{path.title}</h3>
+              <p>{path.description}</p>
+              <div className="career-list">
+                {path.careers.map((career, index) => (
+                  <div key={index} className="career-item">
+                    <h4>{career.title}</h4>
+                    <p>{career.description}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <div className="explore-cta">
-        <h2>Ready to Find Your Path?</h2>
-        <p>Take our preference test to get personalized career recommendations.</p>
-        <button onClick={() => window.location.href = '/preftest'}>Take the Test</button>
+        <div className="explore-cta">
+          <h2>Ready to Find Your Path?</h2>
+          <p>Take our preference test to get personalized career recommendations.</p>
+          <button onClick={() => window.location.href = '/preftest'}>Take the Test</button>
+        </div>
       </div>
     </div>
   );

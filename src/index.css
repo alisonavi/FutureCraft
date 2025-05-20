@@ -15,8 +15,17 @@
   padding: 0;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 @media (max-width: 600px) {
   body {
     background: #232946;
+    padding-top: 4rem; /* Ensure content is below navbar */
+    overflow-x: hidden;
+  }
+  .page-content {
+    padding-top: 1.2rem;
   }
 }

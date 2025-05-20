@@ -23,7 +23,7 @@ export default function PreferencePage() {
   };
 
   return (
-    <div>
+    <div className="page-content">
       <h1>Which design do you prefer?</h1>
       <Preference items={testItems} onComplete={handleComplete} />
     </div>
