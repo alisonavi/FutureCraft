@@ -38,11 +38,10 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await fetch('http://10.176.3.43:8000/api/register', {
+      const response = await fetch('http://192.168.0.106:8000/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': 'true'
         },
         body: JSON.stringify({
           name: formData.name,

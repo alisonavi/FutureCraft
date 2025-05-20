@@ -23,12 +23,11 @@ const LoginPage = () => {
     setError('');
 
     try {
-      const response = await fetch('http://10.176.3.43:8000/api/login', {
+      const response = await fetch('http://192.168.0.106:8000/api/login', {
         method: 'POST',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': 'true'
         },
         body: JSON.stringify(formData)
       });
