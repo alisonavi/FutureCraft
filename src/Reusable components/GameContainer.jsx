@@ -16,7 +16,7 @@ const GameContainer = () => {
           <h2>Interactive Career Explorer</h2>
           <p>Experience your potential career paths in an immersive 3D environment</p>
         </div>
-        <div className="game-wrapper">
+        <div className="game-wrapper" style={{ position: 'relative' }}>
           {!isPlaying ? (
             <div className="game-overlay">
               <div className="game-preview">
@@ -31,7 +31,34 @@ const GameContainer = () => {
               </div>
             </div>
           ) : (
-            <UnityGame />
+            <>
+              <UnityGame />
+              <button
+                className="fullscreen-button"
+                style={{
+                  position: 'absolute',
+                  top: '1rem',
+                  right: '1rem',
+                  zIndex: 10,
+                  background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '1.2rem',
+                  padding: '0.7rem 2rem',
+                  fontSize: '1.1rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  boxShadow: '0 2px 8px rgba(99,102,241,0.15)',
+                  transition: 'background 0.2s',
+                }}
+                onClick={() => {
+                  const btn = document.getElementById('unity-fullscreen-button');
+                  if (btn) btn.click();
+                }}
+              >
+                Fullscreen
+              </button>
+            </>
           )}
         </div>
         <div className="game-footer">
