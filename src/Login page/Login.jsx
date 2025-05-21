@@ -23,7 +23,7 @@ const LoginPage = () => {
     setError('');
 
     try {
-      const response = await fetch('https://5r9o22atet2h.share.zrok.io/api/login', {
+      const response = await fetch('https://vqx6h54dnc1n.share.zrok.io/api/login', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -40,8 +40,8 @@ const LoginPage = () => {
       }
 
       const data = await response.json();
-      localStorage.setItem('access_token', data.token);
-      document.cookie = `access_token=${data.token}; path=/;`;
+      localStorage.setItem('access_token', data.access_token);
+      document.cookie = `access_token=${data.access_token}; path=/;`;
       console.log("User successfully logged in")
       navigate('/profile');
     } catch (error) {

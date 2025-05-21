@@ -38,7 +38,7 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await fetch('https://5r9o22atet2h.share.zrok.io/api/register', {
+      const response = await fetch('https://vqx6h54dnc1n.share.zrok.io/api/register', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -61,6 +61,11 @@ const RegisterPage = () => {
       }
 
       // After successful registration
+      const data = await response.json();
+      if (data.access_token) {
+        localStorage.setItem('access_token', data.access_token);
+        document.cookie = `access_token=${data.access_token}; path=/;`;
+      }
       setError('Registration successful! Redirecting to login...');
       setTimeout(() => navigate('/login'), 1500);
     } catch (error) {
