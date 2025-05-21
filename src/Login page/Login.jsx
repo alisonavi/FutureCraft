@@ -23,7 +23,7 @@ const LoginPage = () => {
     setError('');
 
     try {
-      const response = await fetch('https://5r9o22atet2h.share.zrok.io//api/login', {
+      const response = await fetch('https://5r9o22atet2h.share.zrok.io/api/login', {
         method: 'POST',
         credentials: 'include',
         headers: {

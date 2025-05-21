@@ -38,7 +38,7 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await fetch('https://5r9o22atet2h.share.zrok.io//api/register', {
+      const response = await fetch('https://5r9o22atet2h.share.zrok.io/api/register', {
         method: 'POST',
         credentials: 'include',
         headers: {
