@@ -12,10 +12,8 @@ function getCookie(name) {
 const UserProfile = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(false);
-  let token = "1|knhfV3cifRisUiFYMpZEhzLnFftsKfFiw7teKukq0a3e73e4"
-  if (!token) {
-    token = getCookie('auth_token');
-  }
+  // Get token from localStorage or cookie
+  let token = localStorage.getItem('auth_token') || getCookie('auth_token');
 
   // Redirect immediately if no token
   if (!token) {
@@ -25,7 +23,7 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch('https://96d2jf3spu3j.share.zrok.io/api/user', {
+        const response = await fetch('https://5r9o22atet2h.share.zrok.io/api/user', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
