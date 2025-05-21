@@ -9,7 +9,7 @@ const ChatBot = () => {
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
