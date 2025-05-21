@@ -8,11 +8,11 @@ const likertLabels = {
   5: 'Love it',
 };
 const likertSizes = {
-  1: 64,
-  2: 48,
-  3: 36,
-  4: 48,
-  5: 64,
+  1: 74,
+  2: 58,
+  3: 46,
+  4: 58,
+  5: 74,
 };
 
 // Utility to shuffle an array in place
@@ -77,22 +77,24 @@ export default function Preference({ items, onComplete }) {
             </div>
             <div className="likert-circles-row">
               <span className="likert-label left">Hate it</span>
-              {likertOptions.map(opt => (
-                <label
-                  key={opt}
-                  className={`likert-circle-label${answers[current.id] === opt ? ' selected' : ''}`}
-                  style={{ width: likertSizes[opt], height: likertSizes[opt] }}
-                >
-                  <input
-                    type="radio"
-                    name={`likert-${current.id}`}
-                    value={opt}
-                    checked={answers[current.id] === opt}
-                    onChange={() => handleSelect(opt)}
-                  />
-                  <span className="likert-circle" style={{ width: likertSizes[opt], height: likertSizes[opt] }}></span>
-                </label>
-              ))}
+              <div className="likert-circles-row-inner">
+                {likertOptions.map(opt => (
+                  <label
+                    key={opt}
+                    className={`likert-circle-label${answers[current.id] === opt ? ' selected' : ''}`}
+                    style={{ width: likertSizes[opt], height: likertSizes[opt] }}
+                  >
+                    <input
+                      type="radio"
+                      name={`likert-${current.id}`}
+                      value={opt}
+                      checked={answers[current.id] === opt}
+                      onChange={() => handleSelect(opt)}
+                    />
+                    <span className="likert-circle" style={{ width: likertSizes[opt], height: likertSizes[opt] }}></span>
+                  </label>
+                ))}
+              </div>
               <span className="likert-label right">Love it</span>
             </div>
             <div className="likert-nav-row">

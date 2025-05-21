@@ -1,7 +1,7 @@
 .navbar {
   background: linear-gradient(to right, rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.85));
   backdrop-filter: blur(0.625rem);
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 1rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,6 +19,8 @@
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding-left: 0;
 }
 
 .navbar-header {
@@ -33,6 +35,8 @@
   align-items: center;
   cursor: pointer;
   gap: 0.5rem;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .logo-img {

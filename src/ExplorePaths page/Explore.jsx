@@ -98,7 +98,11 @@ const Explore = () => {
               <p>{path.description}</p>
               <div className="career-list">
                 {path.careers.map((career, index) => (
-                  <div key={index} className="career-item">
+                  <div
+                    key={index}
+                    className={`career-item fade-in fade-in-${index + 1}`}
+                    style={{ animationDelay: `${0.2 + index * 0.15}s` }}
+                  >
                     <h4>{career.title}</h4>
                     <p>{career.description}</p>
                   </div>
