@@ -23,11 +23,12 @@ const LoginPage = () => {
     setError('');
 
     try {
-      const response = await fetch('http://192.168.0.106:8000/api/login', {
+      const response = await fetch('https://96d2jf3spu3j.share.zrok.io/api/login', {
         method: 'POST',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
+          'skip_zrok_interstitial': 'true',
         },
         body: JSON.stringify(formData)
       });

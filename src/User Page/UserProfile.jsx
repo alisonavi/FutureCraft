@@ -25,11 +25,12 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch('http://192.168.0.106:8000/api/user', {
+        const response = await fetch('https://96d2jf3spu3j.share.zrok.io/api/user', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
+            'skip_zrok_interstitial': 'true',
           }
         });
 
