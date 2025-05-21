@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ChatBot.css';
 
-const API_URL = 'http://192.168.0.106:8000/api/career/ask';
+const API_URL = 'https://5r9o22atet2h.share.zrok.io/api/career/ask';
 
 const ChatBot = () => {
   const [messages, setMessages] = useState([
@@ -25,7 +25,10 @@ const ChatBot = () => {
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'skip_zrok_interstitial': 'true',
+        },
         body: JSON.stringify({ question: userMessage.text })
       });
       const data = await response.json();
