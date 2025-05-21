@@ -64,6 +64,17 @@ const Explore = () => {
         { title: 'Nurse', description: 'Provide patient care and support in healthcare settings.' },
         { title: 'Healthcare Administrator', description: 'Manage healthcare facilities and services.' }
       ]
+    },
+    {
+      id: 'education',
+      title: 'Education & Teaching',
+      icon: businessIcon,
+      description: 'Shape the future by teaching, mentoring, and supporting learners of all ages.',
+      careers: [
+        { title: 'Teacher', description: 'Educate students in schools or colleges.' },
+        { title: 'Academic Advisor', description: 'Guide students in their academic journey.' },
+        { title: 'Education Administrator', description: 'Oversee educational programs and institutions.' }
+      ]
     }
   ];
 

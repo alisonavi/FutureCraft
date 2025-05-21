@@ -12,7 +12,7 @@ function getCookie(name) {
 const UserProfile = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(false);
-  let token = localStorage.getItem('auth_token');
+  let token = "1|knhfV3cifRisUiFYMpZEhzLnFftsKfFiw7teKukq0a3e73e4"
   if (!token) {
     token = getCookie('auth_token');
   }
@@ -25,7 +25,7 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch('http://10.176.3.43:8000/api/user', {
+        const response = await fetch('http://192.168.0.106:8000/api/user', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
