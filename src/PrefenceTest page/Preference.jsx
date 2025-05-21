@@ -2,6 +2,19 @@
 import React, { useState, useEffect } from 'react';
 import './Preference.css';
 
+const likertOptions = [1, 2, 3, 4, 5];
+const likertLabels = {
+  1: 'Hate it',
+  5: 'Love it',
+};
+const likertSizes = {
+  1: 64,
+  2: 48,
+  3: 36,
+  4: 48,
+  5: 64,
+};
+
 // Utility to shuffle an array in place
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -14,7 +27,7 @@ function shuffle(array) {
 export default function Preference({ items, onComplete }) {
   const [shuffled, setShuffled] = useState([]);
   const [index, setIndex] = useState(0);
-  const [responses, setResponses] = useState([]);
+  const [answers, setAnswers] = useState({});
   const [finished, setFinished] = useState(false);
 
   // Shuffle once when items first arrive
@@ -25,21 +38,27 @@ export default function Preference({ items, onComplete }) {
   const current = shuffled[index];
   if (!current && !finished) return null;
 
-  const choose = (side) => {
-    const entry = {
-      itemId: current.id,
-      choice: side,                     // "left" or "right"
-      time: new Date().toISOString()
-    };
-    const all = [...responses, entry];
-    setResponses(all);
+  const handleSelect = (value) => {
+    setAnswers((prev) => ({ ...prev, [current.id]: value }));
+  };
 
+  const handleNext = () => {
     if (index + 1 < shuffled.length) {
-      setIndex(i => i + 1);
+      setIndex(index + 1);
     } else {
       setFinished(true);
-      onComplete(all);
+      // Prepare results in order of shuffled
+      const results = shuffled.map(q => ({
+        itemId: q.id,
+        choice: answers[q.id],
+        time: new Date().toISOString()
+      }));
+      onComplete(results);
     }
+  };
+
+  const handlePrev = () => {
+    if (index > 0) setIndex(index - 1);
   };
 
   // Progress bar width
@@ -53,19 +72,41 @@ export default function Preference({ items, onComplete }) {
             <div className="preference-question">
               Question {index + 1} of {shuffled.length}
             </div>
-            <div className="preference-images">
-              <img
-                src={current.left}
-                alt="Option A"
-                className="preference-img"
-                onClick={() => choose('left')}
-              />
-              <img
-                src={current.right}
-                alt="Option B"
-                className="preference-img"
-                onClick={() => choose('right')}
-              />
+            <div className="preference-main-question">
+              {current.question}
+            </div>
+            <div className="likert-circles-row">
+              <span className="likert-label left">Hate it</span>
+              {likertOptions.map(opt => (
+                <label
+                  key={opt}
+                  className={`likert-circle-label${answers[current.id] === opt ? ' selected' : ''}`}
+                  style={{ width: likertSizes[opt], height: likertSizes[opt] }}
+                >
+                  <input
+                    type="radio"
+                    name={`likert-${current.id}`}
+                    value={opt}
+                    checked={answers[current.id] === opt}
+                    onChange={() => handleSelect(opt)}
+                  />
+                  <span className="likert-circle" style={{ width: likertSizes[opt], height: likertSizes[opt] }}></span>
+                </label>
+              ))}
+              <span className="likert-label right">Love it</span>
+            </div>
+            <div className="likert-nav-row">
+              <button className="likert-nav-btn" onClick={handlePrev} disabled={index === 0} aria-label="Previous">
+                &#x25C0;
+              </button>
+              <button
+                className="likert-nav-btn"
+                onClick={handleNext}
+                disabled={typeof answers[current.id] === 'undefined'}
+                aria-label={index + 1 === shuffled.length ? 'Submit' : 'Next'}
+              >
+                &#x25B6;
+              </button>
             </div>
             <div className="preference-progress">
               <div

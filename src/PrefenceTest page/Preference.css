@@ -117,3 +117,188 @@
     margin-top: 1.2rem;
   }
 }
+
+.preference-main-question {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  color: #a5b4fc;
+  text-align: center;
+}
+
+.preference-options-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.preference-option-btn {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  padding: 1.1rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.10);
+  outline: none;
+}
+.preference-option-btn:hover, .preference-option-btn:focus {
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px rgba(99,102,241,0.18);
+}
+.preference-option-btn.left {
+  /* Optionally add a left-specific style */
+}
+.preference-option-btn.right {
+  /* Optionally add a right-specific style */
+}
+
+.preference-or {
+  color: #a5b4fc;
+  font-size: 1.1rem;
+  font-weight: 600;
+  opacity: 0.7;
+  margin: 0 0.5rem;
+}
+
+.likert-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2.2rem;
+}
+
+.likert-btn {
+  min-width: 80px;
+  padding: 1rem 0.5rem;
+  border: none;
+  border-radius: 0.9rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+  transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.likert-btn:hover, .likert-btn:focus {
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  color: #fff;
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 4px 16px rgba(99,102,241,0.18);
+}
+
+.likert-circles-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  margin-bottom: 2.2rem;
+  position: relative;
+}
+
+.likert-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #6366f1;
+  opacity: 0.8;
+  min-width: 60px;
+  text-align: center;
+  align-self: center;
+  position: relative;
+  top: 0;
+}
+.likert-label.left {
+  margin-right: 0.7rem;
+}
+.likert-label.right {
+  margin-left: 0.7rem;
+}
+
+.likert-circle-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: center;
+  transition: width 0.2s, height 0.2s;
+}
+.likert-circle-label input[type="radio"] {
+  display: none;
+}
+.likert-circle {
+  display: inline-block;
+  border: 3px solid #4f46e5;
+  border-radius: 50%;
+  background: transparent;
+  transition: border-color 0.2s, box-shadow 0.2s, width 0.2s, height 0.2s, background 0.2s;
+  box-sizing: border-box;
+}
+.likert-circle-label.selected .likert-circle {
+  border-color: #22c55e;
+  background: #22c55e;
+  box-shadow: 0 0 0 4px rgba(34,197,94,0.12);
+}
+.likert-circle-label:not(.selected):hover .likert-circle {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.10);
+}
+
+.likert-nav-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.likert-nav-btn {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+  outline: none;
+  padding: 0;
+}
+.likert-nav-btn:disabled {
+  background: #a5b4fc;
+  color: #fff;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.likert-nav-btn:hover:not(:disabled), .likert-nav-btn:focus:not(:disabled) {
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px rgba(99,102,241,0.18);
+}
+
+@media (max-width: 600px) {
+  .likert-circles-row {
+    gap: 1.2rem;
+  }
+  .likert-label {
+    min-width: 40px;
+    font-size: 0.95rem;
+  }
+  .likert-nav-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+}
