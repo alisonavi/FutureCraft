@@ -13,7 +13,7 @@ const UserProfile = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(false);
   // Get token from localStorage or cookie
-  let token = localStorage.getItem('auth_token') || getCookie('auth_token');
+  let token = localStorage.getItem('access_token') || getCookie('access_token');
 
   if (!token) {
     return <Navigate to="/login" />;
@@ -47,7 +47,7 @@ const UserProfile = () => {
   }, []);
 
   if (error) {
-    localStorage.removeItem('auth_token');
+    localStorage.removeItem('access_token');
     document.cookie = 'access_token=; Max-Age=0; path=/;';
     return <Navigate to="/login" />;
   }
@@ -57,8 +57,8 @@ const UserProfile = () => {
   }
 
   const handleLogout = () => {
-    localStorage.removeItem('auth_token');
-    document.cookie = 'auth_token=; Max-Age=0; path=/;';
+    localStorage.removeItem('access_token');
+    document.cookie = 'access_token=; Max-Age=0; path=/;';
     window.location.href = '/login';
   };
 
