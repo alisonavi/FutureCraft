@@ -15,7 +15,6 @@ const UserProfile = () => {
   // Get token from localStorage or cookie
   let token = localStorage.getItem('auth_token') || getCookie('auth_token');
 
-  // Redirect immediately if no token
   if (!token) {
     return <Navigate to="/login" />;
   }
@@ -49,7 +48,7 @@ const UserProfile = () => {
 
   if (error) {
     localStorage.removeItem('auth_token');
-    document.cookie = 'auth_token=; Max-Age=0; path=/;';
+    document.cookie = 'access_token=; Max-Age=0; path=/;';
     return <Navigate to="/login" />;
   }
 
