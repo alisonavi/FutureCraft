@@ -60,7 +60,6 @@ const RegisterPage = () => {
         return;
       }
 
-      // After successful registration
       const data = await response.json();
       if (data.access_token) {
         localStorage.setItem('access_token', data.access_token);

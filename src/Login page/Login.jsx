@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import LoadingState from '../Reusable components/LoadingState';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
   const pageVariants = {
@@ -16,11 +19,14 @@ const LoginPage = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    // Clear error when user starts typing
+    if (error) setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setIsLoading(true);
 
     try {
       const response = await fetch('https://207.127.93.193/api/login', {
@@ -35,18 +41,23 @@ const LoginPage = () => {
 
       if (!response.ok) {
         const data = await response.json();
-        setError(data.message || 'Invalid credentials');
-        return;
+        throw new Error(data.message || 'Invalid credentials');
       }
 
       const data = await response.json();
       localStorage.setItem('access_token', data.access_token);
       document.cookie = `access_token=${data.access_token}; path=/;`;
-      console.log("User successfully logged in")
-      navigate('/profile');
+      setSuccess(true);
+      
+      // Add a small delay before navigation for better UX
+      setTimeout(() => {
+        navigate('/profile');
+      }, 1000);
     } catch (error) {
       console.error(error);
-      setError('Network error. Please try again.');
+      setError(error.message || 'Network error. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -60,10 +71,34 @@ const LoginPage = () => {
     >
       <div className="login-container">
         <div className="login-content">
-          <h2>Sign In</h2>
-          {error && <p className="error-message">{error}</p>}
+          <h2>Welcome Back</h2>
+          <AnimatePresence mode="wait">
+            {error && (
+              <motion.p
+                key="error"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="error-message"
+              >
+                {error}
+              </motion.p>
+            )}
+            {success && (
+              <motion.p
+                key="success"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="success-message"
+              >
+                Login successful! Redirecting...
+              </motion.p>
+            )}
+          </AnimatePresence>
           <form onSubmit={handleSubmit}>
-            <input
+            <motion.input
+              whileFocus={{ scale: 1.02 }}
               className='login-input'
               type="email"
               name="email"
@@ -71,8 +106,10 @@ const LoginPage = () => {
               value={formData.email}
               onChange={handleChange}
               required
+              disabled={isLoading}
             />
-            <input
+            <motion.input
+              whileFocus={{ scale: 1.02 }}
               className='login-input'
               type="password"
               name="password"
@@ -80,8 +117,16 @@ const LoginPage = () => {
               value={formData.password}
               onChange={handleChange}
               required
+              disabled={isLoading}
             />
-            <button type="submit">Log In</button>
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              disabled={isLoading}
+            >
+              {isLoading ? <LoadingState message="Signing in..." /> : 'Log In'}
+            </motion.button>
           </form>
           <p className="register-link">
             Don't have an account? <Link to="/register">Create One</Link>

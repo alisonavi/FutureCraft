@@ -36,6 +36,12 @@
   animation: fadeIn 1.2s cubic-bezier(0.4,0,0.2,1);
   position: relative;
   z-index: 1;
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.login-content:hover {
+  transform: translateY(-5px);
 }
 
 .login-content::before {
@@ -50,6 +56,11 @@
   z-index: -1;
   opacity: 0.5;
   filter: blur(0.625rem);
+  transition: opacity 0.3s ease;
+}
+
+.login-content:hover::before {
+  opacity: 0.7;
 }
 
 form {
@@ -78,7 +89,7 @@ input {
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.05);
   color: white;
-  transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
+  transition: all 0.3s ease;
   opacity: 0;
   animation: fadeIn 1.2s cubic-bezier(0.4,0,0.2,1) 0.4s forwards;
 }
@@ -87,6 +98,12 @@ input:focus {
   outline: none;
   border-color: #6366f1;
   box-shadow: 0 0 0 0.1875rem rgba(99, 102, 241, 0.2);
+  transform: translateY(-2px);
+}
+
+input:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 button {
@@ -98,11 +115,17 @@ button {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   opacity: 0;
   animation: fadeIn 1.2s cubic-bezier(0.4,0,0.2,1) 0.6s forwards;
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
 }
 
 button::before {
@@ -118,15 +141,15 @@ button::before {
     rgba(255, 255, 255, 0.2),
     transparent
   );
-  transition: 0.8s;
+  transition: 0.5s;
 }
 
-button:hover {
-  transform: translateY(-0.125rem);
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
   box-shadow: 0 0.3125rem 0.9375rem rgba(99, 102, 241, 0.4);
 }
 
-button:hover::before {
+button:hover:not(:disabled)::before {
   left: 100%;
 }
 
@@ -144,7 +167,7 @@ button:hover::before {
   font-weight: 500;
   position: relative;
   padding: 0.5rem 0;
-  transition: all 0.7s cubic-bezier(0.4,0,0.2,1);
+  transition: all 0.3s ease;
 }
 
 .register-link a::after {
@@ -155,11 +178,35 @@ button:hover::before {
   width: 0;
   height: 0.125rem;
   background: linear-gradient(90deg, #6366f1, #8b5cf6);
-  transition: width 0.7s cubic-bezier(0.4,0,0.2,1);
+  transition: width 0.3s ease;
+}
+
+.register-link a:hover {
+  color: #6366f1;
 }
 
 .register-link a:hover::after {
   width: 100%;
+}
+
+.error-message {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  animation: shake 0.5s cubic-bezier(0.4,0,0.2,1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.success-message {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  animation: fadeIn 0.5s cubic-bezier(0.4,0,0.2,1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
 }
 
 @keyframes fadeIn {
@@ -173,11 +220,27 @@ button:hover::before {
   }
 }
 
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-0.3125rem); }
+  75% { transform: translateX(0.3125rem); }
+}
+
 @media (max-width: 48rem) {
   .login-content {
     padding: 2rem;
     width: 85%;
   }
+}
+
+.login-input::placeholder {
+  color: #fff;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.login-input:focus::placeholder {
+  opacity: 0.5;
 }
 
 /* Fade-in utility classes */
@@ -195,9 +258,4 @@ button:hover::before {
 /* Slower transitions for all interactive elements */
 input, button, .register-link a, .login-link a, .nav-links a, .card, .info-group, .edit-button {
   transition: all 0.8s cubic-bezier(0.4,0,0.2,1) !important;
-}
-
-.login-input::placeholder {
-  color: #fff;
-  opacity: 1;
 }

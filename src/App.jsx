@@ -1,5 +1,7 @@
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastProvider } from './context/ToastContext';
 import './App.css';
 import Navbar from './Reusable components/NavBar';
 import FeatureSection from './Main page/FeatureSection';
@@ -17,31 +19,44 @@ import Preference from './PrefenceTest page/Preference'
 import PreferencePage from './PrefenceTest page/PreferencePage';
 import Contact from './Contact us page/Contact';
 
-function App() {
+const App = () => {
+  useEffect(() => {
+    // Enable smooth scrolling
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Cleanup
+    return () => {
+      document.documentElement.style.scrollBehavior = '';
+    };
+  }, []);
+
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={
-          <>
-            <HeroSection />
-            <FeatureSection />
-            <Carousel />
-            <ThreeCardsSection />
-            <GameContainer />
-          </>
-        } />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/profile" element={<UserProfile />} />
-        <Route path="/preftest" element={<PreferencePage />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/profile' element={<UserProfile />} />
-      </Routes>
-      <AnimatePresence />
-      <Footer />
+      <ToastProvider>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={
+            <>
+              <HeroSection />
+              <FeatureSection />
+              <Carousel />
+              <ThreeCardsSection />
+              <GameContainer />
+            </>
+          } />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/preftest" element={<PreferencePage />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/profile' element={<UserProfile />} />
+        </Routes>
+        <AnimatePresence />
+        <Footer />
+      </ToastProvider>
     </Router>
   );
-}
+};
+
 export default App;
