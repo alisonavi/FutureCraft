@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import './Login.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import LoadingState from '../Reusable components/LoadingState';
 
 const LoginPage = () => {
+  // Redirect if already logged in
+  if (localStorage.getItem('access_token')) {
+    return <Navigate to="/profile" replace />;
+  }
+
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -47,6 +52,7 @@ const LoginPage = () => {
       const data = await response.json();
       localStorage.setItem('access_token', data.access_token);
       document.cookie = `access_token=${data.access_token}; path=/;`;
+      window.dispatchEvent(new Event('authchange'));
       setSuccess(true);
       
       // Add a small delay before navigation for better UX

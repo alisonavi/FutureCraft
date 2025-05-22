@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import './Register.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const RegisterPage = () => {
+  // Redirect if already logged in
+  if (localStorage.getItem('access_token')) {
+    return <Navigate to="/profile" replace />;
+  }
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -64,6 +69,7 @@ const RegisterPage = () => {
       if (data.access_token) {
         localStorage.setItem('access_token', data.access_token);
         document.cookie = `access_token=${data.access_token}; path=/;`;
+        window.dispatchEvent(new Event('authchange'));
       }
       setError('Registration successful! Redirecting to login...');
       setTimeout(() => navigate('/login'), 1500);

@@ -1,0 +1,120 @@
+.preference-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #232946 0%, #3b3b5b 100%);
+  padding: 6rem 2rem 4rem 2rem;
+  color: white;
+}
+
+.preference-intro {
+  max-width: 75rem;
+  margin: 0 auto 4rem auto;
+  text-align: center;
+}
+
+.preference-intro h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.intro-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.intro-section {
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(0.625rem);
+  padding: 2rem;
+  border-radius: 1.25rem;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.intro-section:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.intro-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #a5b4fc;
+}
+
+.intro-section p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #e0e7ff;
+  opacity: 0.9;
+}
+
+.intro-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.intro-section li {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #e0e7ff;
+  opacity: 0.9;
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.intro-section li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: #6366f1;
+}
+
+@media (max-width: 48rem) {
+  .preference-page {
+    padding: 5rem 1rem 3rem 1rem;
+  }
+
+  .preference-intro h1 {
+    font-size: 2rem;
+  }
+
+  .intro-section {
+    padding: 1.5rem;
+  }
+
+  .intro-section h2 {
+    font-size: 1.3rem;
+  }
+
+  .intro-section p,
+  .intro-section li {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .preference-page {
+    padding: 4rem 0.5rem 2rem 0.5rem;
+  }
+
+  .preference-intro h1 {
+    font-size: 1.5rem;
+  }
+
+  .intro-content {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-section {
+    padding: 1.2rem;
+  }
+}
