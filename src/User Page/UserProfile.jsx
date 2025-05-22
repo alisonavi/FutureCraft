@@ -21,7 +21,7 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch('https://vqx6h54dnc1n.share.zrok.io/api/user', {
+        const response = await fetch('https://207.127.93.193/api/user', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ const UserProfile = () => {
         if (!response.ok) {
           throw new Error('Authentication failed');
         }
-        
+
 
         const data = await response.json();
         setUser(data.data);
