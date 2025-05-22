@@ -34,25 +34,41 @@ const questionTips = {
   '15': 'Financial literacy is valuable in both personal and professional life.',
 };
 
-// Career matches based on answers
+// Career matches based on answers (logistic scoring)
+const areaMap = {
+  '1': 'Technology',
+  '2': 'Healthcare',
+  '3': 'Education',
+  '4': 'Creative Arts',
+  '5': 'Business',
+  '6': 'Science',
+  '7': 'Social Services',
+  '8': 'Software Development',
+  '9': 'Mental Health',
+  '10': 'Analytics',
+  '11': 'Team Management',
+  '12': 'Leadership',
+  '13': 'Environmental Science',
+  '14': 'Content Creation',
+  '15': 'Finance',
+};
+
 const getCareerMatches = (answers) => {
-  const matches = [];
-  if (answers['1'] >= 4) matches.push('Technology');
-  if (answers['2'] >= 4) matches.push('Healthcare');
-  if (answers['3'] >= 4) matches.push('Education');
-  if (answers['4'] >= 4) matches.push('Creative Arts');
-  if (answers['5'] >= 4) matches.push('Business');
-  if (answers['6'] >= 4) matches.push('Science');
-  if (answers['7'] >= 4) matches.push('Social Services');
-  if (answers['8'] >= 4) matches.push('Software Development');
-  if (answers['9'] >= 4) matches.push('Mental Health');
-  if (answers['10'] >= 4) matches.push('Analytics');
-  if (answers['11'] >= 4) matches.push('Team Management');
-  if (answers['12'] >= 4) matches.push('Leadership');
-  if (answers['13'] >= 4) matches.push('Environmental Science');
-  if (answers['14'] >= 4) matches.push('Content Creation');
-  if (answers['15'] >= 4) matches.push('Finance');
-  return matches.slice(0, 3); // Return top 3 matches
+  // Scoring: 1 (hate) = -2, 2 = -1, 3 = 0, 4 = +1, 5 (love) = +2
+  const scoreMap = { 1: -2, 2: -1, 3: 0, 4: 1, 5: 2 };
+  const areaScores = {};
+  Object.entries(answers).forEach(([qid, val]) => {
+    const area = areaMap[qid];
+    if (!area) return;
+    if (!areaScores[area]) areaScores[area] = 0;
+    areaScores[area] += scoreMap[val] || 0;
+  });
+  // Only keep areas with positive scores
+  const sorted = Object.entries(areaScores)
+    .filter(([_, score]) => score > 0)
+    .sort((a, b) => b[1] - a[1])
+    .map(([area]) => area);
+  return sorted.slice(0, 3);
 };
 
 // Utility to shuffle an array in place
