@@ -44,11 +44,11 @@ A live demo is available at: `https://goofycraft.netlify.app`
 
 ## Tech Stack
 
-* **Framework**: React 19.x
+* **Framework**: React 19.1
 * **Bundler**: Vite
 * **Animations**: Framer Motion
 * **Routing**: React Router DOM
-* **HTTP Client**: Axios or Fetch API
+* **HTTP Client**: Fetch API
 * **Styling**: Plain CSS modules (no external CSS framework)
 
 ---
