@@ -28,7 +28,7 @@ FutureCraft helps users discover career paths by answering a set of engaging que
 
 ## Demo
 
-A live demo is available at: `https://your-domain.com`
+A live demo is available at: `https://goofycraft.netlify.app`
 
 ---
 
