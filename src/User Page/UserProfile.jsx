@@ -13,6 +13,10 @@ const UserProfile = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(false);
   let token = localStorage.getItem('access_token') || getCookie('access_token');
+  const [editing, setEditing] = useState(false);
+  const [newName, setNewName] = useState('');
+  const [editLoading, setEditLoading] = useState(false);
+  const [editMessage, setEditMessage] = useState('');
 
   if (!token) {
     return <Navigate to="/login" />;
@@ -25,6 +29,7 @@ const UserProfile = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            credentials: 'include',
             Authorization: `Bearer ${token}`,
             'skip_zrok_interstitial': 'true',
           }
@@ -62,6 +67,50 @@ const UserProfile = () => {
     window.location.href = '/login';
   };
 
+  const handleEdit = () => {
+    setNewName(user.name);
+    setEditing(true);
+    setEditMessage('');
+  };
+
+  const handleEditCancel = () => {
+    setEditing(false);
+    setEditMessage('');
+  };
+
+  const handleEditSave = async () => {
+    if (!newName.trim() || newName === user.name) {
+      setEditing(false);
+      return;
+    }
+    setEditLoading(true);
+    setEditMessage('');
+    try {
+      const response = await fetch('https://207.127.93.193/api/user', {
+        method: 'PUT',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          'skip_zrok_interstitial': 'true',
+        },
+        body: JSON.stringify({ name: newName })
+      });
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || 'Failed to update profile');
+      }
+      const data = await response.json();
+      setUser((prev) => ({ ...prev, name: data.data.name }));
+      setEditMessage('Profile updated successfully!');
+      setEditing(false);
+    } catch (err) {
+      setEditMessage('Error: ' + (err.message || 'Failed to update profile'));
+    } finally {
+      setEditLoading(false);
+    }
+  };
+
   // Helper to get initials from name
   const getInitials = (name) => {
     if (!name) return '';
@@ -82,22 +131,41 @@ const UserProfile = () => {
         <div className="profile-avatar">
           {getInitials(user.name)}
         </div>
-        <div className="profile-username">{user.name}</div>
+        <div className="profile-username">
+          {editing ? (
+            <input
+              type="text"
+              value={newName}
+              onChange={e => setNewName(e.target.value)}
+              className="profile-edit-input pretty-input"
+              disabled={editLoading}
+              maxLength={40}
+              placeholder="Enter your name"
+              autoFocus
+            />
+          ) : user.name}
+        </div>
         <div className="profile-email">{user.email}</div>
         <div className="profile-stats">
-          <div className="profile-stat">
-            <div className="profile-stat-label">User ID</div>
-            <div className="profile-stat-value">{user.id}</div>
-          </div>
           <div className="profile-stat">
             <div className="profile-stat-label">Registered</div>
             <div className="profile-stat-value">{formatDate(user.created_at)}</div>
           </div>
         </div>
         <div className="profile-actions">
-          <button className="profile-btn" disabled>Edit Profile</button>
+          {editing ? (
+            <>
+              <button className="profile-btn" onClick={handleEditSave} disabled={editLoading || !newName.trim() || newName === user.name}>
+                {editLoading ? 'Saving...' : 'Save'}
+              </button>
+              <button className="profile-btn" onClick={handleEditCancel} disabled={editLoading}>Cancel</button>
+            </>
+          ) : (
+            <button className="profile-btn" onClick={handleEdit}>Edit Profile</button>
+          )}
           <button className="profile-btn" onClick={handleLogout}>Logout</button>
         </div>
+        {editMessage && <div className="profile-edit-message">{editMessage}</div>}
       </div>
     </div>
   );

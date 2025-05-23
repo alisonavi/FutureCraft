@@ -53,7 +53,6 @@ const App = () => {
               <FeatureSection />
               <Carousel />
               <ThreeCardsSection />
-              <GameContainer />
             </>
           } />
           <Route path="/register" element={<RegisterPage />} />

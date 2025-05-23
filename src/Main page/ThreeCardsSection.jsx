@@ -5,7 +5,6 @@ import graphImg from '../assets/three3.png';
 import fbImg from '../assets/three1.jpg';
 import { useNavigate } from 'react-router-dom';
 import ChatBot from './ChatBot';
-import GameContainer from '../Reusable components/GameContainer';
 
 const ThreeCardsSection = () => {
   const navigate = useNavigate();
@@ -23,6 +22,25 @@ const ThreeCardsSection = () => {
   };
 
   const isLoggedIn = !!localStorage.getItem('access_token');
+
+  const GamePreview = () => {
+    return (
+      <section className="game-preview-section card fade-in fade-in-7" style={{ margin: '3rem auto', maxWidth: 700, textAlign: 'center', background: 'var(--gradient-secondary)' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.5rem', background: 'var(--gradient-accent)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>FutureCraft Game Arena</h2>
+        <p style={{ color: 'var(--color-gray-200)', marginBottom: '1.5rem' }}>
+          Experience your potential career paths in an immersive 3D environment. Compete, learn, and climb the leaderboard!
+        </p>
+        <img src="/game-preview.jpg" alt="Game Preview" style={{ width: '100%', borderRadius: '1rem', margin: '1.5rem 0', boxShadow: '0 4px 24px rgba(0,21,56,0.15)' }} />
+        <button
+          className="btn-primary"
+          style={{ marginTop: '1.5rem', fontSize: '1.1rem', padding: '0.75rem 2.5rem' }}
+          onClick={() => navigate(isLoggedIn ? '/game' : '/login')}
+        >
+          {isLoggedIn ? 'Play Now' : 'Log in to Play'}
+        </button>
+      </section>
+    );
+  };
 
   return (
     <>
@@ -64,7 +82,7 @@ const ThreeCardsSection = () => {
           </div>
         </div>
       </section>
-      <GameContainer previewOnly={!isLoggedIn} />
+      <GamePreview />
       <ChatBot />
     </>
   );

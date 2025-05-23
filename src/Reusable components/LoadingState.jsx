@@ -1,9 +1,9 @@
 import React from 'react';
 import './LoadingState.css';
 
-const LoadingState = ({ message = 'Loading...' }) => {
+const LoadingState = ({ message = 'Loading...', inline = false }) => {
   return (
-    <div className="loading-container">
+    <div className={inline ? 'loading-inline' : 'loading-container'}>
       <div className="loading-spinner">
         <div className="spinner-circle"></div>
         <div className="spinner-circle"></div>

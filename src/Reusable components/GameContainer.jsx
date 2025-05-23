@@ -6,7 +6,8 @@ const GameContainer = ({ previewOnly = false }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlayClick = () => {
-    if (!previewOnly) setIsPlaying(true);
+    if (previewOnly) return;
+    setIsPlaying(true);
   };
 
   return (
@@ -24,10 +25,11 @@ const GameContainer = ({ previewOnly = false }) => {
                   <h3>Ready to Explore?</h3>
                   <p>Click play to start your career exploration journey</p>
                   <button
-                    className="play-button"
+                    className={`play-button${previewOnly ? ' disabled' : ''}`}
                     onClick={handlePlayClick}
                     disabled={previewOnly}
                     title={previewOnly ? 'Log in to play the game' : ''}
+                    style={previewOnly ? { cursor: 'not-allowed', opacity: 0.6 } : {}}
                   >
                     <span className="play-icon">▶</span>
                     {previewOnly ? 'Log in to Play' : 'Play Now'}

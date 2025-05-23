@@ -142,7 +142,7 @@ const LoginPage = () => {
               whileTap={{ scale: 0.98 }}
               disabled={isLoading}
             >
-                {isLoading ? <LoadingState message="Signing in..." /> : 'Sign In'}
+                {isLoading ? <LoadingState message="Signing in..." inline={true} /> : 'Sign In'}
             </motion.button>
               <button type="button" className="back-btn" onClick={() => navigate(-1)}>
                 Back
