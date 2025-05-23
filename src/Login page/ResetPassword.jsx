@@ -29,8 +29,9 @@ const ResetPassword = () => {
     }
     setLoading(true);
     try {
-      const res = await fetch('https://207.127.93.193/reset-password', {
+      const res = await fetch('https://207.127.93.193/api/reset-password', {
         method: 'POST',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token, email, password, password_confirmation: confirm })
       });
