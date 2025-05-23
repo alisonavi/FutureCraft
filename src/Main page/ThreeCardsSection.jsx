@@ -5,6 +5,7 @@ import graphImg from '../assets/three3.png';
 import fbImg from '../assets/three1.jpg';
 import { useNavigate } from 'react-router-dom';
 import ChatBot from './ChatBot';
+import GameContainer from '../Reusable components/GameContainer';
 
 const ThreeCardsSection = () => {
   const navigate = useNavigate();
@@ -20,6 +21,8 @@ const ThreeCardsSection = () => {
   const handleStartJourney = () => {
     navigate('/register');
   };
+
+  const isLoggedIn = !!localStorage.getItem('access_token');
 
   return (
     <>
@@ -61,6 +64,7 @@ const ThreeCardsSection = () => {
           </div>
         </div>
       </section>
+      <GameContainer previewOnly={!isLoggedIn} />
       <ChatBot />
     </>
   );

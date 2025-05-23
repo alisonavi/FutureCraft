@@ -78,38 +78,25 @@ const UserProfile = () => {
 
   return (
     <div className="profile-container">
-      <div className="profile-content">
-        <div className="profile-header">
-          <div className="profile-avatar">
-            {getInitials(user.name)}
-          </div>
-          <h2>Welcome, {user.name}</h2>
+      <div className="profile-card">
+        <div className="profile-avatar">
+          {getInitials(user.name)}
         </div>
-        <div className="profile-info">
-          <div className="info-group">
-            <span className="info-icon" role="img" aria-label="User ID">🆔</span>
-            <div className="info-label">User ID</div>
-            <div className="info-value">{user.id}</div>
+        <div className="profile-username">{user.name}</div>
+        <div className="profile-email">{user.email}</div>
+        <div className="profile-stats">
+          <div className="profile-stat">
+            <div className="profile-stat-label">User ID</div>
+            <div className="profile-stat-value">{user.id}</div>
           </div>
-          <div className="info-group">
-            <span className="info-icon" role="img" aria-label="Name">👤</span>
-            <div className="info-label">Name</div>
-            <div className="info-value">{user.name}</div>
-          </div>
-          <div className="info-group">
-            <span className="info-icon" role="img" aria-label="Email">📧</span>
-            <div className="info-label">Email</div>
-            <div className="info-value">{user.email}</div>
-          </div>
-          <div className="info-group">
-            <span className="info-icon" role="img" aria-label="Registration Date">📅</span>
-            <div className="info-label">Registered</div>
-            <div className="info-value">{formatDate(user.created_at)}</div>
+          <div className="profile-stat">
+            <div className="profile-stat-label">Registered</div>
+            <div className="profile-stat-value">{formatDate(user.created_at)}</div>
           </div>
         </div>
         <div className="profile-actions">
-          <button className="edit-profile-btn" disabled>Edit Profile</button>
-          <button className="edit-button" onClick={handleLogout}>Logout</button>
+          <button className="profile-btn" disabled>Edit Profile</button>
+          <button className="profile-btn" onClick={handleLogout}>Logout</button>
         </div>
       </div>
     </div>

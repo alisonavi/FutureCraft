@@ -1,47 +1,50 @@
 .game-section {
-  background: linear-gradient(135deg, #232946 0%, #3b3b5b 100%);
+  background: var(--gradient-primary);
   padding: 4rem 2rem;
-  color: white;
+  color: var(--color-white);
 }
 
 .game-container {
   max-width: 75rem;
   margin: 0 auto;
-  background: rgba(30, 41, 59, 0.85);
+  background: rgba(2, 21, 56, 0.97);
   backdrop-filter: blur(0.625rem);
-  border-radius: 1.25rem;
-  border: 0.0625rem solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  border: 1.5px solid var(--color-accent);
   overflow: hidden;
-  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0,21,56,0.18);
 }
 
 .game-header {
   text-align: center;
-  padding: 2rem;
-  border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.1);
+  padding: 2.5rem 2rem 2rem 2rem;
+  border-bottom: 1.5px solid rgba(59, 176, 212, 0.08);
 }
 
 .game-header h2 {
-  font-size: 2rem;
+  font-size: 2.4rem;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  font-weight: 900;
+  letter-spacing: -1px;
 }
 
 .game-header p {
-  font-size: 1.1rem;
-  opacity: 0.8;
+  font-size: 1.15rem;
+  opacity: 0.9;
   line-height: 1.6;
+  color: var(--color-gray-100);
 }
 
 .game-wrapper {
   position: relative;
   width: 100%;
   height: 0;
-  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-  background: #1a1a1a;
+  padding-bottom: 56.25%;
+  background: var(--gradient-secondary);
 }
 
 .game-wrapper canvas {
@@ -59,7 +62,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(35, 41, 70, 0.95), rgba(59, 59, 91, 0.95));
+  background: linear-gradient(135deg, rgba(2, 21, 56, 0.97), rgba(2, 30, 74, 0.97));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,26 +79,28 @@
 .preview-content h3 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  font-weight: 800;
 }
 
 .preview-content p {
   font-size: 1.1rem;
-  opacity: 0.8;
+  opacity: 0.9;
   margin-bottom: 2rem;
+  color: var(--color-gray-100);
 }
 
 .play-button {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  color: white;
-  padding: 1rem 2rem;
+  background: var(--gradient-accent);
+  color: var(--color-white);
+  padding: 1rem 2.5rem;
   border: none;
-  border-radius: 3.125rem;
+  border-radius: 2rem;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   display: inline-flex;
@@ -103,40 +108,42 @@
   gap: 0.5rem;
   position: relative;
   overflow: hidden;
-}
-
-.play-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: 0.5s;
+  box-shadow: 0 2px 8px rgba(59,176,212,0.10);
 }
 
 .play-button:hover {
-  transform: translateY(-0.125rem);
-  box-shadow: 0 0.3125rem 0.9375rem rgba(99, 102, 241, 0.4);
-}
-
-.play-button:hover::before {
-  left: 100%;
+  background: var(--color-accent-dark);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px var(--color-accent-light);
 }
 
 .play-icon {
   font-size: 1.2rem;
 }
 
+.fullscreen-button {
+  background: var(--gradient-accent);
+  color: var(--color-white);
+  border: none;
+  border-radius: 1.2rem;
+  padding: 0.7rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(59,176,212,0.10);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.fullscreen-button:hover {
+  background: var(--color-accent-dark);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px var(--color-accent-light);
+}
+
 .game-footer {
   padding: 1.5rem;
-  border-top: 0.0625rem solid rgba(255, 255, 255, 0.1);
+  border-top: 1.5px solid rgba(59, 176, 212, 0.08);
+  background: rgba(2, 21, 56, 0.97);
 }
 
 .game-controls {
@@ -154,52 +161,44 @@
 }
 
 .control-key {
-  background: rgba(99, 102, 241, 0.1);
+  background: rgba(0, 177, 229, 0.10);
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  border: 0.0625rem solid rgba(99, 102, 241, 0.2);
+  border: 1.5px solid var(--color-accent);
   font-family: monospace;
-  font-size: 0.9rem;
-  color: #6366f1;
+  font-size: 0.95rem;
+  color: var(--color-accent);
+  font-weight: 700;
 }
 
 .control-desc {
-  font-size: 0.9rem;
-  opacity: 0.8;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  color: var(--color-gray-200);
 }
 
 @media (max-width: 48rem) {
   .game-section {
     padding: 3rem 1rem;
   }
-
   .game-header {
     padding: 1.5rem;
   }
-
   .game-header h2 {
     font-size: 1.5rem;
   }
-
   .game-header p {
     font-size: 1rem;
   }
-
   .preview-content h3 {
     font-size: 1.5rem;
   }
-
   .preview-content p {
     font-size: 1rem;
   }
-
   .play-button {
     padding: 0.8rem 1.5rem;
     font-size: 1.1rem;
-  }
-
-  .game-controls {
-    gap: 1.5rem;
   }
 }
 
@@ -207,50 +206,39 @@
   .game-section {
     padding: 2rem 0.5rem;
   }
-
   .game-container {
     border-radius: 1rem;
   }
-
   .game-header {
     padding: 1rem;
   }
-
   .game-header h2 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
-
   .game-header p {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
-
   .preview-content h3 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
-
   .preview-content p {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
-
   .play-button {
-    padding: 0.7rem 1.2rem;
-    font-size: 1rem;
+    padding: 0.7rem 1.1rem;
+    font-size: 0.95rem;
   }
-
   .game-footer {
     padding: 1rem;
   }
-
   .game-controls {
     gap: 1rem;
   }
-
   .control-key {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
   }
-
   .control-desc {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 } 

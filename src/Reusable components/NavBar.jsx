@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './NavBar.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../assets/FutureCraftLogo.png';
 
 const Navbar = () => {
@@ -55,7 +55,11 @@ const Navbar = () => {
                 <Link to="/login" onClick={handleNavLinkClick}>Login</Link>
               </>
             )}
+            {isLoggedIn && (
+              <Link to="/game" onClick={handleNavLinkClick}>Game</Link>
+            )}
             <Link to="/contact" onClick={handleNavLinkClick}>Contact</Link>
+
           </nav>
         </div>
       </div>

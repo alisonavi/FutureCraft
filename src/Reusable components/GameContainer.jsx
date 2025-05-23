@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import './GameContainer.css';
 import UnityGame from './UnityGame';
 
-const GameContainer = () => {
+const GameContainer = ({ previewOnly = false }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlayClick = () => {
-    setIsPlaying(true);
+    if (!previewOnly) setIsPlaying(true);
   };
 
   return (
@@ -23,10 +23,20 @@ const GameContainer = () => {
                 <div className="preview-content">
                   <h3>Ready to Explore?</h3>
                   <p>Click play to start your career exploration journey</p>
-                  <button className="play-button" onClick={handlePlayClick}>
+                  <button
+                    className="play-button"
+                    onClick={handlePlayClick}
+                    disabled={previewOnly}
+                    title={previewOnly ? 'Log in to play the game' : ''}
+                  >
                     <span className="play-icon">▶</span>
-                    Play Now
+                    {previewOnly ? 'Log in to Play' : 'Play Now'}
                   </button>
+                  {previewOnly && (
+                    <div style={{ color: 'var(--color-accent)', marginTop: '1rem', fontWeight: 600 }}>
+                      Please log in to play the game.
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -35,22 +45,6 @@ const GameContainer = () => {
               <UnityGame />
               <button
                 className="fullscreen-button"
-                style={{
-                  position: 'absolute',
-                  top: '1rem',
-                  right: '1rem',
-                  zIndex: 10,
-                  background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-                  color: '#fff',
-                  border: 'none',
-                  borderRadius: '1.2rem',
-                  padding: '0.7rem 2rem',
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  boxShadow: '0 2px 8px rgba(99,102,241,0.15)',
-                  transition: 'background 0.2s',
-                }}
                 onClick={() => {
                   const btn = document.getElementById('unity-fullscreen-button');
                   if (btn) btn.click();

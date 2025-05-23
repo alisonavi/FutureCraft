@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ToastProvider } from './context/ToastContext';
 import './App.css';
 import Navbar from './Reusable components/NavBar';
@@ -68,6 +68,7 @@ const App = () => {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/game" element={<ProtectedGameRoute />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <AnimatePresence />
@@ -76,5 +77,42 @@ const App = () => {
     </Router>
   );
 };
+
+function ProtectedGameRoute() {
+  const isLoggedIn = !!localStorage.getItem('access_token');
+  if (!isLoggedIn) return <Navigate to="/login" />;
+  return (
+    <div style={{ minHeight: '100vh', background: 'var(--gradient-primary)' }}>
+      <section style={{
+        padding: '5.5rem 0 2.5rem 0',
+        textAlign: 'center',
+        background: 'var(--gradient-primary)',
+        borderBottom: '1.5px solid rgba(59, 176, 212, 0.08)',
+        marginBottom: '2.5rem',
+      }}>
+        <h1 style={{
+          fontSize: '2.3rem',
+          fontWeight: 900,
+          background: 'linear-gradient(90deg, var(--color-accent), var(--color-accent-light))',
+          WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
+          color: 'transparent',
+          marginBottom: '1.2rem',
+          letterSpacing: '-1px',
+        }}>FutureCraft Game Arena</h1>
+        <p style={{
+          color: 'var(--color-gray-100)',
+          fontSize: '1.1rem',
+          maxWidth: 700,
+          margin: '0 auto 0.5rem auto',
+          opacity: 0.9,
+        }}>
+          Dive into our interactive 3D career explorer. Compete, learn, and climb the leaderboard!
+        </p>
+      </section>
+      <GameContainer />
+    </div>
+  );
+}
 
 export default App;
