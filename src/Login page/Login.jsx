@@ -134,7 +134,7 @@ const LoginPage = () => {
                 autoComplete="current-password"
               />
             </div>
-            <a href="#" className="forgot-link">Forgot your password?</a>
+            <Link to="/forgot-password" className="forgot-link">Forgot your password?</Link>
             <div className="button-row">
               <motion.button
                 type="submit"

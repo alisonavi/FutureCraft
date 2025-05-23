@@ -21,11 +21,20 @@ import Contact from './Contact us page/Contact';
 import NotFound from './Reusable components/NotFound';
 import Terms from './Reusable components/Terms';
 import Privacy from './Reusable components/Privacy';
+import ForgotPassword from './Login page/ForgotPassword';
+import ResetPassword from './Login page/ResetPassword';
+import VerifyEmail from './Login page/VerifyEmail';
 
 const App = () => {
   useEffect(() => {
     // Enable smooth scrolling
     document.documentElement.style.scrollBehavior = 'smooth';
+
+    // Fetch CSRF cookie on app load
+    fetch('https://207.127.93.193/sanctum/csrf-cookie', {
+      method: 'GET',
+      credentials: 'include',
+    }).catch(() => {});
     
     // Cleanup
     return () => {
@@ -56,6 +65,9 @@ const App = () => {
           <Route path='/profile' element={<UserProfile />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <AnimatePresence />

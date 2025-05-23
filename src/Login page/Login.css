@@ -123,16 +123,17 @@
 }
 
 .forgot-link {
-  color: #3BB0D4;
-  font-size: 0.95rem;
-  text-decoration: none;
-  margin-bottom: 0.3rem;
-  display: inline-block;
+  display: block;
+  margin: 0.5rem 0 1.5rem 0;
+  color: var(--color-white);
+  text-align: left;
+  font-size: 1rem;
+  text-decoration: underline;
   transition: color 0.2s;
 }
 
 .forgot-link:hover {
-  color: #2490b8;
+  color: var(--color-accent);
   text-decoration: underline;
 }
 

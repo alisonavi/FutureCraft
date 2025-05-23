@@ -35,7 +35,7 @@ const RegisterPage = () => {
 
     try {
       // Replace with your registration API endpoint
-      const response = await fetch('https://207.127.93.193/api/register', {
+      const response = await fetch('https://207.127.93.193/api/register/request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -47,8 +47,10 @@ const RegisterPage = () => {
         const data = await response.json();
         throw new Error(data.message || 'Registration failed');
       }
-      setSuccess('Registration successful! You can now log in.');
-      setTimeout(() => navigate('/login'), 1500);
+      setSuccess(true);
+      setTimeout(() => {
+        navigate(`/verify-email?email=${encodeURIComponent(formData.email)}`);
+      }, 1000);
     } catch (err) {
       setError(err.message || 'Network error. Please try again.');
     } finally {
