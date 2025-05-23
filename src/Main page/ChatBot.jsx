@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ChatBot.css';
 
+
 const API_URL = 'http://192.168.0.106:8000/api/career/ask';
 
 const ChatBot = () => {
