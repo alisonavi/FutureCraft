@@ -55,7 +55,7 @@ const LoginPage = () => {
       document.cookie = `access_token=${data.access_token}; path=/;`;
       window.dispatchEvent(new Event('authchange'));
       setSuccess(true);
-
+      
       // Add a small delay before navigation for better UX
       setTimeout(() => {
         navigate('/profile');
@@ -106,44 +106,44 @@ const LoginPage = () => {
           <form className="login-form" onSubmit={handleSubmit} autoComplete="on">
             <div className="login-input-wrapper">
               <label htmlFor="email" className="login-label">E-mail</label>
-              <motion.input
-                whileFocus={{ scale: 1.02 }}
-                className='login-input'
-                type="email"
-                name="email"
+            <motion.input
+              whileFocus={{ scale: 1.02 }}
+              className='login-input'
+              type="email"
+              name="email"
                 id="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                disabled={isLoading}
+              value={formData.email}
+              onChange={handleChange}
+              required
+              disabled={isLoading}
                 autoComplete="username"
-              />
+            />
             </div>
             <div className="login-input-wrapper">
               <label htmlFor="password" className="login-label">Password</label>
-              <motion.input
-                whileFocus={{ scale: 1.02 }}
-                className='login-input'
-                type="password"
-                name="password"
+            <motion.input
+              whileFocus={{ scale: 1.02 }}
+              className='login-input'
+              type="password"
+              name="password"
                 id="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                disabled={isLoading}
+              value={formData.password}
+              onChange={handleChange}
+              required
+              disabled={isLoading}
                 autoComplete="current-password"
-              />
+            />
             </div>
             <Link to="/forgot-password" className="forgot-link">Forgot your password?</Link>
             <div className="button-row">
-              <motion.button
+            <motion.button
                 type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                disabled={isLoading}
-              >
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              disabled={isLoading}
+            >
                 {isLoading ? <LoadingState message="Signing in..." /> : 'Sign In'}
-              </motion.button>
+            </motion.button>
               <button type="button" className="back-btn" onClick={() => navigate(-1)}>
                 Back
               </button>

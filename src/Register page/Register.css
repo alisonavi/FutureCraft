@@ -148,15 +148,15 @@
   margin-bottom: 1.2rem;
   font-size: 0.95rem;
   border: 1px solid rgba(59, 176, 212, 0.2);
-}
+  }
 
 .register-terms {
   margin-top: 1.2rem;
   color: #b0bedc;
   font-size: 0.95rem;
   text-align: left;
-}
-
+  }
+  
 .register-terms a {
   color: #3BB0D4;
   text-decoration: none;

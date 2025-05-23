@@ -20,7 +20,7 @@ a, button, input, select, textarea {
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 30px rgba(0, 21, 56, 0.3);
-}
+  }
 
 /* Section Styles */
 .section {
@@ -41,7 +41,7 @@ a, button, input, select, textarea {
     var(--color-accent) 50%, 
     transparent 100%
   );
-}
+  }
 
 /* Navigation Styles */
 .nav-link {
@@ -61,7 +61,7 @@ a, button, input, select, textarea {
   background: var(--color-accent);
   transition: all 0.3s ease;
   transform: translateX(-50%);
-}
+  }
 
 .nav-link:hover::after {
   width: 100%;

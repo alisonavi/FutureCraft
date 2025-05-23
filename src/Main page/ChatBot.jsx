@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './ChatBot.css';
 
 
-const API_URL = 'http://192.168.0.106:8000/api/career/ask';
+const API_URL = 'https://g5ms0cwrjm6s.share.zrok.io/api/career/ask';
 
 const ChatBot = () => {
   const [messages, setMessages] = useState([
@@ -30,12 +30,12 @@ const ChatBot = () => {
           'Content-Type': 'application/json',
           'skip_zrok_interstitial': 'true',
         },
-        body: JSON.stringify({ question: userMessage.text })
+        body: JSON.stringify({ message: userMessage.text })
       });
       const data = await response.json();
       setMessages((prev) => [
         ...prev,
-        { sender: 'ai', text: data.answer }
+        { sender: 'ai', text: data.data.npc_response }
       ]);
     } catch (err) {
       setMessages((prev) => [
