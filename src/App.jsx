@@ -19,6 +19,8 @@ import Preference from './PrefenceTest page/Preference'
 import PreferencePage from './PrefenceTest page/PreferencePage';
 import Contact from './Contact us page/Contact';
 import NotFound from './Reusable components/NotFound';
+import Terms from './Reusable components/Terms';
+import Privacy from './Reusable components/Privacy';
 
 const App = () => {
   useEffect(() => {
@@ -52,6 +54,8 @@ const App = () => {
           <Route path="/explore" element={<Explore />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/profile' element={<UserProfile />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <AnimatePresence />

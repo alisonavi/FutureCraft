@@ -1,24 +1,14 @@
 .hero-container {
-  /* Remove the margin-top */
-  background-size: cover;
-  background-position: center;
-  background-image: linear-gradient(
-    to right bottom,
-    rgba(0, 21, 127, 0.35),
-    rgba(92, 53, 201, 0.35)
-  ),
-  url("../assets/background.png");
-  color: white;
-  padding: 1rem 5rem;
-  height: 25rem;
+  background: var(--gradient-primary);
+  position: relative;
+  min-height: 80vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  position: relative;
-  /* margin-top: 4rem; */
+  padding: 6rem 2rem;
+  overflow: hidden;
 }
+
 .hero-container::before {
   content: '';
   position: absolute;
@@ -26,87 +16,189 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 21, 127, 0.35);
-  z-index: -1;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(59, 176, 212, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0, 21, 56, 0.2) 0%, transparent 50%);
+  z-index: 1;
+}
+
+.hero-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: linear-gradient(to top, var(--color-primary-dark), transparent);
+  z-index: 1;
 }
 
 .hero-content {
-  max-width: 50rem;
-  margin-top: 5rem; /* Add this line */
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  text-align: center;
 }
 
 .hero-content h2 {
-  font-size: 1.2rem;
-  opacity: 0.8;
-  margin-bottom: 1rem;
-  color: white;
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-300);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .hero-content h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 4.5rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 30px rgba(59, 176, 212, 0.3);
 }
 
 .hero-content p {
-  font-size: 1.1rem;
-  opacity: 0.7;
-  margin-bottom: 2rem;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--color-gray-200);
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cta-button {
-  background-color: #2563eb;
-  color: white;
-  padding: 1rem 2rem;
+  background: var(--gradient-accent);
+  color: var(--color-white);
+  padding: 1rem 2.5rem;
   border: none;
-  border-radius: 1.5625rem;
+  border-radius: var(--border-radius-md);
   font-size: 1.1rem;
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--color-accent-dark), var(--color-accent));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
 }
 
 .cta-button:hover {
-  background-color: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
-/* Fade-in utility classes */
+.cta-button:hover::before {
+  opacity: 1;
+}
+
+/* Glowing effect for the hero section */
+.hero-content::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(59, 176, 212, 0.1) 0%, transparent 70%);
+  z-index: -1;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.5;
+  }
+}
+
+/* Fade-in animations */
 .fade-in {
   opacity: 0;
-  animation: fadeIn 1.2s cubic-bezier(0.4,0,0.2,1) forwards;
+  animation: fadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .fade-in-1 { animation-delay: 0.2s; }
 .fade-in-2 { animation-delay: 0.4s; }
 .fade-in-3 { animation-delay: 0.6s; }
 .fade-in-4 { animation-delay: 0.8s; }
-.fade-in-5 { animation-delay: 1.0s; }
-.fade-in-6 { animation-delay: 1.2s; }
 
-.cta-button, h1, h2, p {
-  transition: all 0.8s cubic-bezier(0.4,0,0.2,1) !important;
+@media (max-width: 768px) {
+  .hero-container {
+    min-height: 60vh;
+    padding: 4rem 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content h2 {
+    font-size: 1rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .cta-button {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+  }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   .hero-container {
-    padding: 3.5rem 1rem 0.5rem 1rem;
-    height: 15rem;
-    border-radius: 0 0 1.2rem 1.2rem;
-    margin-bottom: 1.2rem;
+    min-height: 50vh;
   }
-  .hero-content {
-    margin-top: 2rem;
-    max-width: 95vw;
-  }
+
   .hero-content h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
+
   .hero-content h2 {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
   }
+
   .hero-content p {
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-  }
-  .cta-button {
-    padding: 0.7rem 1.2rem;
-    font-size: 0.95rem;
+    font-size: 0.875rem;
   }
 }

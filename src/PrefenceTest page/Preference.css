@@ -1,10 +1,11 @@
 .preference-bg {
   min-height: 80vh;
-  background: linear-gradient(120deg, #232946 0%, #3b3b5b 100%);
+  background: var(--gradient-primary);
   display: flex;
   align-items: flex-start;
   justify-content: center;
   padding: 2rem 0;
+  font-family: var(--font-family);
 }
 
 .preference-container {
@@ -30,17 +31,19 @@
 }
 
 .preference-card {
-  background: rgba(30, 41, 59, 0.97);
+  background: rgba(2, 30, 74, 0.97);
   border-radius: 1.5rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  box-shadow: 0 8px 32px rgba(0,21,56,0.18);
   padding: 2.5rem 3.5rem 2rem 3.5rem;
   width: 100%;
   max-width: 800px;
   text-align: center;
   color: #fff;
   position: relative;
-  animation: fadeInCard 0.5s cubic-bezier(0.4,0,0.2,1);
+  animation: fadeInCard 0.7s cubic-bezier(0.4,0,0.2,1);
   z-index: 2;
+  border: 1px solid rgba(59, 176, 212, 0.08);
+  backdrop-filter: blur(12px);
 }
 
 .preference-sidebar {
@@ -58,13 +61,14 @@
 }
 
 .question-tip, .live-preview {
-  background: rgba(30, 41, 59, 0.97);
+  background: rgba(2, 30, 74, 0.97);
   border-radius: 1.25rem;
   padding: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
-  animation: fadeInCard 0.5s cubic-bezier(0.4,0,0.2,1);
+  border: 1px solid rgba(59, 176, 212, 0.08);
+  box-shadow: 0 4px 16px rgba(0,21,56,0.10);
+  animation: fadeInCard 0.7s cubic-bezier(0.4,0,0.2,1);
   margin-bottom: 0.5rem;
+  backdrop-filter: blur(12px);
 }
 
 .question-tip h3, .live-preview h3 {
@@ -99,7 +103,7 @@
 
 .match-item:hover {
   transform: translateX(5px);
-  box-shadow: 0 2px 8px rgba(99,102,241,0.2);
+  box-shadow: 0 2px 8px rgba(59,176,212,0.2);
 }
 
 .match-icon {
@@ -137,8 +141,8 @@
   flex: 1;
   max-width: 12rem;
   border-radius: 1rem;
-  border: 3px solid #6366f1;
-  box-shadow: 0 4px 16px rgba(99,102,241,0.10);
+  border: 3px solid var(--color-accent);
+  box-shadow: 0 4px 16px rgba(59,176,212,0.10);
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
   background: #fff;
@@ -147,8 +151,8 @@
 }
 .preference-img:hover {
   transform: scale(1.07) translateY(-4px);
-  box-shadow: 0 8px 32px rgba(99,102,241,0.18);
-  border-color: #8b5cf6;
+  box-shadow: 0 8px 32px rgba(59,176,212,0.18);
+  border-color: var(--color-accent-dark);
   z-index: 2;
 }
 
@@ -156,13 +160,13 @@
   width: 100%;
   height: 0.7rem;
   border-radius: 0.5rem;
-  background: #232946;
+  background: var(--color-primary);
   margin: 1.5rem 0 0.5rem 0;
   overflow: hidden;
 }
 .preference-progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  background: var(--gradient-accent);
   border-radius: 0.5rem;
   transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
 }
@@ -292,7 +296,7 @@
 }
 
 .preference-option-btn {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: var(--gradient-accent);
   color: white;
   border: none;
   border-radius: 1rem;
@@ -301,13 +305,13 @@
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(99,102,241,0.10);
+  box-shadow: 0 2px 8px rgba(59,176,212,0.10);
   outline: none;
 }
 .preference-option-btn:hover, .preference-option-btn:focus {
-  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  background: var(--color-accent-dark);
   transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 4px 16px rgba(99,102,241,0.18);
+  box-shadow: 0 4px 16px rgba(59,176,212,0.18);
 }
 .preference-option-btn.left {
   /* Optionally add a left-specific style */
@@ -340,17 +344,17 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: var(--gradient-accent);
   color: #fff;
-  box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+  box-shadow: 0 2px 8px rgba(59,176,212,0.08);
   transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
   outline: none;
 }
 .likert-btn:hover, .likert-btn:focus {
-  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  background: var(--color-accent-dark);
   color: #fff;
   transform: translateY(-2px) scale(1.06);
-  box-shadow: 0 4px 16px rgba(99,102,241,0.18);
+  box-shadow: 0 4px 16px rgba(59,176,212,0.18);
 }
 
 .likert-circles-row {
@@ -381,20 +385,20 @@
 }
 .likert-circle {
   display: inline-block;
-  border: 2px solid #7c3aed;
+  border: 2px solid var(--color-accent);
   border-radius: 50%;
-  background: #232946;
+  background: var(--color-primary);
   transition: border-color 0.2s, box-shadow 0.2s, width 0.2s, height 0.2s, background 0.2s;
   box-sizing: border-box;
 }
 .likert-circle-label.selected .likert-circle {
   border-color: #22c55e;
   background: #22c55e;
-  box-shadow: 0 0 0 4px rgba(34,197,94,0.10);
+  box-shadow: 0 0 0 6px rgba(34,197,94,0.12);
 }
 .likert-circle-label:not(.selected):hover .likert-circle {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 4px rgba(99,102,241,0.10);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(59,176,212,0.10);
 }
 
 .likert-label {
@@ -413,7 +417,7 @@
 }
 .likert-label.right {
   right: 0;
-  color: #6366f1;
+  color: var(--color-accent);
 }
 
 .likert-nav-row {
@@ -424,9 +428,9 @@
   margin-bottom: 1.5rem;
 }
 .likert-nav-btn {
-  background: #fff;
-  color: #7c3aed;
-  border: 2px solid #7c3aed;
+  background: var(--gradient-accent);
+  color: #fff;
+  border: none;
   border-radius: 50%;
   width: 64px;
   height: 64px;
@@ -437,23 +441,21 @@
   font-weight: 700;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+  box-shadow: 0 2px 8px rgba(59,176,212,0.08);
   outline: none;
   padding: 0;
 }
 .likert-nav-btn:disabled {
-  background: #ede9fe;
-  color: #a5b4fc;
-  border-color: #a5b4fc;
+  background: var(--color-accent-dark);
+  color: var(--color-accent);
   cursor: not-allowed;
   opacity: 0.7;
 }
 .likert-nav-btn:hover:not(:disabled), .likert-nav-btn:focus:not(:disabled) {
-  background: #ede9fe;
-  color: #5b21b6;
-  border-color: #5b21b6;
+  background: var(--color-accent-dark);
+  color: #fff;
   transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 4px 16px rgba(99,102,241,0.18);
+  box-shadow: 0 4px 16px rgba(59,176,212,0.18);
 }
 
 @media (max-width: 900px) {

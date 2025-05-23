@@ -1,82 +1,65 @@
 import React, { useState } from 'react';
 import './Register.css';
-import { Link, useNavigate, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const RegisterPage = () => {
-  // Redirect if already logged in
-  if (localStorage.getItem('access_token')) {
-    return <Navigate to="/profile" replace />;
-  }
-
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    name: ''
   });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
-  const pageVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 }
-  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError('');
+    setSuccess('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
+    setIsLoading(true);
 
-    // Client-side validation
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-    if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters');
+      setError('Passwords do not match.');
+      setIsLoading(false);
       return;
     }
 
     try {
+      // Replace with your registration API endpoint
       const response = await fetch('https://207.127.93.193/api/register', {
         method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          'skip_zrok_interstitial': 'true',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: formData.name,
           email: formData.email,
-          password: formData.password,
-          password_confirmation: formData.confirmPassword
+          password: formData.password
         })
       });
-
       if (!response.ok) {
         const data = await response.json();
-        setError(data.message || 'Registration failed');
-        console.log(data)
-        return;
+        throw new Error(data.message || 'Registration failed');
       }
-
-      const data = await response.json();
-      if (data.access_token) {
-        localStorage.setItem('access_token', data.access_token);
-        document.cookie = `access_token=${data.access_token}; path=/;`;
-        window.dispatchEvent(new Event('authchange'));
-      }
-      setError('Registration successful! Redirecting to login...');
+      setSuccess('Registration successful! You can now log in.');
       setTimeout(() => navigate('/login'), 1500);
-    } catch (error) {
-      console.error(error);
-      setError('Network error. Please try again.');
+    } catch (err) {
+      setError(err.message || 'Network error. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
+  };
+
+  const pageVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 }
   };
 
   return (
@@ -89,56 +72,75 @@ const RegisterPage = () => {
     >
       <div className="register-container">
         <div className="register-content">
-          <div className="new-user">
-            <h2>Create Your Account</h2>
-            {(error && error.toLowerCase().includes('success')) ? (
-              <p className="success-message">{error}</p>
-            ) : error ? (
-              <p className="error-message">{error}</p>
-            ) : null}
-            <form className="register-form" onSubmit={handleSubmit}>
+          <h2>Create an account</h2>
+          {error && <p className="error-message">{error}</p>}
+          {success && <p className="success-message">{success}</p>}
+          <form className="register-form" onSubmit={handleSubmit} autoComplete="on">
+            <div className="register-input-wrapper">
+              <label htmlFor="name" className="register-label">Name</label>
               <input
-                className='register-input'
+                className="register-input"
                 type="text"
                 name="name"
-                placeholder="Full Name"
-                value={formData.name}
+                id="name"
+                value={formData.name || ''}
                 onChange={handleChange}
                 required
+                autoComplete="name"
               />
+            </div>
+            <div className="register-input-wrapper">
+              <label htmlFor="email" className="register-label">E-mail</label>
               <input
-                className='register-input'
+                className="register-input"
                 type="email"
                 name="email"
-                placeholder="Email"
+                id="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
+                autoComplete="username"
               />
+            </div>
+            <div className="register-input-wrapper">
+              <label htmlFor="password" className="register-label">Password</label>
               <input
-                className='register-input'
+                className="register-input"
                 type="password"
                 name="password"
-                placeholder="Password"
+                id="password"
                 value={formData.password}
                 onChange={handleChange}
                 required
+                autoComplete="new-password"
               />
+            </div>
+            <div className="register-input-wrapper">
+              <label htmlFor="confirmPassword" className="register-label">Confirm Password</label>
               <input
-                className='register-input'
+                className="register-input"
                 type="password"
                 name="confirmPassword"
-                placeholder="Confirm Password"
+                id="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
+                autoComplete="new-password"
               />
-              <button type="submit">Submit</button>
-            </form>
-            <p className="login-link">
-              Already a Member? <Link to="/login">Log In</Link>
-            </p>
-          </div>
+            </div>
+            <div className="button-row">
+              <button type="submit" disabled={isLoading}>
+                {isLoading ? 'Registering...' : 'Continue'}
+              </button>
+            </div>
+          </form>
+          <p className="register-link">
+            Already have an account?
+            <Link to="/login"> Log In</Link>
+          </p>
+          <p className="register-terms">
+            By signing up, you understand and agree to our <Link to="/terms">Terms of Service</Link>, and <Link to="/privacy">Privacy Policy</Link>.
+          </p>
         </div>
       </div>
     </motion.div>

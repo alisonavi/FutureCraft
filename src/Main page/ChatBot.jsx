@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ChatBot.css';
 
-const API_URL = 'https://207.127.93.193/api/career/ask';
+const API_URL = 'http://192.168.0.106:8000/api/career/ask';
 
 const ChatBot = () => {
   const [messages, setMessages] = useState([
@@ -52,30 +52,21 @@ const ChatBot = () => {
     }
   };
 
+  // Typing indicator component
+  const TypingIndicator = () => (
+    <div className="chatbot-message ai typing-indicator">
+      <span className="typing-dot" />
+      <span className="typing-dot" />
+      <span className="typing-dot" />
+    </div>
+  );
+
   if (!open) {
     return (
       <button
         className="chatbot-fab"
         onClick={() => setOpen(true)}
         aria-label="Open chat"
-        style={{
-          position: 'fixed',
-          bottom: '1.5rem',
-          right: '1.5rem',
-          zIndex: 2001,
-          width: 60,
-          height: 60,
-          borderRadius: '50%',
-          background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-          color: '#fff',
-          border: 'none',
-          boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
-          fontSize: 32,
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
       >
         <span role="img" aria-label="Chat">💬</span>
       </button>
@@ -97,6 +88,7 @@ const ChatBot = () => {
             {msg.text}
           </div>
         ))}
+        {loading && <TypingIndicator />}
         <div ref={messagesEndRef} />
       </div>
       <div className="chatbot-input-row">

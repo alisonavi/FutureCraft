@@ -14,6 +14,7 @@ const LoginPage = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const pageVariants = {
@@ -54,7 +55,7 @@ const LoginPage = () => {
       document.cookie = `access_token=${data.access_token}; path=/;`;
       window.dispatchEvent(new Event('authchange'));
       setSuccess(true);
-      
+
       // Add a small delay before navigation for better UX
       setTimeout(() => {
         navigate('/profile');
@@ -77,7 +78,7 @@ const LoginPage = () => {
     >
       <div className="login-container">
         <div className="login-content">
-          <h2>Welcome Back</h2>
+          <h2 className='hoho'>Welcome Back</h2>
           <AnimatePresence mode="wait">
             {error && (
               <motion.p
@@ -102,40 +103,55 @@ const LoginPage = () => {
               </motion.p>
             )}
           </AnimatePresence>
-          <form onSubmit={handleSubmit}>
-            <motion.input
-              whileFocus={{ scale: 1.02 }}
-              className='login-input'
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              disabled={isLoading}
-            />
-            <motion.input
-              whileFocus={{ scale: 1.02 }}
-              className='login-input'
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              disabled={isLoading}
-            />
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              type="submit"
-              disabled={isLoading}
-            >
-              {isLoading ? <LoadingState message="Signing in..." /> : 'Log In'}
-            </motion.button>
+          <form className="login-form" onSubmit={handleSubmit} autoComplete="on">
+            <div className="login-input-wrapper">
+              <label htmlFor="email" className="login-label">E-mail</label>
+              <motion.input
+                whileFocus={{ scale: 1.02 }}
+                className='login-input'
+                type="email"
+                name="email"
+                id="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                disabled={isLoading}
+                autoComplete="username"
+              />
+            </div>
+            <div className="login-input-wrapper">
+              <label htmlFor="password" className="login-label">Password</label>
+              <motion.input
+                whileFocus={{ scale: 1.02 }}
+                className='login-input'
+                type="password"
+                name="password"
+                id="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                disabled={isLoading}
+                autoComplete="current-password"
+              />
+            </div>
+            <a href="#" className="forgot-link">Forgot your password?</a>
+            <div className="button-row">
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                disabled={isLoading}
+              >
+                {isLoading ? <LoadingState message="Signing in..." /> : 'Sign In'}
+              </motion.button>
+              <button type="button" className="back-btn" onClick={() => navigate(-1)}>
+                Back
+              </button>
+            </div>
           </form>
           <p className="register-link">
-            Don't have an account? <Link to="/register">Create One</Link>
+            Don't have an account?
+            <Link to="/register"> Create One</Link>
           </p>
         </div>
       </div>

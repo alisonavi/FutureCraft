@@ -1,8 +1,8 @@
 .explore-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #232946 0%, #3b3b5b 100%);
+  background: var(--gradient-primary);
   padding: 6rem 2rem 4rem 2rem;
-  color: white;
+  color: var(--color-white);
 }
 
 .explore-header {
@@ -15,7 +15,7 @@
 .explore-header h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -36,13 +36,13 @@
 }
 
 .path-card {
-  background: rgba(30, 41, 59, 0.85);
+  background: rgba(2, 21, 56, 0.97);
   backdrop-filter: blur(0.625rem);
   border-radius: 1.25rem;
   padding: 2rem;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-  border: 0.0625rem solid rgba(255, 255, 255, 0.1);
+  border: 0.0625rem solid var(--color-accent);
   position: relative;
   overflow: hidden;
 }
@@ -54,7 +54,7 @@
   left: -0.125rem;
   right: -0.125rem;
   bottom: -0.125rem;
-  background: linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899);
+  background: linear-gradient(45deg, var(--color-accent), var(--color-accent-light));
   border-radius: 1.375rem;
   z-index: -1;
   opacity: 0;
@@ -69,7 +69,8 @@
 .path-card:hover,
 .path-card.selected {
   transform: translateY(-0.5rem);
-  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 32px 4px var(--color-accent), 0 8px 32px rgba(0,21,56,0.18);
+  border-color: var(--color-accent);
 }
 
 .path-icon {
@@ -86,7 +87,7 @@
 .path-card h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #a5b4fc;
+  color: var(--color-accent-light);
 }
 
 .path-card p {
@@ -107,7 +108,7 @@
 }
 
 .career-item {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(2, 21, 56, 0.85);
   padding: 1rem;
   border-radius: 0.75rem;
   margin-bottom: 1rem;
@@ -118,7 +119,7 @@
 }
 
 .career-item h4 {
-  color: #8588e7;
+  color: var(--color-accent);
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
 }
@@ -133,19 +134,19 @@
   text-align: center;
   margin-top: 4rem;
   padding: 3rem;
-  background: rgba(30, 41, 59, 0.85);
+  background: rgba(2, 21, 56, 0.97);
   backdrop-filter: blur(0.625rem);
   border-radius: 1.25rem;
   max-width: 50rem;
   margin-left: auto;
   margin-right: auto;
-  border: 0.0625rem solid rgba(255, 255, 255, 0.1);
+  border: 0.0625rem solid var(--color-accent);
 }
 
 .explore-cta h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -158,7 +159,7 @@
 }
 
 .explore-cta button {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: var(--gradient-accent);
   color: white;
   padding: 1rem 2rem;
   border: none;
@@ -168,6 +169,7 @@
   transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 16px 2px var(--color-accent-light);
 }
 
 .explore-cta button::before {
@@ -188,7 +190,8 @@
 
 .explore-cta button:hover {
   transform: translateY(-0.125rem);
-  box-shadow: 0 0.3125rem 0.9375rem rgba(99, 102, 241, 0.4);
+  background: var(--color-accent-dark);
+  box-shadow: 0 0 24px 4px var(--color-accent);
 }
 
 .explore-cta button:hover::before {
@@ -291,21 +294,21 @@
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  background: rgba(30, 41, 59, 0.95);
+  background: rgba(0, 177, 229, 0.10);
   backdrop-filter: blur(8px);
-  color: #a5b4fc;
+  color: var(--color-accent);
   font-size: 1rem;
   font-weight: 500;
   z-index: 1000;
-  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+  border-bottom: 1px solid var(--color-accent-light);
 }
 
 .loading-spinner {
   width: 24px;
   height: 24px;
-  border: 3px solid rgba(99, 102, 241, 0.3);
+  border: 3px solid rgba(0, 177, 229, 0.3);
   border-radius: 50%;
-  border-top-color: #6366f1;
+  border-top-color: var(--color-accent);
   animation: spin 1s linear infinite;
 }
 
