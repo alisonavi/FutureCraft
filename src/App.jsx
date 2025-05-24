@@ -31,7 +31,7 @@ const App = () => {
     document.documentElement.style.scrollBehavior = 'smooth';
 
     // Fetch CSRF cookie on app load
-    fetch('https://c798zyr7fl20.share.zrok.io/sanctum/csrf-cookie', {
+    fetch('https://207.127.93.193/sanctum/csrf-cookie', {
       method: 'GET',
       credentials: 'include',
     }).catch(() => { });

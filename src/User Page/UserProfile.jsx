@@ -29,7 +29,7 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch('https://c798zyr7fl20.share.zrok.io/api/user', {
+        const response = await fetch('https://207.127.93.193/api/user', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ const UserProfile = () => {
       setAnalysisLoading(true);
       setAnalysisError('');
       try {
-        const res = await fetch('https://c798zyr7fl20.share.zrok.io/api/preference-analysis', {
+        const res = await fetch('https://207.127.93.193/api/preference-analysis', {
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -114,7 +114,7 @@ const UserProfile = () => {
     setEditLoading(true);
     setEditMessage('');
     try {
-      const response = await fetch('https://c798zyr7fl20.share.zrok.io/api/user', {
+      const response = await fetch('https://207.127.93.193/api/user', {
         method: 'PUT',
         credentials: 'include',
         headers: {

@@ -29,7 +29,7 @@ const ResetPassword = () => {
     }
     setLoading(true);
     try {
-      const res = await fetch('https://c798zyr7fl20.share.zrok.io/api/reset-password', {
+      const res = await fetch('https://207.127.93.193/api/reset-password', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

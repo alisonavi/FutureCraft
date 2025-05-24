@@ -14,7 +14,7 @@ export default function PreferencePage() {
     if (!isLoggedIn) return;
     setLoading(true);
     setError('');
-    fetch('https://c798zyr7fl20.share.zrok.io/api/preference-tests', {
+    fetch('https://207.127.93.193/api/preference-tests', {
       method: 'GET',
       credentials: 'include',
     })

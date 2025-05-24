@@ -11,22 +11,40 @@ const Contact = () => {
   });
   const [status, setStatus] = useState({ type: '', message: '' });
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    setStatus({ type: 'info', message: 'Sending message...' });
+    setStatus({ type: 'info', message: 'Sending message…' });
 
     try {
-      // Here you would typically send the form data to your backend
-      // For now, we'll simulate a successful submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setStatus({ type: 'success', message: 'Message sent successfully! We\'ll get back to you soon.' });
+      const res = await fetch('https://207.127.93.193/api/feedback', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.message || `HTTP ${res.status}`);
+      }
+
+      setStatus({
+        type: 'success',
+        message: `Message sent successfully! We'll get back to you soon.`
+      });
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
-      setStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
+      console.error('Feedback submit error:', error);
+      setStatus({
+        type: 'error',
+        message: `Failed to send message: ${error.message}`
+      });
     }
   };
 
@@ -70,6 +88,7 @@ const Contact = () => {
                     {status.message}
                   </div>
                 )}
+
                 <div className="form-group">
                   <input
                     type="text"
@@ -80,6 +99,7 @@ const Contact = () => {
                     required
                   />
                 </div>
+
                 <div className="form-group">
                   <input
                     type="email"
@@ -90,6 +110,7 @@ const Contact = () => {
                     required
                   />
                 </div>
+
                 <div className="form-group">
                   <input
                     type="text"
@@ -100,6 +121,7 @@ const Contact = () => {
                     required
                   />
                 </div>
+
                 <div className="form-group">
                   <textarea
                     name="message"
@@ -109,6 +131,7 @@ const Contact = () => {
                     required
                   ></textarea>
                 </div>
+
                 <button type="submit">Send Message</button>
               </form>
             </div>
@@ -119,4 +142,4 @@ const Contact = () => {
   );
 };
 
-export default Contact; 
+export default Contact;

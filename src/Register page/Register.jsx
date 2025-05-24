@@ -35,9 +35,9 @@ const RegisterPage = () => {
 
     try {
       // Replace with your registration API endpoint
-      const response = await fetch('https://c798zyr7fl20.share.zrok.io/api/register/request', {
+      const response = await fetch('https://207.127.93.193/api/register/request', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', credentials: 'include', },
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,

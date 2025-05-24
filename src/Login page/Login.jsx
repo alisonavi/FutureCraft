@@ -35,7 +35,7 @@ const LoginPage = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://c798zyr7fl20.share.zrok.io/api/login', {
+      const response = await fetch('https://207.127.93.193/api/login', {
         method: 'POST',
         credentials: 'include',
         headers: {

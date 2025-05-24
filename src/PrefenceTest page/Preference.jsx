@@ -92,7 +92,7 @@ export default function Preference({ items, onComplete }) {
           preference_test_id: Number(q.id),
           score: answers[q.id]
         }));
-        const res = await fetch('https://c798zyr7fl20.share.zrok.io/api/preference-tests/responses', {
+        const res = await fetch('https://207.127.93.193/api/preference-tests/responses', {
           method: 'POST',
           credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
