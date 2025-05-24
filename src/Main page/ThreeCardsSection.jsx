@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ThreeCardsSection.css';
+import ChatBot from './ChatBot';
 
 const careerPaths = [
   { date: 'Monday, June 3, 2025', title: 'AI & Data Science Bootcamp', fields: ['Data Science', 'AI Engineering'] },
@@ -62,6 +63,7 @@ export default function ThreeCardsSection() {
       <div className="three-view-all">
         <a href="/explore">View all career paths →</a>
       </div>
+      <ChatBot />
     </section>
   );
 }
