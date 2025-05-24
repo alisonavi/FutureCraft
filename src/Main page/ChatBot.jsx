@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './ChatBot.css';
 
 
-const API_URL = 'https://g5ms0cwrjm6s.share.zrok.io/api/career/ask';
+const API_URL = 'https://207.127.93.193/api/career/ask';
 
 const ChatBot = () => {
   const [messages, setMessages] = useState([
