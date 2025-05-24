@@ -2,11 +2,12 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './Explore.css';
 import { useToast } from '../context/ToastContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import techIcon from '../assets/goofy5.jpg';
-import businessIcon from '../assets/goofy1.jpg';
-import creativeIcon from '../assets/goofy2.jpg';
-import scienceIcon from '../assets/goofy3.jpg';
-import healthcareIcon from '../assets/goofy4.jpg';
+import techIcon from '../assets/ex11.webp';
+import businessIcon from '../assets/ex2.png';
+import creativeIcon from '../assets/ex22.png';
+import scienceIcon from '../assets/ex44.png';
+import healthcareIcon from '../assets/ex001.png';
+import educationIcon from '../assets/exx.png';
 
 const Explore = () => {
   const [selectedPath, setSelectedPath] = useState(null);
@@ -121,7 +122,7 @@ const Explore = () => {
     {
       id: 'education',
       title: 'Education & Teaching',
-      icon: businessIcon,
+      icon: educationIcon,
       description: 'Shape the future by teaching, mentoring, and supporting learners of all ages.',
       careers: [
         { title: 'Teacher', description: 'Educate students in schools or colleges.' },
@@ -187,14 +188,14 @@ const Explore = () => {
           ))}
         </div>
 
-        <motion.div 
+        <motion.div
           className="explore-cta"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
           <h2>Ready to Find Your Path?</h2>
           <p>Take our preference test to get personalized career recommendations.</p>
-          <motion.button 
+          <motion.button
             onClick={() => window.location.href = '/preftest'}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

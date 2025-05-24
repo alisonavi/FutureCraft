@@ -10,6 +10,11 @@ const GameContainer = ({ previewOnly = false }) => {
     setIsPlaying(true);
   };
 
+  const handleFullscreen = () => {
+    const btn = document.getElementById('unity-fullscreen-button');
+    if (btn) btn.click();
+  };
+
   return (
     <section className="game-section">
       <div className="game-container">
@@ -17,7 +22,8 @@ const GameContainer = ({ previewOnly = false }) => {
           <h2>Interactive Career Explorer</h2>
           <p>Experience your potential career paths in an immersive 3D environment</p>
         </div>
-        <div className="game-wrapper" style={{ position: 'relative' }}>
+
+        <div className="game-wrapper">
           {!isPlaying ? (
             <div className="game-overlay">
               <div className="game-preview">
@@ -35,7 +41,7 @@ const GameContainer = ({ previewOnly = false }) => {
                     {previewOnly ? 'Log in to Play' : 'Play Now'}
                   </button>
                   {previewOnly && (
-                    <div style={{ color: 'var(--color-accent)', marginTop: '1rem', fontWeight: 600 }}>
+                    <div className="login-prompt">
                       Please log in to play the game.
                     </div>
                   )}
@@ -43,20 +49,10 @@ const GameContainer = ({ previewOnly = false }) => {
               </div>
             </div>
           ) : (
-            <>
-              <UnityGame />
-              <button
-                className="fullscreen-button"
-                onClick={() => {
-                  const btn = document.getElementById('unity-fullscreen-button');
-                  if (btn) btn.click();
-                }}
-              >
-                Fullscreen
-              </button>
-            </>
+            <UnityGame />
           )}
         </div>
+
         <div className="game-footer">
           <div className="game-controls">
             <div className="control-item">
@@ -72,10 +68,18 @@ const GameContainer = ({ previewOnly = false }) => {
               <span className="control-desc">Interact</span>
             </div>
           </div>
+          {isPlaying && (
+            <button
+              className="fullscreen-button"
+              onClick={handleFullscreen}
+            >
+              Fullscreen
+            </button>
+          )}
         </div>
       </div>
     </section>
   );
 };
 
-export default GameContainer; 
+export default GameContainer;
