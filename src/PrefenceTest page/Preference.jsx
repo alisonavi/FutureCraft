@@ -152,13 +152,13 @@ export default function Preference({ items, onComplete }) {
                 </div>
                 {/* Navigation arrows for all but last question */}
                 {index + 1 < shuffled.length && (
-                  <div className="likert-nav-row">
-                    <button className="likert-nav-btn" onClick={handlePrev} disabled={index === 0} aria-label="Previous">
-                      &#x25C0;
-                    </button>
-                    <button
-                      className="likert-nav-btn"
-                      onClick={handleNext}
+                <div className="likert-nav-row">
+                  <button className="likert-nav-btn" onClick={handlePrev} disabled={index === 0} aria-label="Previous">
+                    &#x25C0;
+                  </button>
+                  <button
+                    className="likert-nav-btn"
+                    onClick={handleNext}
                       disabled={typeof answers[current.id] === 'undefined' || submitting}
                       aria-label="Next"
                     >
@@ -189,7 +189,7 @@ export default function Preference({ items, onComplete }) {
                         alignItems: 'center',
                         gap: '1rem',
                       }}
-                    >
+                  >
                       {submitting ? (
                         <span style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                           <span className="loading-spinner" style={{ width: 24, height: 24, border: '3px solid #fff', borderTop: '3px solid #00b1e5', borderRadius: '50%', display: 'inline-block', animation: 'spin 1s linear infinite' }}></span>
@@ -198,8 +198,8 @@ export default function Preference({ items, onComplete }) {
                       ) : (
                         'Submit'
                       )}
-                    </button>
-                  </div>
+                  </button>
+                </div>
                 )}
                 <div className="preference-progress">
                   <div

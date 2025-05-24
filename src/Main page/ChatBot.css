@@ -85,6 +85,8 @@
 }
 
 .chatbot-message {
+  margin-top: 0;
+  padding-top: 0.5rem;
   max-width: 85%;
   padding: 1rem 1.25rem;
   border-radius: var(--border-radius-md);

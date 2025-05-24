@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import './UserProfile.css';
+import ReactMarkdown from 'react-markdown';
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -17,6 +18,9 @@ const UserProfile = () => {
   const [newName, setNewName] = useState('');
   const [editLoading, setEditLoading] = useState(false);
   const [editMessage, setEditMessage] = useState('');
+  const [analysis, setAnalysis] = useState(null);
+  const [analysisLoading, setAnalysisLoading] = useState(true);
+  const [analysisError, setAnalysisError] = useState('');
 
   if (!token) {
     return <Navigate to="/login" />;
@@ -49,6 +53,30 @@ const UserProfile = () => {
     };
 
     fetchUser();
+
+    // Fetch preference analysis
+    const fetchAnalysis = async () => {
+      setAnalysisLoading(true);
+      setAnalysisError('');
+      try {
+        const res = await fetch('https://207.127.93.193/api/preference-analysis', {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!res.ok) throw new Error('Could not fetch analysis');
+        const data = await res.json();
+        setAnalysis(data.analysis);
+      } catch (err) {
+        setAnalysisError('Could not load your career analysis.');
+      } finally {
+        setAnalysisLoading(false);
+      }
+    };
+    fetchAnalysis();
   }, []);
 
   if (error) {
@@ -166,6 +194,20 @@ const UserProfile = () => {
           <button className="profile-btn" onClick={handleLogout}>Logout</button>
         </div>
         {editMessage && <div className="profile-edit-message">{editMessage}</div>}
+      </div>
+      <div className="profile-analysis-card card fade-in fade-in-2" style={{ maxWidth: 700, margin: '2.5rem auto 0 auto', background: 'var(--gradient-secondary)', borderRadius: '1.5rem', padding: '2.2rem 2.5rem', color: 'var(--color-white)', boxShadow: '0 4px 24px rgba(0,21,56,0.15)' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '1.2rem', background: 'var(--gradient-accent)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>Your Career Path Analysis</h2>
+        {analysisLoading ? (
+          <div style={{ color: 'var(--color-gray-200)', fontSize: '1.1rem' }}>Loading analysis...</div>
+        ) : analysisError ? (
+          <div style={{ color: 'salmon', fontSize: '1.1rem' }}>{analysisError}</div>
+        ) : analysis ? (
+          <div style={{ color: 'var(--color-gray-100)', fontSize: '1.1rem', lineHeight: 1.7 }}>
+            <ReactMarkdown>{analysis}</ReactMarkdown>
+          </div>
+        ) : (
+          <div style={{ color: 'var(--color-gray-300)' }}>No analysis available yet.</div>
+        )}
       </div>
     </div>
   );

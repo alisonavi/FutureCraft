@@ -14,9 +14,9 @@ export default function UnityGame() {
       const warningBanner = document.querySelector('#unity-warning');
 
       const config = {
-        dataUrl: '/WebGLBuild/Build/WebGLBuild.data.unityweb',
-        frameworkUrl: '/WebGLBuild/Build/WebGLBuild.framework.js.unityweb',
-        codeUrl: '/WebGLBuild/Build/WebGLBuild.wasm.unityweb',
+        dataUrl: '/WebGLBuild/Build/FutureCraftPreFinal.data.unityweb',
+        frameworkUrl: '/WebGLBuild/Build/FutureCraftPreFinal.framework.js.unityweb',
+        codeUrl: '/WebGLBuild/Build/FutureCraftPreFinal.wasm.unityweb',
         streamingAssetsUrl: '/WebGLBuild/TemplateData',
         companyName: 'YourCompany',
         productName: 'YourGame',
