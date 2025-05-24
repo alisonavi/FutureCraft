@@ -92,7 +92,7 @@ export default function Preference({ items, onComplete }) {
           preference_test_id: Number(q.id),
           score: answers[q.id]
         }));
-        const res = await fetch('https://207.127.93.193/api/preference-tests/responses', {
+        const res = await fetch('https://c798zyr7fl20.share.zrok.io/api/preference-tests/responses', {
           method: 'POST',
           credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
@@ -100,7 +100,7 @@ export default function Preference({ items, onComplete }) {
         });
         if (!res.ok) throw new Error('Failed to submit responses');
         setSubmitSuccess(true);
-      setFinished(true);
+        setFinished(true);
       } catch (err) {
         setSubmitError('Could not submit your answers. Please try again.');
       } finally {
@@ -152,13 +152,13 @@ export default function Preference({ items, onComplete }) {
                 </div>
                 {/* Navigation arrows for all but last question */}
                 {index + 1 < shuffled.length && (
-                <div className="likert-nav-row">
-                  <button className="likert-nav-btn" onClick={handlePrev} disabled={index === 0} aria-label="Previous">
-                    &#x25C0;
-                  </button>
-                  <button
-                    className="likert-nav-btn"
-                    onClick={handleNext}
+                  <div className="likert-nav-row">
+                    <button className="likert-nav-btn" onClick={handlePrev} disabled={index === 0} aria-label="Previous">
+                      &#x25C0;
+                    </button>
+                    <button
+                      className="likert-nav-btn"
+                      onClick={handleNext}
                       disabled={typeof answers[current.id] === 'undefined' || submitting}
                       aria-label="Next"
                     >
@@ -189,7 +189,7 @@ export default function Preference({ items, onComplete }) {
                         alignItems: 'center',
                         gap: '1rem',
                       }}
-                  >
+                    >
                       {submitting ? (
                         <span style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                           <span className="loading-spinner" style={{ width: 24, height: 24, border: '3px solid #fff', borderTop: '3px solid #00b1e5', borderRadius: '50%', display: 'inline-block', animation: 'spin 1s linear infinite' }}></span>
@@ -198,8 +198,8 @@ export default function Preference({ items, onComplete }) {
                       ) : (
                         'Submit'
                       )}
-                  </button>
-                </div>
+                    </button>
+                  </div>
                 )}
                 <div className="preference-progress">
                   <div

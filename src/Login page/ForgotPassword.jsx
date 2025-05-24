@@ -12,7 +12,7 @@ const ForgotPassword = () => {
     setMessage(null);
     setLoading(true);
     try {
-      const res = await fetch('https://207.127.93.193/api/forgot-password', {
+      const res = await fetch('https://c798zyr7fl20.share.zrok.io/api/forgot-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
@@ -52,11 +52,11 @@ const ForgotPassword = () => {
         </form>
         {message && message.startsWith('✅') ? (
           <div className="forgot-success-message">
-            <div style={{display:'flex',flexDirection:'column',alignItems:'center',width:'100%'}}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
               <span className="checkmark">✔️</span>
-              <div style={{fontSize:'1.3rem',fontWeight:800,marginBottom:'0.5rem'}}>Check your email!</div>
-              <div style={{fontSize:'1.05rem',color:'var(--color-white)',marginBottom:'1.2rem',opacity:0.92}}>
-                We've sent a password reset link to your email address. Please follow the instructions in the email to reset your password.<br/>
+              <div style={{ fontSize: '1.3rem', fontWeight: 800, marginBottom: '0.5rem' }}>Check your email!</div>
+              <div style={{ fontSize: '1.05rem', color: 'var(--color-white)', marginBottom: '1.2rem', opacity: 0.92 }}>
+                We've sent a password reset link to your email address. Please follow the instructions in the email to reset your password.<br />
                 Didn't get the email? Check your spam folder or try again.
               </div>
               <Link to="/login">
@@ -78,7 +78,7 @@ const ForgotPassword = () => {
           </div>
         ) : message && (
           <div className="status-message error forgot-success-message">
-            <span style={{fontSize: '1.15rem', fontWeight: 600}}>{message.replace('❌ ', '')}</span>
+            <span style={{ fontSize: '1.15rem', fontWeight: 600 }}>{message.replace('❌ ', '')}</span>
           </div>
         )}
         <p className="register-link">
