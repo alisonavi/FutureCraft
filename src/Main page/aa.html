@@ -10,27 +10,30 @@
         --text: #e2e8f0;
         --meta: #4fd1c5;
         --sub: #94a3b8;
-        --btn: rgba(255, 255, 255, 0.15);
+        --btn-bg: rgba(255, 255, 255, 0.15);
         --btn-hover: rgba(255, 255, 255, 0.25);
+        --link: #fbbf24;
       }
+
       * {
         box-sizing: border-box;
-        margin: 0;
-        padding: 0;
       }
       body {
+        margin: 0;
+        padding: 2rem;
+        font-family: 'Segoe UI', sans-serif;
         background: var(--bg);
         color: var(--text);
-        font-family: 'Segoe UI', sans-serif;
-        padding: 2rem;
       }
       h2 {
         font-size: 2rem;
         font-weight: 600;
         margin-bottom: 1.5rem;
       }
+
       .carousel-wrapper {
         position: relative;
+        padding: 0 2rem; /* give room for arrows */
       }
       .carousel {
         display: flex;
@@ -48,15 +51,14 @@
       }
 
       .card {
-        flex: 0 0 280px;
+        flex: 0 0 300px;
         background: var(--card);
         border-radius: 12px;
         padding: 1.25rem;
         position: relative;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        height: 200px;
       }
       .card .meta {
         font-size: 0.875rem;
@@ -66,51 +68,61 @@
         position: absolute;
         top: 1rem;
         right: 1rem;
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
         fill: var(--sub);
         cursor: pointer;
       }
       .card h3 {
+        margin: 0.5rem 0;
         font-size: 1.125rem;
         font-weight: 600;
         line-height: 1.3;
-        color: var(--text);
       }
       .teams {
+        margin-top: auto; /* push to bottom */
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        gap: 0.25rem;
         font-size: 0.95rem;
         color: var(--text);
-      }
-      .teams span.middle {
-        color: var(--sub);
       }
 
       .nav-button {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: var(--btn);
-        border: none;
         width: 36px;
         height: 36px;
         border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        border: none;
+        background: var(--btn-bg);
         color: var(--text);
+        font-size: 1.25rem;
+        cursor: pointer;
         transition: background 0.2s;
       }
       .nav-button:hover {
         background: var(--btn-hover);
       }
       .nav-prev {
-        left: -18px;
+        left: 0;
       }
       .nav-next {
-        right: -18px;
+        right: 0;
+      }
+
+      .view-schedule {
+        margin-top: 1rem;
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      .view-schedule a {
+        color: var(--link);
+        text-decoration: none;
+      }
+      .view-schedule a:hover {
+        text-decoration: underline;
       }
     </style>
   </head>
@@ -118,52 +130,53 @@
     <h2>Upcoming matches</h2>
     <div class="carousel-wrapper">
       <div class="carousel" id="carousel">
-        <!-- Card 1 -->
+        <!-- Match 1 -->
         <div class="card">
-          <div class="meta">Saturday, May 24, 2025 at 3:00 PM</div>
-          <!-- example SVG icon -->
+          <div class="meta">Friday, May 23, 2025 at 3:00 PM</div>
+          <!-- replace this SVG with your real icon -->
           <svg class="icon" viewBox="0 0 24 24">
             <path d="M12 2L4 22h16L12 2z" />
           </svg>
           <h3>Esports World Cup 2025: EMEA Qualifier</h3>
           <div class="teams">
-            <span>Team Liquid</span>
-            <span class="middle">–</span>
-            <span>—</span>
+            <span>Team Liquid Brazil</span>
+            <span>FUT Esports</span>
           </div>
         </div>
 
-        <!-- Card 2 -->
+        <!-- Match 2 -->
         <div class="card">
-          <div class="meta">Saturday, May 24, 2025 at 3:00 PM</div>
+          <div class="meta">Friday, May 23, 2025 at 5:30 PM</div>
           <svg class="icon" viewBox="0 0 24 24">
             <path d="M12 2L4 22h16L12 2z" />
           </svg>
-          <h3>Esports World Cup 2025: EMEA Qualifier</h3>
+          <h3>DreamLeague Season 26 – Group Stage 2</h3>
           <div class="teams">
+            <span>Yakult Brothers</span>
             <span>Team Liquid</span>
-            <span class="middle">–</span>
-            <span>BBL Esports</span>
           </div>
         </div>
 
-        <!-- Card 3 -->
+        <!-- Match 3 -->
         <div class="card">
-          <div class="meta">Saturday, May 24, 2025 at 8:00 PM</div>
+          <div class="meta">Saturday, May 24, 2025 at 8:30 PM</div>
           <svg class="icon" viewBox="0 0 24 24">
             <path d="M12 2L4 22h16L12 2z" />
           </svg>
-          <h3>DreamHack Dallas 2025</h3>
+          <h3>DreamLeague Season 26 – Group Stage 2</h3>
           <div class="teams">
-            <span>Clem</span>
-            <span class="middle">–</span>
-            <span>—</span>
+            <span>Aurora Gaming</span>
+            <span>Team Liquid</span>
           </div>
         </div>
       </div>
 
       <button class="nav-button nav-prev" id="prevBtn">&#8592;</button>
       <button class="nav-button nav-next" id="nextBtn">&#8594;</button>
+    </div>
+
+    <div class="view-schedule">
+      <a href="/schedule">View schedule page →</a>
     </div>
 
     <script>

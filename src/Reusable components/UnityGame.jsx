@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 export default function UnityGame() {
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = '/WebGLBuild/Build/WebGLBuild.loader.js';
+    script.src = '/WebGLBuild/Build/FutureCraftPreFinal.loader.js';
     script.onload = () => {
       const container = document.querySelector('#unity-container');
       const canvas = document.querySelector('#unity-canvas');
