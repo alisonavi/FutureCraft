@@ -10,23 +10,23 @@ const SLIDE_WIDTH = 1200;
 const SLIDE_HEIGHT = 675;
 const AUTO_SCROLL_INTERVAL = 7000; // 7 seconds
 
-const slides = [
-  { 
-    image: slide1,
+  const slides = [
+    {
+      image: slide1,
     title: "Discover Your Future",
     description: "Explore career paths tailored to your interests and skills",
     buttonText: "Start Journey",
     buttonLink: "/preference-test"
-  },
-  { 
-    image: slide2,
+    },
+    {
+      image: slide2,
     title: "AI-Powered Guidance",
     description: "Get personalized recommendations from our advanced AI system",
     buttonText: "Learn More",
     buttonLink: "/explore-paths"
-  },
-  { 
-    image: slide3,
+    },
+    {
+      image: slide3,
     title: "Interactive Learning",
     description: "Experience our immersive game-based learning platform",
     buttonText: "Play Now",
@@ -88,14 +88,14 @@ const Carousel = () => {
           else if (idx === prevIndex) className += ` prev ${direction}`;
           else return null;
           return (
-            <div
+          <div
               className={className}
               key={idx}
               style={{ width: SLIDE_WIDTH, height: SLIDE_HEIGHT, position: 'absolute', top: 0, left: 0 }}
             >
               <div className="slide-overlay" />
               <img src={slide.image} alt={`Slide ${idx + 1}`} />
-              <div className="slide-content">
+            <div className="slide-content">
                 <h2 className="slide-title">{slide.title}</h2>
                 <p className="slide-description">{slide.description}</p>
                 <a href={slide.buttonLink} className="slide-button">
@@ -112,8 +112,8 @@ const Carousel = () => {
               className={`dot${activeIndex === idx ? ' active' : ''}`}
               onClick={() => handleDotClick(idx)}
             />
-          ))}
-        </div>
+        ))}
+      </div>
       </div>
     </div>
   );

@@ -15,25 +15,6 @@ const likertSizes = {
   5: 74,
 };
 
-// Question tips for each question
-const questionTips = {
-  '1': 'Technical skills are highly valued in today\'s job market. Many careers require some level of computer literacy.',
-  '2': 'Healthcare is one of the fastest-growing sectors. Helping others can be very rewarding.',
-  '3': 'Teaching and mentoring skills are valuable in many professions, not just education.',
-  '4': 'Creative skills are increasingly important in the digital age.',
-  '5': 'Business analysis skills are crucial for making data-driven decisions.',
-  '6': 'Scientific thinking helps develop problem-solving abilities.',
-  '7': 'Social skills are essential for networking and team collaboration.',
-  '8': 'Software development is a high-demand field with excellent growth potential.',
-  '9': 'Mental health awareness is becoming increasingly important in the workplace.',
-  '10': 'Problem-solving skills are highly valued across all industries.',
-  '11': 'Teamwork is a fundamental skill in most modern workplaces.',
-  '12': 'Leadership skills can open doors to management positions.',
-  '13': 'Environmental awareness is growing in importance across industries.',
-  '14': 'Communication skills are essential in any career path.',
-  '15': 'Financial literacy is valuable in both personal and professional life.',
-};
-
 // Career matches based on answers (logistic scoring)
 const areaMap = {
   '1': 'Technology',
@@ -85,17 +66,13 @@ export default function Preference({ items, onComplete }) {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [finished, setFinished] = useState(false);
-  const [careerMatches, setCareerMatches] = useState([]);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   useEffect(() => {
     setShuffled(shuffle([...items]));
   }, [items]);
-
-  useEffect(() => {
-    if (Object.keys(answers).length > 0) {
-      setCareerMatches(getCareerMatches(answers));
-    }
-  }, [answers]);
 
   const current = shuffled[index];
   if (!current && !finished) return null;
@@ -104,17 +81,31 @@ export default function Preference({ items, onComplete }) {
     setAnswers((prev) => ({ ...prev, [current.id]: value }));
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (index + 1 < shuffled.length) {
       setIndex(index + 1);
     } else {
+      setSubmitting(true);
+      setSubmitError('');
+      try {
+        const responses = shuffled.map(q => ({
+          preference_test_id: Number(q.id),
+          score: answers[q.id]
+        }));
+        const res = await fetch('https://207.127.93.193/api/preference-tests/responses', {
+          method: 'POST',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ responses })
+        });
+        if (!res.ok) throw new Error('Failed to submit responses');
+        setSubmitSuccess(true);
       setFinished(true);
-      const results = shuffled.map(q => ({
-        itemId: q.id,
-        choice: answers[q.id],
-        time: new Date().toISOString()
-      }));
-      onComplete(results);
+      } catch (err) {
+        setSubmitError('Could not submit your answers. Please try again.');
+      } finally {
+        setSubmitting(false);
+      }
     }
   };
 
@@ -159,54 +150,79 @@ export default function Preference({ items, onComplete }) {
                   </div>
                   <span className="likert-label right">Love it</span>
                 </div>
-                <div className="likert-nav-row">
-                  <button className="likert-nav-btn" onClick={handlePrev} disabled={index === 0} aria-label="Previous">
-                    &#x25C0;
-                  </button>
-                  <button
-                    className="likert-nav-btn"
-                    onClick={handleNext}
-                    disabled={typeof answers[current.id] === 'undefined'}
-                    aria-label={index + 1 === shuffled.length ? 'Submit' : 'Next'}
-                  >
-                    &#x25B6;
-                  </button>
-                </div>
+                {/* Navigation arrows for all but last question */}
+                {index + 1 < shuffled.length && (
+                  <div className="likert-nav-row">
+                    <button className="likert-nav-btn" onClick={handlePrev} disabled={index === 0} aria-label="Previous">
+                      &#x25C0;
+                    </button>
+                    <button
+                      className="likert-nav-btn"
+                      onClick={handleNext}
+                      disabled={typeof answers[current.id] === 'undefined' || submitting}
+                      aria-label="Next"
+                    >
+                      <span>&#x25B6;</span>
+                    </button>
+                  </div>
+                )}
+                {/* Submit button for last question, only after answer selected */}
+                {index + 1 === shuffled.length && typeof answers[current.id] !== 'undefined' && (
+                  <div style={{ marginTop: '2.5rem', display: 'flex', justifyContent: 'center' }}>
+                    <button
+                      className="likert-submit-btn"
+                      onClick={handleNext}
+                      disabled={submitting}
+                      style={{
+                        background: 'var(--gradient-accent)',
+                        color: 'white',
+                        fontWeight: 700,
+                        fontSize: '1.5rem',
+                        border: 'none',
+                        borderRadius: '2rem',
+                        padding: '1rem 3rem',
+                        boxShadow: '0 4px 24px rgba(0,177,229,0.15)',
+                        cursor: submitting ? 'not-allowed' : 'pointer',
+                        transition: 'all 0.2s',
+                        outline: 'none',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '1rem',
+                      }}
+                    >
+                      {submitting ? (
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                          <span className="loading-spinner" style={{ width: 24, height: 24, border: '3px solid #fff', borderTop: '3px solid #00b1e5', borderRadius: '50%', display: 'inline-block', animation: 'spin 1s linear infinite' }}></span>
+                          Submitting...
+                        </span>
+                      ) : (
+                        'Submit'
+                      )}
+                    </button>
+                  </div>
+                )}
                 <div className="preference-progress">
                   <div
                     className="preference-progress-bar"
                     style={{ width: `${progress}%` }}
                   />
                 </div>
+                {submitError && <div style={{ color: 'salmon', marginTop: '1rem' }}>{submitError}</div>}
+                <style>{`
+                  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+                `}</style>
               </>
             ) : (
               <div className="preference-complete">
-                Thank you for completing the test! 🎉
+                {submitSuccess ? 'Thank you for completing the test! 🎉' : 'Test complete.'}
               </div>
             )}
           </div>
         </div>
-
         <div className="preference-sidebar">
           <div className="question-tip">
             <h3>Why This Matters</h3>
-            <p>{questionTips[current?.id] || 'Your preferences help us understand your career interests.'}</p>
-          </div>
-
-          <div className="live-preview">
-            <h3>Your Top Matches</h3>
-            <div className="matches-list">
-              {careerMatches.length > 0 ? (
-                careerMatches.map((match, idx) => (
-                  <div key={idx} className="match-item">
-                    <span className="match-icon">🎯</span>
-                    <span className="match-text">{match}</span>
-                  </div>
-                ))
-              ) : (
-                <p className="no-matches">Answer more questions to see your matches</p>
-              )}
-            </div>
+            <p>{current?.description || 'Your preferences help us understand your career interests.'}</p>
           </div>
         </div>
       </div>

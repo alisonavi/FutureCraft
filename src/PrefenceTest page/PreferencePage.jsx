@@ -1,38 +1,36 @@
 // src/pages/PreferencePage.jsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Preference from '../PrefenceTest page/Preference';
 import { motion } from 'framer-motion';
 import './PreferencePage.css';
 
-const testItems = [
-  { id: '1', question: 'Working with computers and technology' },
-  { id: '2', question: 'Helping people with their health or well-being' },
-  { id: '3', question: 'Teaching or mentoring others' },
-  { id: '4', question: 'Designing graphics or digital art' },
-  { id: '5', question: 'Analyzing business data and trends' },
-  { id: '6', question: 'Conducting scientific experiments' },
-  { id: '7', question: 'Organizing community or social events' },
-  { id: '8', question: 'Building software or apps' },
-  { id: '9', question: 'Caring for patients or supporting mental health' },
-  { id: '10', question: 'Solving math or coding problems' },
-  { id: '11', question: 'Working in a team environment' },
-  { id: '12', question: 'Leading projects or people' },
-  { id: '13', question: 'Working outdoors or with nature' },
-  { id: '14', question: 'Writing or creating content' },
-  { id: '15', question: 'Managing finances or budgets' },
-];
-
 export default function PreferencePage() {
-  const handleComplete = async (results) => {
-    // results is an array of { itemId, choice, time }
-    console.log(results);
-    await fetch('/api/save-preferences', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user: 'diploma123', responses: results })
-    });
-    alert('Thank you! Your answers have been recorded.');
-  };
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const isLoggedIn = !!localStorage.getItem('access_token');
+
+  useEffect(() => {
+    if (!isLoggedIn) return;
+    setLoading(true);
+    setError('');
+    fetch('https://207.127.93.193/api/preference-tests', {
+      method: 'GET',
+      credentials: 'include',
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch questions');
+        return res.json();
+      })
+      .then(data => {
+        setItems(data.data || []);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError('Could not load questions. Please try again later.');
+        setLoading(false);
+      });
+  }, [isLoggedIn]);
 
   return (
     <div className="preference-page">
@@ -79,7 +77,28 @@ export default function PreferencePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
-        <Preference items={testItems} onComplete={handleComplete} />
+        {isLoggedIn ? (
+          loading ? (
+            <div style={{textAlign: 'center', margin: '2rem', fontSize: '1.2rem'}}>Loading questions...</div>
+          ) : error ? (
+            <div style={{color: 'salmon', textAlign: 'center', margin: '2rem'}}>{error}</div>
+          ) : (
+            <Preference items={items} />
+          )
+        ) : (
+          <div style={{textAlign: 'center', margin: '2.5rem 0 3rem 0'}}>
+            <div style={{fontSize: '1.25rem', color: 'var(--color-gray-200)', marginBottom: '2.5rem'}}>
+              <strong>Want to discover your best-fit career path?</strong>
+              <br />
+              <span style={{display: 'inline-block', marginTop: '1.1rem'}}>
+                Log in or create an account to take the full Preference Test and get personalized results!
+              </span>
+            </div>
+            <a href="/login" className="btn-primary" style={{fontSize: '1.1rem', padding: '0.9rem 2.5rem', borderRadius: '1.2rem', textDecoration: 'none'}}>Log In</a>
+            <span style={{margin: '0 1rem', color: 'var(--color-gray-400)'}}>or</span>
+            <a href="/register" className="btn-secondary" style={{fontSize: '1.1rem', padding: '0.9rem 2.5rem', borderRadius: '1.2rem', textDecoration: 'none'}}>Create Account</a>
+          </div>
+        )}
       </motion.div>
     </div>
   );
