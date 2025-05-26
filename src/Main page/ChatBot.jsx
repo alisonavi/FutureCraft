@@ -11,7 +11,7 @@ const ChatBot = () => {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [deepThink, setDeepThink] = useState(true);
+  const [deepThink, setDeepThink] = useState(false);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
