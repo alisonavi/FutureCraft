@@ -8,7 +8,7 @@ import slide5 from '../assets/carousel555.png';
 
 const SLIDE_WIDTH = 1200;
 const SLIDE_HEIGHT = 675;
-const AUTO_SCROLL_INTERVAL = 7000; // 7 seconds
+const AUTO_SCROLL_INTERVAL = 6000;
 
 const slides = [
   {
