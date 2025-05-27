@@ -34,7 +34,6 @@ const RegisterPage = () => {
     }
 
     try {
-      // Replace with your registration API endpoint
       const response = await fetch('https://207.127.93.193/api/register/request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', credentials: 'include', },

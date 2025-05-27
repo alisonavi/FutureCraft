@@ -13,35 +13,35 @@ const AUTO_SCROLL_INTERVAL = 6000;
 const slides = [
   {
     image: slide1,
-    title: "Discover Your Future",
+    title: "Discover your future",
     description: "Explore career paths tailored to your interests and skills",
     buttonText: "Start Journey",
     buttonLink: "/preference-test"
   },
   {
     image: slide2,
-    title: "AI-Powered Guidance",
+    title: "AI-Powered guidance",
     description: "Get personalized recommendations from our advanced AI system",
     buttonText: "Learn More",
     buttonLink: "/explore-paths"
   },
   {
     image: slide3,
-    title: "Interactive Learning",
+    title: "Interactive learning",
     description: "Experience our immersive game-based learning platform",
     buttonText: "Play Now",
     buttonLink: "/game"
   },
   {
     image: slide4,
-    title: "Expert Insights",
+    title: "Expert insights",
     description: "Access industry insights and career development resources",
     buttonText: "Explore Resources",
     buttonLink: "/resources"
   },
   {
     image: slide5,
-    title: "Join Our Community",
+    title: "Join our community",
     description: "Connect with like-minded individuals and career mentors",
     buttonText: "Sign Up",
     buttonLink: "/register"

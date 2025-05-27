@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import './UserProfile.css';
 import ReactMarkdown from 'react-markdown';
 
@@ -21,6 +22,7 @@ const UserProfile = () => {
   const [analysis, setAnalysis] = useState(null);
   const [analysisLoading, setAnalysisLoading] = useState(true);
   const [analysisError, setAnalysisError] = useState('');
+  const [activeTab, setActiveTab] = useState('overview');
 
   if (!token) {
     return <Navigate to="/login" />;
@@ -43,7 +45,6 @@ const UserProfile = () => {
           throw new Error('Authentication failed');
         }
 
-
         const data = await response.json();
         setUser(data.data);
       } catch (error) {
@@ -54,7 +55,6 @@ const UserProfile = () => {
 
     fetchUser();
 
-    // Fetch preference analysis
     const fetchAnalysis = async () => {
       setAnalysisLoading(true);
       setAnalysisError('');
@@ -86,7 +86,12 @@ const UserProfile = () => {
   }
 
   if (!user) {
-    return <div className="loader">Loading...</div>;
+    return (
+      <div className="profile-loading">
+        <div className="loading-spinner"></div>
+        <p>Loading your profile...</p>
+      </div>
+    );
   }
 
   const handleLogout = () => {
@@ -139,7 +144,6 @@ const UserProfile = () => {
     }
   };
 
-  // Helper to get initials from name
   const getInitials = (name) => {
     if (!name) return '';
     const parts = name.trim().split(' ');
@@ -147,68 +151,196 @@ const UserProfile = () => {
     return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
   };
 
-  // Format date
   const formatDate = (dateStr) => {
     if (!dateStr) return '';
-    return new Date(dateStr).toLocaleDateString();
+    return new Date(dateStr).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   };
 
   return (
     <div className="profile-container">
-      <div className="profile-card">
-        <div className="profile-avatar">
-          {getInitials(user.name)}
-        </div>
-        <div className="profile-username">
-          {editing ? (
-            <input
-              type="text"
-              value={newName}
-              onChange={e => setNewName(e.target.value)}
-              className="profile-edit-input pretty-input"
-              disabled={editLoading}
-              maxLength={40}
-              placeholder="Enter your name"
-              autoFocus
-            />
-          ) : user.name}
-        </div>
-        <div className="profile-email">{user.email}</div>
-        <div className="profile-stats">
-          <div className="profile-stat">
-            <div className="profile-stat-label">Registered</div>
-            <div className="profile-stat-value">{formatDate(user.created_at)}</div>
+      <motion.div
+        className="profile-header"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="profile-cover"></div>
+        <div className="profile-header-content">
+          <motion.div
+            className="profile-avatar"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {getInitials(user.name)}
+          </motion.div>
+          <div className="profile-header-info">
+            <div className="profile-name-section">
+              {editing ? (
+                <input
+                  type="text"
+                  value={newName}
+                  onChange={e => setNewName(e.target.value)}
+                  className="profile-edit-input"
+                  disabled={editLoading}
+                  maxLength={40}
+                  placeholder="Enter your name"
+                  autoFocus
+                />
+              ) : (
+                <h1 className="profile-name">{user.name}</h1>
+              )}
+              <div className="profile-email">{user.email}</div>
+            </div>
+            <div className="profile-actions">
+              {editing ? (
+                <>
+                  <motion.button
+                    className="profile-btn primary"
+                    onClick={handleEditSave}
+                    disabled={editLoading || !newName.trim() || newName === user.name}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {editLoading ? 'Saving...' : 'Save Changes'}
+                  </motion.button>
+                  <motion.button
+                    className="profile-btn secondary"
+                    onClick={handleEditCancel}
+                    disabled={editLoading}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Cancel
+                  </motion.button>
+                </>
+              ) : (
+                <>
+                  <motion.button
+                    className="profile-btn primary"
+                    onClick={handleEdit}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Edit Profile
+                  </motion.button>
+                  <motion.button
+                    className="profile-btn secondary"
+                    onClick={handleLogout}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Logout
+                  </motion.button>
+                </>
+              )}
+            </div>
           </div>
         </div>
-        <div className="profile-actions">
-          {editing ? (
-            <>
-              <button className="profile-btn" onClick={handleEditSave} disabled={editLoading || !newName.trim() || newName === user.name}>
-                {editLoading ? 'Saving...' : 'Save'}
-              </button>
-              <button className="profile-btn" onClick={handleEditCancel} disabled={editLoading}>Cancel</button>
-            </>
+      </motion.div>
+
+      <div className="profile-content">
+        <div className="profile-tabs">
+          <button
+            className={`profile-tab ${activeTab === 'overview' ? 'active' : ''}`}
+            onClick={() => setActiveTab('overview')}
+          >
+            Overview
+          </button>
+          <button
+            className={`profile-tab ${activeTab === 'analysis' ? 'active' : ''}`}
+            onClick={() => setActiveTab('analysis')}
+          >
+            Career Analysis
+          </button>
+        </div>
+
+        <div className="profile-tab-content">
+          {activeTab === 'overview' ? (
+            <motion.div
+              className="profile-overview"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="profile-stats-grid">
+                <div className="profile-stat-card">
+                  <div className="stat-icon">📅</div>
+                  <div className="stat-content">
+                    <h3>Member Since</h3>
+                    <p>{formatDate(user.created_at)}</p>
+                  </div>
+                </div>
+                <div className="profile-stat-card">
+                  <div className="stat-icon">🎯</div>
+                  <div className="stat-content">
+                    <h3>Career Paths</h3>
+                    <p>3 Saved</p>
+                  </div>
+                </div>
+                <div className="profile-stat-card">
+                  <div className="stat-icon">📊</div>
+                  <div className="stat-content">
+                    <h3>Tests Completed</h3>
+                    <p>2 Tests</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           ) : (
-            <button className="profile-btn" onClick={handleEdit}>Edit Profile</button>
+            <motion.div
+              className="profile-analysis"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="analysis-card">
+                <h2>Your Career Path Analysis</h2>
+                {analysisLoading ? (
+                  <div className="analysis-loading">
+                    <div className="loading-spinner"></div>
+                    <p>Loading your analysis...</p>
+                  </div>
+                ) : analysisError ? (
+                  <div className="analysis-error">
+                    <p>{analysisError}</p>
+                  </div>
+                ) : analysis ? (
+                  <div className="analysis-content">
+                    <ReactMarkdown>{analysis}</ReactMarkdown>
+                  </div>
+                ) : (
+                  <div className="analysis-empty">
+                    <p>No analysis available yet. Complete your preference test to get started!</p>
+                    <motion.button
+                      className="profile-btn primary"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => window.location.href = '/preftest'}
+                    >
+                      Take Test
+                    </motion.button>
+                  </div>
+                )}
+              </div>
+            </motion.div>
           )}
-          <button className="profile-btn" onClick={handleLogout}>Logout</button>
         </div>
-        {editMessage && <div className="profile-edit-message">{editMessage}</div>}
       </div>
-      <div className="profile-analysis-card card fade-in fade-in-2" style={{ maxWidth: 700, margin: '2.5rem auto 0 auto', background: 'var(--gradient-secondary)', borderRadius: '1.5rem', padding: '2.2rem 2.5rem', color: 'var(--color-white)', boxShadow: '0 4px 24px rgba(0,21,56,0.15)' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '1.2rem', background: 'var(--gradient-accent)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>Your Career Path Analysis</h2>
-        {analysisLoading ? (
-          <div style={{ color: 'var(--color-gray-200)', fontSize: '1.1rem' }}>Loading analysis...</div>
-        ) : analysisError ? (
-          <div style={{ color: 'salmon', fontSize: '1.1rem' }}>{analysisError}</div>
-        ) : analysis ? (
-          <div style={{ color: 'var(--color-gray-100)', fontSize: '1.1rem', lineHeight: 1.7 }}>
-            <ReactMarkdown>{analysis}</ReactMarkdown>
-          </div>
-        ) : (
-          <div style={{ color: 'var(--color-gray-300)' }}>No analysis available yet.</div>
-        )}
-      </div>
+
+      {editMessage && (
+        <motion.div
+          className="profile-message"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+        >
+          {editMessage}
+        </motion.div>
+      )}
     </div>
   );
 };
