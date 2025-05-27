@@ -137,19 +137,15 @@ const Explore = () => {
       <div className="explore-container">
         <AnimatePresence>
           {pullDistance > 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <div
               className="pull-indicator"
-              style={{ transform: `translateY(${pullDistance}px)` }}
             >
               {isRefreshing ? (
                 <div className="loading-spinner" />
               ) : (
                 <span>Pull to refresh</span>
               )}
-            </motion.div>
+            </div>
           )}
         </AnimatePresence>
 
@@ -160,38 +156,31 @@ const Explore = () => {
 
         <div className="paths-grid">
           {careerPaths.map((path) => (
-            <motion.div
+            <div
               key={path.id}
               className={`path-card ${selectedPath === path.id ? 'selected' : ''}`}
               onClick={() => setSelectedPath(path.id)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
             >
               <img src={path.icon} alt={path.title} className="path-icon" />
               <h3>{path.title}</h3>
               <p>{path.description}</p>
               <div className="career-list">
                 {path.careers.map((career, index) => (
-                  <motion.div
+                  <div
                     key={index}
                     className={`career-item fade-in fade-in-${index + 1}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
                   >
                     <h4>{career.title}</h4>
                     <p>{career.description}</p>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        <motion.div
+        <div
           className="explore-cta"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
         >
           <h2>Ready to Find Your Path?</h2>
           <p>Take our preference test to get personalized career recommendations.</p>
@@ -202,7 +191,7 @@ const Explore = () => {
           >
             Take the Test
           </motion.button>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

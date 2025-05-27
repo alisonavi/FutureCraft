@@ -41,7 +41,7 @@ const ExplorePaths = () => {
     if (containerRef.current.scrollTop === 0) {
       const touchY = e.touches[0].clientY;
       const pull = touchY - touchStartY.current;
-      
+
       if (pull > 0) {
         setPullDistance(pull);
         e.preventDefault();
@@ -58,7 +58,7 @@ const ExplorePaths = () => {
   };
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className="explore-container"
       onTouchStart={handleTouchStart}
@@ -71,15 +71,11 @@ const ExplorePaths = () => {
           <span style={{ marginLeft: '0.5rem' }}>Refreshing...</span>
         </div>
       )}
-      
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        style={{ transform: `translateY(${pullDistance}px)` }}
+
+      <div
       >
         <h1>Explore Career Paths</h1>
-        
+
         {loading ? (
           <div className="loading-state">
             <div className="loading-spinner" />
@@ -88,12 +84,8 @@ const ExplorePaths = () => {
         ) : (
           <div className="paths-grid">
             {paths.map((path) => (
-              <motion.div
-                key={path.id}
+              <div
                 className="path-card"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => navigate(`/path/${path.id}`)}
               >
                 <h3>{path.title}</h3>
                 <p>{path.description}</p>
@@ -101,11 +93,11 @@ const ExplorePaths = () => {
                   <span>{path.duration} months</span>
                   <span>{path.difficulty}</span>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 };
