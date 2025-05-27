@@ -107,7 +107,6 @@ const LoginPage = () => {
             <div className="login-input-wrapper">
               <label htmlFor="email" className="login-label">E-mail</label>
               <motion.input
-                whileFocus={{ scale: 1.02 }}
                 className='login-input'
                 type="email"
                 name="email"
@@ -122,7 +121,6 @@ const LoginPage = () => {
             <div className="login-input-wrapper">
               <label htmlFor="password" className="login-label">Password</label>
               <motion.input
-                whileFocus={{ scale: 1.02 }}
                 className='login-input'
                 type="password"
                 name="password"

@@ -69,7 +69,6 @@ const Carousel = () => {
 
   useEffect(() => {
     if (isPaused) return;
-
     const interval = setInterval(goToNextSlide, AUTO_SCROLL_INTERVAL);
     return () => clearInterval(interval);
   }, [isPaused, goToNextSlide]);
