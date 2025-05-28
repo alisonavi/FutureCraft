@@ -27,16 +27,12 @@ import VerifyEmail from './Login page/VerifyEmail';
 
 const App = () => {
   useEffect(() => {
-    // Enable smooth scrolling
     document.documentElement.style.scrollBehavior = 'smooth';
-
-    // Fetch CSRF cookie on app load
     fetch('https://207.127.93.193/sanctum/csrf-cookie', {
       method: 'GET',
       credentials: 'include',
     }).catch(() => { });
 
-    // Cleanup
     return () => {
       document.documentElement.style.scrollBehavior = '';
     };
