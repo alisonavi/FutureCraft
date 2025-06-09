@@ -6,8 +6,8 @@ import slide3 from '../assets/carousel33.jpg';
 import slide1 from '../assets/lox.png'
 import slide5 from '../assets/carousel555.png';
 
-const SLIDE_WIDTH = 1200;
-const SLIDE_HEIGHT = 675;
+const SLIDE_WIDTH = '100%';
+const SLIDE_HEIGHT = 'auto';
 const AUTO_SCROLL_INTERVAL = 6000;
 
 const slides = [
@@ -77,7 +77,7 @@ const Carousel = () => {
     <div className="carousel-wrapper">
       <div
         className="slider slide-anim-root"
-        style={{ width: SLIDE_WIDTH, height: SLIDE_HEIGHT, margin: '3rem auto', position: 'relative' }}
+        style={{ width: '100%', height: 'auto', margin: '3rem auto', position: 'relative' }}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
@@ -90,7 +90,7 @@ const Carousel = () => {
             <div
               className={className}
               key={idx}
-              style={{ width: SLIDE_WIDTH, height: SLIDE_HEIGHT, position: 'absolute', top: 0, left: 0 }}
+              style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}
             >
               <div className="slide-overlay" />
               <img src={slide.image} alt={`Slide ${idx + 1}`} />
