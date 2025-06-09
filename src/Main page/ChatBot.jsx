@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ChatBot.css';
 
-
 const API_URL = 'https://207.127.93.193/api/career/ask';
 
 const ChatBot = () => {
@@ -20,12 +19,14 @@ const ChatBot = () => {
 
   const sendMessage = async () => {
     if (!input.trim()) return;
+
     let messageToSend = input;
     if (!deepThink) messageToSend += ' /no_think';
-    const userMessage = { sender: 'user', text: input };
-    setMessages((prev) => [...prev, userMessage]);
+
+    setMessages(prev => [...prev, { sender: 'user', text: input }]);
     setInput('');
     setLoading(true);
+
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
@@ -35,20 +36,22 @@ const ChatBot = () => {
         },
         body: JSON.stringify({ message: messageToSend })
       });
+
       const data = await response.json();
       let aiText =
         data?.data?.npc_response ||
         data?.npc_response ||
         data?.message ||
         "Sorry, something went wrong. Please try again later.";
-      // Remove <think>...</think> and everything between
-      aiText = aiText.replace(/<think>[\s\S]*?<\/think>/gi, '');
-      setMessages((prev) => [
-        ...prev,
-        { sender: 'ai', text: aiText }
-      ]);
+
+      // strip out any <think> blocks, then trim whitespace/newlines
+      aiText = aiText
+        .replace(/<think>[\s\S]*?<\/think>/gi, '')
+        .trim();
+
+      setMessages(prev => [...prev, { sender: 'ai', text: aiText }]);
     } catch (err) {
-      setMessages((prev) => [
+      setMessages(prev => [
         ...prev,
         { sender: 'ai', text: 'Sorry, there was an error. Please try again.' }
       ]);
@@ -57,13 +60,10 @@ const ChatBot = () => {
     }
   };
 
-  const handleInputKeyDown = (e) => {
-    if (e.key === 'Enter' && !loading) {
-      sendMessage();
-    }
+  const handleInputKeyDown = e => {
+    if (e.key === 'Enter' && !loading) sendMessage();
   };
 
-  // Typing indicator component
   const TypingIndicator = () => (
     <div className="chatbot-message ai typing-indicator">
       <span className="typing-dot" />
@@ -88,10 +88,32 @@ const ChatBot = () => {
     <div className="chatbot-container">
       <div className="chatbot-header">
         Career AI Chat
-        <button className="chatbot-close-btn" onClick={() => setOpen(false)} title="Close chat">×</button>
+        <button
+          className="chatbot-close-btn"
+          onClick={() => setOpen(false)}
+          title="Close chat">
+          ×
+        </button>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', padding: '0.5rem 1rem 0.5rem 1rem' }}>
-        <label style={{ color: 'var(--color-gray-200)', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          padding: '0.5rem 1rem'
+        }}
+      >
+        <label
+          style={{
+            color: 'var(--color-gray-200)',
+            fontSize: '1rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            cursor: 'pointer'
+          }}
+        >
           <input
             type="checkbox"
             checked={deepThink}
@@ -100,22 +122,28 @@ const ChatBot = () => {
           />
           Deep Think
         </label>
-        <span style={{ marginLeft: '0.7rem', color: deepThink ? '#3BB0D4' : '#a5b4fc', fontWeight: 600, fontSize: '0.95rem' }}>
+        <span
+          style={{
+            marginLeft: '0.7rem',
+            color: deepThink ? '#3BB0D4' : '#a5b4fc',
+            fontWeight: 600,
+            fontSize: '0.95rem'
+          }}
+        >
           {deepThink ? 'ON' : 'OFF'}
         </span>
       </div>
+
       <div className="chatbot-messages">
         {messages.map((msg, idx) => (
-          <div
-            key={idx}
-            className={`chatbot-message ${msg.sender}`}
-          >
+          <div key={idx} className={`chatbot-message ${msg.sender}`}>
             {msg.text}
           </div>
         ))}
         {loading && <TypingIndicator />}
         <div ref={messagesEndRef} />
       </div>
+
       <div className="chatbot-input-row">
         <input
           className="chatbot-input"
@@ -138,4 +166,4 @@ const ChatBot = () => {
   );
 };
 
-export default ChatBot; 
+export default ChatBot;
