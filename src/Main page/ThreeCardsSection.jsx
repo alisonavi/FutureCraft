@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ThreeCardsSection.css';
 import ChatBot from './ChatBot';
@@ -14,14 +14,28 @@ const careerPaths = [
 export default function ThreeCardsSection() {
   const navigate = useNavigate();
   const carouselRef = useRef(null);
-  // width = card width + gap
-  const scrollAmount = carouselRef.current
-    ? carouselRef.current.querySelector('.three-card').offsetWidth + 16
-    : 316;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [maxIndex, setMaxIndex] = useState(0);
+
+  useEffect(() => {
+    if (carouselRef.current) {
+      const cardWidth = carouselRef.current.querySelector('.three-card').offsetWidth;
+      const containerWidth = carouselRef.current.offsetWidth;
+      const cardsPerView = Math.floor(containerWidth / cardWidth);
+      setMaxIndex(careerPaths.length - cardsPerView);
+    }
+  }, []);
 
   const scroll = (dir) => {
     if (!carouselRef.current) return;
-    carouselRef.current.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+    
+    const newIndex = currentIndex + dir;
+    if (newIndex >= 0 && newIndex <= maxIndex) {
+      const cardWidth = carouselRef.current.querySelector('.three-card').offsetWidth;
+      const scrollAmount = cardWidth * dir;
+      carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      setCurrentIndex(newIndex);
+    }
   };
 
   return (
@@ -33,12 +47,13 @@ export default function ThreeCardsSection() {
           className="three-nav three-nav-prev"
           onClick={() => scroll(-1)}
           aria-label="Scroll left"
+          disabled={currentIndex === 0}
         >
           ←
         </button>
 
         <div className="three-carousel" ref={carouselRef}>
-          {careerPaths.slice(0, 3).map((item, i) => (
+          {careerPaths.map((item, i) => (
             <div className="three-card" key={i}>
               <div className="three-meta">{item.date}</div>
               <h3 className="three-card-title">{item.title}</h3>
@@ -55,6 +70,7 @@ export default function ThreeCardsSection() {
           className="three-nav three-nav-next"
           onClick={() => scroll(1)}
           aria-label="Scroll right"
+          disabled={currentIndex === maxIndex}
         >
           →
         </button>
