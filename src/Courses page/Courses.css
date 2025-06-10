@@ -122,10 +122,12 @@
 
 .course-card p.course-overview {
   font-size: 0.95rem;
-  opacity: 0.8;
+  opacity: 1;
   margin-bottom: 1.5rem;
   line-height: 1.6;
   flex-grow: 1;
+  background-color: transparent;
+  color: var(--color-gray-200);
 }
 
 .course-meta {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import './Courses.css';
 
 const Courses = () => {
@@ -7,6 +8,7 @@ const Courses = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -25,6 +27,7 @@ const Courses = () => {
         }
 
         const data = await response.json();
+        // Assuming 'occupation_code' is present in each course object
         setCourses(data.courses || []);
       } catch (err) {
         console.error("Failed to fetch courses:", err);
@@ -54,6 +57,10 @@ const Courses = () => {
     );
   }
 
+  const handleCourseClick = (occupationCode) => {
+    navigate(`/courses/${occupationCode}`);
+  };
+
   return (
     <motion.div
       className="courses-page"
@@ -67,25 +74,25 @@ const Courses = () => {
             <h2>Categories</h2>
           </div>
           <nav className="category-nav">
-            <button
+            <button 
               className={`category-btn ${selectedCategory === 'all' ? 'active' : ''}`}
               onClick={() => setSelectedCategory('all')}
             >
               All Courses
             </button>
-            <button
+            <button 
               className={`category-btn ${selectedCategory === 'ai' ? 'active' : ''}`}
               onClick={() => setSelectedCategory('ai')}
             >
               AI & Machine Learning
             </button>
-            <button
+            <button 
               className={`category-btn ${selectedCategory === 'data' ? 'active' : ''}`}
               onClick={() => setSelectedCategory('data')}
             >
               Data Science
             </button>
-            <button
+            <button 
               className={`category-btn ${selectedCategory === 'web' ? 'active' : ''}`}
               onClick={() => setSelectedCategory('web')}
             >
@@ -97,15 +104,17 @@ const Courses = () => {
         <main className="courses-main">
           <div className="courses-header">
             <h1>AI-Powered Career Courses</h1>
-            <p>Explore a variety of courses designed to advance your career in driven fields.</p>
+            <p>Explore a variety of courses designed to advance your career in AI-driven fields.</p>
           </div>
-
+          
           <div className="courses-grid">
             {courses.length > 0 ? (
               courses.map((course) => (
                 <motion.div
                   key={course.id}
                   className="course-card"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <div className="course-content">
                     <h2>{course.course_title}</h2>
@@ -115,7 +124,7 @@ const Courses = () => {
                         <i className="fas fa-book"></i>
                         {course.modules_count} Modules
                       </span>
-                      <button className="enroll-btn">Enroll Now</button>
+                      <button className="enroll-btn" onClick={() => handleCourseClick(course.occupation_code)}>Enroll Now</button>
                     </div>
                   </div>
                 </motion.div>
