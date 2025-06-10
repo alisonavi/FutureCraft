@@ -8,6 +8,8 @@ const Courses = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [coursesPerPage] = useState(6); // Display 6 courses per page
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,6 +63,32 @@ const Courses = () => {
     navigate(`/courses/${occupationCode}`);
   };
 
+  // Get current courses for pagination
+  const indexOfLastCourse = currentPage * coursesPerPage;
+  const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
+  const currentCourses = courses.slice(indexOfFirstCourse, indexOfLastCourse);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const totalPages = Math.ceil(courses.length / coursesPerPage);
+
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(
+        <button
+          key={i}
+          onClick={() => paginate(i)}
+          className={`pagination-btn ${currentPage === i ? 'active' : ''}`}
+        >
+          {i}
+        </button>
+      );
+    }
+    return pageNumbers;
+  };
+
   return (
     <motion.div
       className="courses-page"
@@ -108,8 +136,8 @@ const Courses = () => {
           </div>
           
           <div className="courses-grid">
-            {courses.length > 0 ? (
-              courses.map((course) => (
+            {currentCourses.length > 0 ? (
+              currentCourses.map((course) => (
                 <motion.div
                   key={course.id}
                   className="course-card"
@@ -135,6 +163,26 @@ const Courses = () => {
               </div>
             )}
           </div>
+
+          {totalPages > 1 && (
+            <div className="pagination">
+              <button 
+                onClick={() => paginate(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="pagination-nav-btn"
+              >
+                Previous
+              </button>
+              {renderPageNumbers()}
+              <button
+                onClick={() => paginate(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="pagination-nav-btn"
+              >
+                Next
+              </button>
+            </div>
+          )}
         </main>
       </div>
     </motion.div>
