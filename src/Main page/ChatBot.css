@@ -78,7 +78,6 @@
   line-height: 1.6;
   word-break: break-word;
 
-  /* preserve intentional breaks but collapse extra blank lines */
   white-space: pre-wrap;
 
   position: relative;

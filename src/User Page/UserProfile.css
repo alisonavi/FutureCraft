@@ -211,25 +211,70 @@
 .analysis-card {
   background: var(--gradient-secondary);
   border-radius: 1.5rem;
-  padding: 2rem;
-  margin-top: 2rem;
+  padding: 2.5rem 3rem;
+  margin-top: 2.5rem;
+  box-shadow: 0 8px 32px rgba(0, 21, 56, 0.25);
+  border: 1px solid rgba(59, 176, 212, 0.1);
 }
 
 .analysis-card h2 {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   font-weight: 800;
   color: var(--color-white);
-  margin: 0 0 1.5rem 0;
-  background: var(--gradient-accent);
+  margin: 0 0 1.8rem 0;
+  background: linear-gradient(90deg, #66b1e5, #00e0fe);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .analysis-content {
   color: var(--color-gray-100);
   font-size: 1.1rem;
   line-height: 1.7;
+}
+
+.analysis-content p {
+  margin-bottom: 1.5rem;
+}
+
+.analysis-content strong {
+  color: var(--color-accent-light);
+}
+
+.analysis-content ul,
+.analysis-content ol {
+  margin-top: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.analysis-content ul {
+  list-style-type: disc;
+}
+
+.analysis-content ol {
+  list-style-type: decimal;
+}
+
+.analysis-content li {
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+  line-height: 1.8;
+  color: var(--color-gray-200);
+}
+
+.analysis-content li::marker {
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+.analysis-content h3 {
+  font-size: 1.3rem;
+  color: var(--color-accent);
+  margin-top: 2rem;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
 }
 
 .analysis-loading,
@@ -329,6 +374,31 @@
   .profile-stats-grid {
     grid-template-columns: 1fr;
   }
+
+  .analysis-card {
+    padding: 2rem 2.5rem;
+    margin-top: 2rem;
+  }
+
+  .analysis-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .analysis-content {
+    font-size: 1rem;
+  }
+
+  .analysis-content h3 {
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .analysis-content li {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -352,6 +422,31 @@
 
   .profile-btn {
     width: 100%;
+  }
+
+  .analysis-card {
+    padding: 1.5rem 1.8rem;
+    margin-top: 1.5rem;
+  }
+
+  .analysis-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .analysis-content {
+    font-size: 0.9rem;
+  }
+
+  .analysis-content h3 {
+    font-size: 1rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .analysis-content li {
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
   }
 }
 

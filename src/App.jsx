@@ -24,6 +24,7 @@ import Privacy from './Reusable components/Privacy';
 import ForgotPassword from './Login page/ForgotPassword';
 import ResetPassword from './Login page/ResetPassword';
 import VerifyEmail from './Login page/VerifyEmail';
+import Courses from './Courses page/Courses';
 
 const App = () => {
   useEffect(() => {
@@ -64,6 +65,7 @@ const App = () => {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/game" element={<ProtectedGameRoute />} />
+          <Route path='/courses' element={<Courses />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <AnimatePresence />

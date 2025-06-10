@@ -42,12 +42,12 @@ const Navbar = () => {
             <span className="hamburger-bar"></span>
           </button>
           <nav className="nav-links">
-            <Link to="/" onClick={handleNavLinkClick}>Home</Link>
             <Link to="/preftest" onClick={handleNavLinkClick}>Preference Test</Link>
             <Link to="/explore" onClick={handleNavLinkClick}>Explore Paths</Link>
             {isLoggedIn ? (
               <>
                 <Link to="/profile" onClick={handleNavLinkClick}>Profile</Link>
+                <Link to="/courses" onClick={handleNavLinkClick}>Courses</Link>
               </>
             ) : (
               <>
