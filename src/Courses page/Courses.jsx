@@ -97,7 +97,7 @@ const Courses = () => {
         <main className="courses-main">
           <div className="courses-header">
             <h1>AI-Powered Career Courses</h1>
-            <p>Explore a variety of courses designed to advance your career in AI-driven fields.</p>
+            <p>Explore a variety of courses designed to advance your career in driven fields.</p>
           </div>
 
           <div className="courses-grid">

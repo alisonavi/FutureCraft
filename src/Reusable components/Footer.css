@@ -103,7 +103,6 @@
 
 .footer-link:hover {
   color: var(--color-white);
-  padding-left: 8px;
 }
 
 .footer-link:hover::before {

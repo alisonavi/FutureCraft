@@ -129,7 +129,6 @@ export default function Preference({ items, onComplete }) {
                   {current.question}
                 </div>
                 <div className="likert-circles-row">
-                  <span className="likert-label left">Hate it</span>
                   <div className="likert-circles-row-inner">
                     {likertOptions.map(opt => (
                       <label
@@ -145,10 +144,14 @@ export default function Preference({ items, onComplete }) {
                           onChange={() => handleSelect(opt)}
                         />
                         <span className="likert-circle" style={{ width: likertSizes[opt], height: likertSizes[opt] }}></span>
+                        {(opt === 1 || opt === 5) && (
+                          <span className="likert-option-label">
+                            {likertLabels[opt]}
+                          </span>
+                        )}
                       </label>
                     ))}
                   </div>
-                  <span className="likert-label right">Love it</span>
                 </div>
                 {/* Navigation arrows for all but last question */}
                 {index + 1 < shuffled.length && (
