@@ -139,6 +139,11 @@
   max-width: 800px;
   margin: 0 auto 4rem auto;
   animation: fadeIn 1.2s cubic-bezier(0.4,0,0.2,1);
+  background: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  border: none !important;
+  isolation: isolate;
 }
 
 .course-detail-header h1 {
@@ -158,6 +163,8 @@
   color: var(--color-white) !important;
   box-shadow: none !important;
   border: none !important;
+  display: block !important;
+  isolation: isolate;
 }
 
 .course-content-sections {

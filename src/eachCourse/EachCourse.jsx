@@ -93,7 +93,11 @@ const EachCourse = () => {
           <div className="modules-list">
             {course.course_data.modules && course.course_data.modules.length > 0 ? (
               course.course_data.modules.map((module) => (
-                <CourseModule key={module.moduleId} module={module} />
+                <CourseModule 
+                  key={module.moduleId} 
+                  module={module} 
+                  occupationId={occupationId}
+                />
               ))
             ) : (
               <p>No modules available for this course.</p>

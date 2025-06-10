@@ -1,0 +1,286 @@
+.each-module-page {
+  min-height: 100vh;
+  background: var(--gradient-primary);
+  padding: 6rem 2rem 4rem 2rem;
+  color: var(--color-white);
+}
+
+.module-detail-header {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 3rem auto;
+  animation: fadeIn 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+.module-detail-header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.8rem;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.course-title-link {
+  font-size: 1.1rem;
+  color: var(--color-gray-300);
+  margin-bottom: 1rem;
+}
+
+.course-title-link a {
+  color: var(--color-accent-light);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.course-title-link a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.module-description {
+  font-size: 1.2rem;
+  opacity: 0.8;
+  line-height: 1.6;
+  color: var(--color-gray-200);
+}
+
+.module-content-sections {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.lesson-section {
+  background: rgba(2, 21, 56, 0.97);
+  border-radius: 1.25rem;
+  padding: 2.5rem;
+  border: 1px solid var(--color-accent);
+  box-shadow: 0 0 32px 4px rgba(0,21,56,0.18), 0 8px 32px rgba(0,21,56,0.18);
+}
+
+.lesson-section h2 {
+  font-size: 2.2rem;
+  color: var(--color-accent-light);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lesson-content {
+  font-size: 1rem;
+  color: var(--color-gray-200);
+  line-height: 1.7;
+}
+
+.lesson-content p {
+  margin-bottom: 1rem;
+}
+
+.lesson-content strong {
+  color: var(--color-white);
+  font-weight: bold;
+}
+
+.lesson-content em {
+  font-style: italic;
+  color: var(--color-accent-light);
+}
+
+.lesson-content ul, .lesson-content ol {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  color: var(--color-gray-300);
+}
+
+.lesson-content li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.lesson-content a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.lesson-content a:hover {
+  color: var(--color-accent-light);
+  text-decoration: underline;
+}
+
+.exercises-section {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.8rem;
+  border: 1px dashed rgba(59, 176, 212, 0.3);
+}
+
+.exercises-section h3 {
+  font-size: 1.8rem;
+  color: var(--color-accent-light);
+  margin-bottom: 1rem;
+}
+
+.exercises-section p {
+  font-size: 0.95rem;
+  color: var(--color-gray-300);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.exercise-questions,
+.exercise-resources {
+  margin-top: 1.5rem;
+}
+
+.exercise-questions h4,
+.exercise-resources h4 {
+  font-size: 1.1rem;
+  color: var(--color-accent);
+  margin-bottom: 0.8rem;
+}
+
+.exercise-questions ul,
+.exercise-resources ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  color: var(--color-gray-300);
+}
+
+.exercise-questions li,
+.exercise-resources li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.exercise-resources li a {
+  color: var(--color-gray-400);
+  transition: color 0.3s ease;
+}
+
+.exercise-resources li a:hover {
+  color: var(--color-white);
+}
+
+/* Loading and Error States */
+.each-module-page.loading-state, 
+.each-module-page.error-state, 
+.each-module-page.no-module-found {
+  text-align: center;
+  padding: 5rem 0;
+  font-size: 1.2rem;
+  color: var(--color-gray-300);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .each-module-page {
+    padding: 5rem 1rem 3rem 1rem;
+  }
+
+  .module-detail-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .module-description {
+    font-size: 1rem;
+  }
+
+  .lesson-section {
+    padding: 1.5rem;
+  }
+
+  .lesson-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .lesson-content {
+    font-size: 0.9rem;
+  }
+
+  .exercises-section {
+    padding: 1.5rem;
+  }
+
+  .exercises-section h3 {
+    font-size: 1.5rem;
+  }
+
+  .exercise-questions h4,
+  .exercise-resources h4 {
+    font-size: 1rem;
+  }
+
+  .exercise-questions ul,
+  .exercise-resources ul {
+    padding-left: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .each-module-page {
+    padding: 4rem 0.5rem 2rem 0.5rem;
+  }
+
+  .module-detail-header h1 {
+    font-size: 2rem;
+  }
+
+  .module-description {
+    font-size: 0.9rem;
+  }
+
+  .lesson-section {
+    padding: 1rem;
+  }
+
+  .lesson-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .lesson-content {
+    font-size: 0.85rem;
+  }
+
+  .exercises-section {
+    padding: 1rem;
+  }
+
+  .exercises-section h3 {
+    font-size: 1.2rem;
+  }
+
+  .exercise-questions h4,
+  .exercise-resources h4 {
+    font-size: 0.9rem;
+  }
+}

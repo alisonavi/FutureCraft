@@ -25,7 +25,9 @@ import ForgotPassword from './Login page/ForgotPassword';
 import ResetPassword from './Login page/ResetPassword';
 import VerifyEmail from './Login page/VerifyEmail';
 import Courses from './Courses page/Courses';
-import EachCourse from './eachCourse/EachCourse';
+import EachModule from './eachCourse/eachModule';
+import EachCourse from './eachCourse/eachCourse';
+
 
 const App = () => {
   useEffect(() => {
@@ -68,6 +70,7 @@ const App = () => {
           <Route path="/game" element={<ProtectedGameRoute />} />
           <Route path='/courses' element={<Courses />} />
           <Route path='/courses/:occupationId' element={<EachCourse />} />
+          <Route path='/courses/:occupationId/:moduleId' element={<EachModule />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <AnimatePresence />
