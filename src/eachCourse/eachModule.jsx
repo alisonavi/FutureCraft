@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import './EachModule.css';
+import './eachModule.css';
 
 const EachModule = () => {
   const { occupationId, moduleId } = useParams();
