@@ -20,7 +20,7 @@ const Terms = () => (
       <h2>7. Changes</h2>
       <p>We may update these Terms at any time. Continued use of FutureCraft means you accept the new terms.</p>
       <h2>8. Contact</h2>
-      <p>If you have questions about these Terms, contact us at <a href="mailto:support@futurecraft.com">support@futurecraft.com</a>.</p>
+      <p>If you have questions about these Terms, contact us at <a href="mailto:futurecraft@internet.ru">futurecraft@internet.ru</a>.</p>
     </div>
   </div>
 );

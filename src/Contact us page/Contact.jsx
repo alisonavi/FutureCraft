@@ -69,7 +69,7 @@ const Contact = () => {
                   <h3>Contact Information</h3>
                   <div className="info-item">
                     <i className="fas fa-envelope"></i>
-                    <p>support@futurecraft.com</p>
+                    <p>futurecraft@internet.ru</p>
                   </div>
                   <div className="info-item">
                     <i className="fas fa-phone"></i>

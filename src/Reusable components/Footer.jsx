@@ -23,7 +23,7 @@ const Footer = () => {
         </div>
         <div className="footer-section contact">
           <h4>Contact</h4>
-          <p>Email: <a href="mailto:support@futurecraft.com" className="footer-link">support@futurecraft.com</a></p>
+          <p>Email: <a href="mailto:futurecraft@internet.ru" className="footer-link">futurecraft@internet.ru</a></p>
           <div className="footer-socials">
             <a href="https://twitter.com/" className="footer-social" title="Twitter" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
             <a href="https://instagram.com/" className="footer-social" title="Instagram" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
