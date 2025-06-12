@@ -35,7 +35,13 @@ const GameContainer = ({ previewOnly = false }) => {
                     onClick={handlePlayClick}
                     disabled={previewOnly}
                     title={previewOnly ? 'Log in to play the game' : ''}
-                    style={previewOnly ? { cursor: 'not-allowed', opacity: 0.6 } : {}}
+                    style={{
+                      cursor: previewOnly ? 'not-allowed' : 'pointer',
+                      opacity: previewOnly ? 0.6 : 1,
+                      pointerEvents: 'auto',
+                      zIndex: 10,
+                      position: 'relative'
+                    }}
                   >
                     <span className="play-icon">▶</span>
                     {previewOnly ? 'Log in to Play' : 'Play Now'}
@@ -71,7 +77,22 @@ const GameContainer = ({ previewOnly = false }) => {
           {isPlaying && (
             <button
               className="fullscreen-button"
-              onClick={handleFullscreen}
+              style={{
+                pointerEvents: 'auto',
+                zIndex: 10,
+                position: 'relative'
+              }}
+              onClick={() => {
+                // Try to find the Unity canvas and request fullscreen directly
+                const unityCanvas = document.querySelector('canvas');
+                if (unityCanvas && unityCanvas.requestFullscreen) {
+                  unityCanvas.requestFullscreen();
+                } else {
+                  // fallback: try the old button if it exists
+                  const btn = document.getElementById('unity-fullscreen-button');
+                  if (btn) btn.click();
+                }
+              }}
             >
               Fullscreen
             </button>
