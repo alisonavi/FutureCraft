@@ -26,13 +26,13 @@ import ResetPassword from './Login page/ResetPassword';
 import VerifyEmail from './Login page/VerifyEmail';
 import Courses from './Courses page/Courses';
 import EachModule from './eachCourse/eachModule';
-import EachCourse from './eachCourse/EachCourse';
-
+import EachCourse from './eachCourse/eachCourse';
+// import EachCourse from './eachCourse/EachCourse';
 
 const App = () => {
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
-    fetch('https://207.127.93.193/sanctum/csrf-cookie', {
+    fetch('https://api.future-craft.ru/sanctum/csrf-cookie', {
       method: 'GET',
       credentials: 'include',
     }).catch(() => { });
