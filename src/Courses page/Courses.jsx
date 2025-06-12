@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import './Courses.css';
 
 const Courses = () => {
@@ -11,6 +11,12 @@ const Courses = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [coursesPerPage] = useState(6); // Display 6 courses per page
   const navigate = useNavigate();
+
+  // Add authentication check
+  const token = localStorage.getItem('access_token');
+  if (!token) {
+    return <Navigate to="/login" />;
+  }
 
   useEffect(() => {
     const fetchCourses = async () => {

@@ -103,14 +103,16 @@ const EachModule = () => {
                   <h3>Exercises</h3>
                   <p>{lesson.exercises.description}</p>
                   {lesson.exercises.questions && lesson.exercises.questions.length > 0 && (
-                    <div className="exercise-questions">
-                      <h4>Questions:</h4>
-                      <ul>
-                        {lesson.exercises.questions.map((question, index) => (
-                          <li key={index}>{question.question}</li>
-                        ))}
-                      </ul>
-                    </div>
+                    lesson.exercises.questions.filter(q => q.question && q.question.trim() !== '').length > 0 && (
+                      <div className="exercise-questions">
+                        <h4>Questions:</h4>
+                        <ul>
+                          {lesson.exercises.questions.filter(q => q.question && q.question.trim() !== '').map((question, index) => (
+                            <li key={index}>{question.question}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )
                   )}
                   {lesson.exercises.texts && lesson.exercises.texts.length > 0 && (
                     <div className="exercise-resources">

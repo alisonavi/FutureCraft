@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import CourseModule from './CourseModule';
 import './EachCourse.css';
-
 const EachCourse = () => {
+  const navigate = useNavigate();
   const { occupationId } = useParams();
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  let token = localStorage.getItem('access_token');
+
+  if (!token) {
+    return <Navigate to='/login' />
+  }
 
   useEffect(() => {
     const fetchCourseDetails = async () => {
@@ -93,9 +98,9 @@ const EachCourse = () => {
           <div className="modules-list">
             {course.course_data.modules && course.course_data.modules.length > 0 ? (
               course.course_data.modules.map((module) => (
-                <CourseModule 
-                  key={module.moduleId} 
-                  module={module} 
+                <CourseModule
+                  key={module.moduleId}
+                  module={module}
                   occupationId={occupationId}
                 />
               ))

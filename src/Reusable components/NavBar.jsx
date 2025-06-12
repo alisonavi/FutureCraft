@@ -58,6 +58,7 @@ const Navbar = () => {
             {isLoggedIn && (
               <Link to="/game" onClick={handleNavLinkClick}>Game</Link>
             )}
+
             <Link to="/contact" onClick={handleNavLinkClick}>Contact</Link>
 
           </nav>
