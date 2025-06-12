@@ -4,11 +4,11 @@ import './ThreeCardsSection.css';
 import ChatBot from './ChatBot';
 
 const careerPaths = [
-  { date: 'Monday, June 3, 2025', title: 'AI & Data Science Bootcamp', fields: ['Data Science', 'AI Engineering'] },
-  { date: 'Wednesday, June 5, 2025', title: 'Creative Design Sprint', fields: ['Graphic Design', 'UX/UI'] },
-  { date: 'Friday, June 7, 2025', title: 'Healthcare & Well-being Panel', fields: ['Nursing', 'Therapy'] },
-  { date: 'Monday, June 10, 2025', title: 'Sustainability Careers Forum', fields: ['Environmental Policy', 'Green Energy'] },
-  { date: 'Thursday, June 13, 2025', title: 'Business & Analytics Day', fields: ['Business Intelligence', 'Analytics'] },
+  { date: 'Monday, June 16, 2025', title: 'AI & Data Science Bootcamp', fields: ['Data Science', 'AI Engineering'] },
+  { date: 'Wednesday, June 18, 2025', title: 'Creative Design Sprint', fields: ['Graphic Design', 'UX/UI'] },
+  { date: 'Friday, June 27, 2025', title: 'Healthcare & Well-being Panel', fields: ['Nursing', 'Therapy'] },
+  { date: 'Monday, July 2, 2025', title: 'Sustainability Careers Forum', fields: ['Environmental Policy', 'Green Energy'] },
+  { date: 'Friday, July 11, 2025', title: 'Business & Analytics Day', fields: ['Business Intelligence', 'Analytics'] },
 ];
 
 export default function ThreeCardsSection() {
@@ -28,7 +28,7 @@ export default function ThreeCardsSection() {
 
   const scroll = (dir) => {
     if (!carouselRef.current) return;
-    
+
     const newIndex = currentIndex + dir;
     if (newIndex >= 0 && newIndex <= maxIndex) {
       const cardWidth = carouselRef.current.querySelector('.three-card').offsetWidth;
