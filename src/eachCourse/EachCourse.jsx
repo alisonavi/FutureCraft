@@ -18,7 +18,7 @@ const EachCourse = () => {
   useEffect(() => {
     const fetchCourseDetails = async () => {
       try {
-        const response = await fetch(`https://207.127.93.193/api/ai-courses/occupation/${occupationId}`, {
+        const response = await fetch(`https://api.future-craft.ru/api/ai-courses/occupation/${occupationId}`, {
           method: 'GET',
           credentials: 'include',
           headers: {

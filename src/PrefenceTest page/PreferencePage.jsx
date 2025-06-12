@@ -14,7 +14,7 @@ export default function PreferencePage() {
     if (!isLoggedIn) return;
     setLoading(true);
     setError('');
-    fetch('https://207.127.93.193/api/preference-tests', {
+    fetch('https://api.future-craft.ru/api/preference-tests', {
       method: 'GET',
       credentials: 'include',
     })

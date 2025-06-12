@@ -17,7 +17,7 @@ const VerifyEmail = () => {
     setMessage(null);
     setLoading(true);
     try {
-      const res = await fetch('https://207.127.93.193/api/register/verify', {
+      const res = await fetch('https://api.future-craft.ru/api/register/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, code })

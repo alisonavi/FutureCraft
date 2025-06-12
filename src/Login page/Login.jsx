@@ -35,7 +35,7 @@ const LoginPage = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://207.127.93.193/api/login', {
+      const response = await fetch('https://api.future-craft.ru/api/login', {
         method: 'POST',
         credentials: 'include',
         headers: {

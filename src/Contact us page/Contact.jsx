@@ -20,7 +20,7 @@ const Contact = () => {
     setStatus({ type: 'info', message: 'Sending message…' });
 
     try {
-      const res = await fetch('https://207.127.93.193/api/feedback', {
+      const res = await fetch('https://api.future-craft.ru/api/feedback', {
         method: 'POST',
         credentials: 'include',
         headers: {

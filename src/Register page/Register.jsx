@@ -34,7 +34,7 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await fetch('https://207.127.93.193/api/register/request', {
+      const response = await fetch('https://api.future-craft.ru/api/register/request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', credentials: 'include', },
         body: JSON.stringify({

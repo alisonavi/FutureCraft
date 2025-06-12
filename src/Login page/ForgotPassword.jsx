@@ -12,7 +12,7 @@ const ForgotPassword = () => {
     setMessage(null);
     setLoading(true);
     try {
-      const res = await fetch('https://207.127.93.193/api/forgot-password', {
+      const res = await fetch('https://api.future-craft.ru/api/forgot-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })

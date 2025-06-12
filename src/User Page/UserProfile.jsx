@@ -39,7 +39,7 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch('https://207.127.93.193/api/user', {
+        const response = await fetch('https://api.future-craft.ru/api/user', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const UserProfile = () => {
       setAnalysisLoading(true);
       setAnalysisError('');
       try {
-        const res = await fetch('https://207.127.93.193/api/preference-analysis', {
+        const res = await fetch('https://api.future-craft.ru/api/preference-analysis', {
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -127,7 +127,7 @@ const UserProfile = () => {
     setEditLoading(true);
     setEditMessage('');
     try {
-      const response = await fetch('https://207.127.93.193/api/user', {
+      const response = await fetch('https://api.future-craft.ru/api/user', {
         method: 'PUT',
         credentials: 'include',
         headers: {
@@ -200,7 +200,7 @@ const UserProfile = () => {
 
     setIsResettingPassword(true);
     try {
-      const response = await fetch('https://207.127.93.193/api/user/password', {
+      const response = await fetch('https://api.future-craft.ru/api/user/password', {
         method: 'PUT',
         credentials: 'include',
         headers: {

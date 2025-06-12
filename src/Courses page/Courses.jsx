@@ -21,7 +21,7 @@ const Courses = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch('https://207.127.93.193/api/ai-courses', {
+        const response = await fetch('https://api.future-craft.ru/api/ai-courses', {
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -108,25 +108,25 @@ const Courses = () => {
             <h2>Categories</h2>
           </div>
           <nav className="category-nav">
-            <button 
+            <button
               className={`category-btn ${selectedCategory === 'all' ? 'active' : ''}`}
               onClick={() => setSelectedCategory('all')}
             >
               All Courses
             </button>
-            <button 
+            <button
               className={`category-btn ${selectedCategory === 'ai' ? 'active' : ''}`}
               onClick={() => setSelectedCategory('ai')}
             >
               AI & Machine Learning
             </button>
-            <button 
+            <button
               className={`category-btn ${selectedCategory === 'data' ? 'active' : ''}`}
               onClick={() => setSelectedCategory('data')}
             >
               Data Science
             </button>
-            <button 
+            <button
               className={`category-btn ${selectedCategory === 'web' ? 'active' : ''}`}
               onClick={() => setSelectedCategory('web')}
             >
@@ -140,7 +140,7 @@ const Courses = () => {
             <h1>AI-Powered Career Courses</h1>
             <p>Explore a variety of courses designed to advance your career in AI-driven fields.</p>
           </div>
-          
+
           <div className="courses-grid">
             {currentCourses.length > 0 ? (
               currentCourses.map((course) => (
@@ -172,7 +172,7 @@ const Courses = () => {
 
           {totalPages > 1 && (
             <div className="pagination">
-              <button 
+              <button
                 onClick={() => paginate(currentPage - 1)}
                 disabled={currentPage === 1}
                 className="pagination-nav-btn"
