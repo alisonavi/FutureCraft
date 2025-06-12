@@ -97,38 +97,22 @@ const ChatBot = () => {
       </div>
 
       <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          padding: '0.5rem 1rem'
-        }}
+        className="deep-think-control-wrapper"
       >
         <label
-          style={{
-            color: 'var(--color-gray-200)',
-            fontSize: '1rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            cursor: 'pointer'
-          }}
+          className="deep-think-label"
         >
           <input
             type="checkbox"
             checked={deepThink}
             onChange={() => setDeepThink(v => !v)}
-            style={{ accentColor: '#3BB0D4', width: 18, height: 18 }}
+            className="deep-think-checkbox"
           />
-          Deep Think
+          <span className="deep-think-slider"></span>
+          <span className="deep-think-text">Deep Think</span>
         </label>
         <span
-          style={{
-            marginLeft: '0.7rem',
-            color: deepThink ? '#3BB0D4' : '#a5b4fc',
-            fontWeight: 600,
-            fontSize: '0.95rem'
-          }}
+          className={`deep-think-status ${deepThink ? 'on' : 'off'}`}
         >
           {deepThink ? 'ON' : 'OFF'}
         </span>
