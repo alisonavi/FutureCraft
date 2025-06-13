@@ -171,6 +171,31 @@
   color: var(--color-white);
 }
 
+.lesson-objectives {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(59, 176, 212, 0.07);
+  border-radius: 0.8rem;
+  border: 1px solid rgba(59, 176, 212, 0.18);
+}
+
+.lesson-objectives h3 {
+  font-size: 1.3rem;
+  color: var(--color-accent-light);
+  margin-bottom: 1rem;
+}
+
+.lesson-objectives ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  color: var(--color-gray-200);
+}
+
+.lesson-objectives li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
 /* Loading and Error States */
 .each-module-page.loading-state, 
 .each-module-page.error-state, 

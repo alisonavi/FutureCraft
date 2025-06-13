@@ -156,3 +156,9 @@ a, button, input, select, textarea {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent);
 }
+
+/* OVERRIDE: Remove all transform and shadow effects from three-nav buttons */
+.three-nav, .three-nav:hover, .three-nav:focus, .three-nav:active {
+  transform: none !important;
+  box-shadow: 0 2px 12px rgba(0,21,56,0.10) !important;
+}

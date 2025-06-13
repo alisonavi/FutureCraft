@@ -69,9 +69,9 @@
 .expand-icon, .expand-icon.expanded,
 .module-content, .module-description,
 .lessons-list, .lesson-item, .lesson-item h4,
-.lesson-content, .lesson-content p, .lesson-content strong,
+/* .lesson-content, .lesson-content p, .lesson-content strong,
 .lesson-content ul, .lesson-content ol, .lesson-content li,
-.lesson-content a, .lesson-content a:hover,
+.lesson-content a, .lesson-content a:hover, */
 .exercises, .exercises h5, .exercises ul, .exercises li, .exercise-resources,
 .exercise-resources h6, .exercise-resources ul, .exercise-resources li a {
   display: none;

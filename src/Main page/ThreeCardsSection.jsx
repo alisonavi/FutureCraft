@@ -49,7 +49,9 @@ export default function ThreeCardsSection() {
           aria-label="Scroll left"
           disabled={currentIndex === 0}
         >
-          ←
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.5 19L9.5 12L15.5 5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </button>
 
         <div className="three-carousel" ref={carouselRef}>
@@ -72,7 +74,9 @@ export default function ThreeCardsSection() {
           aria-label="Scroll right"
           disabled={currentIndex === maxIndex}
         >
-          →
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 5L15 12L9 19" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </button>
       </div>
 

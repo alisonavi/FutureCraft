@@ -30,6 +30,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+  display: block;
 }
 
 /* Carousel track */
@@ -41,6 +42,7 @@
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
   padding: 1rem 0;
+  position: relative; /* For absolute arrows */
 }
 
 .three-carousel::-webkit-scrollbar {
@@ -52,11 +54,11 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border: none;
   border-radius: 50%;
-  background: var(--btn-bg);
+  background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(0,177,229,0.10));
   color: var(--text);
   font-size: 1.25rem;
   cursor: pointer;
@@ -64,13 +66,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.3s ease;
   pointer-events: auto;
+  box-shadow: 0 2px 12px rgba(0,21,56,0.10);
+  border: 1.5px solid rgba(255,255,255,0.18);
+  padding: 0;
 }
 
-.three-nav:hover {
-  background: var(--btn-bg);
-  transform: translateY(-50%);
+.three-nav svg {
+  display: block;
+  margin: auto;
+  width: 28px;
+  height: 28px;
+}
+
+.three-nav:active {
+  transform: translateY(-50%) scale(0.93);
+  background: linear-gradient(135deg, rgba(0,177,229,0.13), rgba(255,255,255,0.10));
 }
 
 .three-nav:disabled {
@@ -84,8 +95,12 @@
   background: var(--btn-bg);
 }
 
-.three-nav-prev { left: -18px; }
-.three-nav-next { right: -18px; }
+.three-nav-prev {
+  left: -48px;
+}
+.three-nav-next {
+  right: -48px;
+}
 
 /* Individual card */
 .three-card {

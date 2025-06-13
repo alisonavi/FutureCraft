@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './eachModule.css';
+import { marked } from 'marked';
 
 const EachModule = () => {
   const { occupationId, moduleId } = useParams();
@@ -9,6 +10,7 @@ const EachModule = () => {
   const [module, setModule] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
 
   useEffect(() => {
     const fetchModuleDetails = async () => {
@@ -44,11 +46,28 @@ const EachModule = () => {
     }
   }, [occupationId, moduleId]);
 
-  const createMarkup = (htmlContent) => {
-    // It's crucial to sanitize HTML content to prevent XSS attacks.
-    // For this example, we are assuming the content from the API is safe.
-    // In a production environment, you would use a library like DOMPurify.
-    return { __html: htmlContent };
+  // Clean and convert markdown lesson content to HTML
+  const processLessonContent = (raw) => {
+    if (!raw) return '';
+    let cleaned = raw;
+    // Remove <think>...</think> tags
+    cleaned = cleaned.replace(/<think>[\s\S]*?<\/think>/gi, '');
+    // Remove **Lesson ID: ...** and similar headers
+    cleaned = cleaned.replace(/\*\*Lesson ID:[^\n]*\*\*\s*/gi, '');
+    cleaned = cleaned.replace(/\*\*Title:[^\n]*\*\*\s*/gi, '');
+    cleaned = cleaned.replace(/\*\*Lesson Title:[^\n]*\*\*\s*/gi, '');
+    cleaned = cleaned.replace(/\*\*Module:[^\n]*\*\*\s*/gi, '');
+    cleaned = cleaned.replace(/\*\*ID:[^\n]*\*\*\s*/gi, '');
+    // Remove standalone lesson headers without ** formatting
+    cleaned = cleaned.replace(/^Lesson ID:[^\n]*\n?/gim, '');
+    cleaned = cleaned.replace(/^Title:[^\n]*\n?/gim, '');
+    // Remove exercise type indicators
+    cleaned = cleaned.replace(/\b(quiz|readingAssignment|writingAssignment)\b\s*\n?/gi, '');
+    // Clean up extra whitespace
+    cleaned = cleaned.replace(/\n\s*\n/g, '\n\n');
+    cleaned = cleaned.trim();
+    // Convert markdown to HTML
+    return marked.parse(cleaned);
   };
 
   if (loading) {
@@ -85,40 +104,74 @@ const EachModule = () => {
     >
       <div className="module-detail-header">
         <h1>{module.moduleTitle}</h1>
+        <p><strong>Module ID:</strong> {module.moduleId}</p>
         {course && (
           <p className="course-title-link">From: <a href={`/courses/${occupationId}`}>{course.course_data.courseTitle}</a></p>
         )}
         <p className="module-description">{module.moduleDescription}</p>
+        {/* Show any other module fields if present */}
+        {Object.entries(module).map(([key, value]) => (
+          ["moduleId", "moduleTitle", "moduleDescription", "lessons"].includes(key) ? null : (
+            <p key={key}><strong>{key}:</strong> {typeof value === 'object' ? JSON.stringify(value) : value}</p>
+          )
+        ))}
       </div>
 
       <div className="module-content-sections">
         {module.lessons && module.lessons.length > 0 ? (
-          module.lessons.map((lesson) => (
-            <section key={lesson.lessonId} className="lesson-section">
-              <h2>{lesson.lessonTitle}</h2>
-              <div className="lesson-content" dangerouslySetInnerHTML={createMarkup(lesson.lessonContent)} />
+          <>
+            <section key={module.lessons[currentLessonIndex].lessonId} className="lesson-section">
+              <h2>{module.lessons[currentLessonIndex].lessonId}: {module.lessons[currentLessonIndex].lessonTitle}</h2>
+              <div className="lesson-content" dangerouslySetInnerHTML={{ __html: processLessonContent(module.lessons[currentLessonIndex].lessonContent) }} />
 
-              {lesson.exercises && (
+              {module.lessons[currentLessonIndex].exercises && module.lessons[currentLessonIndex].exercises.learningObjectives && module.lessons[currentLessonIndex].exercises.learningObjectives.length > 0 && (
+                <div className="lesson-objectives">
+                  <h3>Learning Objectives</h3>
+                  <ul>
+                    {module.lessons[currentLessonIndex].exercises.learningObjectives.map((obj, idx) => (
+                      <li key={idx}>{obj}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {module.lessons[currentLessonIndex].exercises && (
                 <div className="exercises-section">
                   <h3>Exercises</h3>
-                  <p>{lesson.exercises.description}</p>
-                  {lesson.exercises.questions && lesson.exercises.questions.length > 0 && (
-                    lesson.exercises.questions.filter(q => q.question && q.question.trim() !== '').length > 0 && (
-                      <div className="exercise-questions">
-                        <h4>Questions:</h4>
-                        <ul>
-                          {lesson.exercises.questions.filter(q => q.question && q.question.trim() !== '').map((question, index) => (
-                            <li key={index}>{question.question}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )
+                  {module.lessons[currentLessonIndex].exercises.description ? (() => {
+                    const lines = module.lessons[currentLessonIndex].exercises.description.split(/\n|(?=\d+\.\s)/g).map(l => l.trim()).filter(Boolean);
+                    const firstIsStep = /^\d+\.\s/.test(lines[0]);
+                    const steps = lines.filter(line => /^\d+\.\s/.test(line));
+                    const intro = !firstIsStep ? lines[0] : null;
+                    return (
+                      <>
+                        {intro && <p>{intro}</p>}
+                        {steps.length > 0 && (
+                          <ol style={{ marginBottom: '1rem', paddingLeft: '1.5rem' }}>
+                            {steps.map((step, idx) => (
+                              <li key={idx} style={{ marginBottom: '0.5rem' }}>{step.replace(/^\d+\.\s/, '')}</li>
+                            ))}
+                          </ol>
+                        )}
+                        {!intro && steps.length === 0 && <p>{module.lessons[currentLessonIndex].exercises.description}</p>}
+                      </>
+                    );
+                  })() : null}
+                  {module.lessons[currentLessonIndex].exercises.questions && module.lessons[currentLessonIndex].exercises.questions.length > 0 && (
+                    <div className="exercise-questions">
+                      <h4>Questions:</h4>
+                      <ul>
+                        {module.lessons[currentLessonIndex].exercises.questions.map((question, index) => (
+                          <li key={index}>{typeof question === 'string' ? question : question.question}</li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
-                  {lesson.exercises.texts && lesson.exercises.texts.length > 0 && (
+                  {module.lessons[currentLessonIndex].exercises.texts && module.lessons[currentLessonIndex].exercises.texts.length > 0 && (
                     <div className="exercise-resources">
                       <h4>Resources:</h4>
                       <ul>
-                        {lesson.exercises.texts.map((text, index) => (
+                        {module.lessons[currentLessonIndex].exercises.texts.map((text, index) => (
                           <li key={index}><a href={text} target="_blank" rel="noopener noreferrer">{text}</a></li>
                         ))}
                       </ul>
@@ -127,7 +180,26 @@ const EachModule = () => {
                 </div>
               )}
             </section>
-          ))
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '2rem' }}>
+              <button
+                onClick={() => setCurrentLessonIndex(i => Math.max(i - 1, 0))}
+                disabled={currentLessonIndex === 0}
+                style={{ padding: '0.7rem 2rem', borderRadius: '8px', border: 'none', background: 'var(--color-accent)', color: 'white', fontWeight: 600, fontSize: '1rem', opacity: currentLessonIndex === 0 ? 0.5 : 1, cursor: currentLessonIndex === 0 ? 'not-allowed' : 'pointer' }}
+              >
+                Previous
+              </button>
+              <span style={{ color: 'var(--color-gray-200)', fontWeight: 500 }}>
+                Lesson {currentLessonIndex + 1} of {module.lessons.length}
+              </span>
+              <button
+                onClick={() => setCurrentLessonIndex(i => Math.min(i + 1, module.lessons.length - 1))}
+                disabled={currentLessonIndex === module.lessons.length - 1}
+                style={{ padding: '0.7rem 2rem', borderRadius: '8px', border: 'none', background: 'var(--color-accent)', color: 'white', fontWeight: 600, fontSize: '1rem', opacity: currentLessonIndex === module.lessons.length - 1 ? 0.5 : 1, cursor: currentLessonIndex === module.lessons.length - 1 ? 'not-allowed' : 'pointer' }}
+              >
+                Next
+              </button>
+            </div>
+          </>
         ) : (
           <p>No lessons available for this module.</p>
         )}
