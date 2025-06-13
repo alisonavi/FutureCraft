@@ -26,8 +26,7 @@ import ResetPassword from './Login page/ResetPassword';
 import VerifyEmail from './Login page/VerifyEmail';
 import Courses from './Courses page/Courses';
 import EachModule from './eachCourse/eachModule';
-import EachCourse from './eachCourse/eachCourse';
-// import EachCourse from './eachCourse/EachCourse';
+import EachCourse from './eachCourse/EachCourse';
 
 const App = () => {
   useEffect(() => {
