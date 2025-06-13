@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 export default function UnityGame() {
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = '/WebGLBuild/Build/FCLLP2.loader.js';
+    script.src = '/WebGLBuild/Build/FCLLP3.loader.js';
     script.onload = () => {
       const container = document.querySelector('#unity-container');
       const canvas = document.querySelector('#unity-canvas');
@@ -14,9 +14,9 @@ export default function UnityGame() {
       const warningBanner = document.querySelector('#unity-warning');
 
       const config = {
-        dataUrl: '/WebGLBuild/Build/FCLLP2.data',
-        frameworkUrl: '/WebGLBuild/Build/FCLLP2.framework.js',
-        codeUrl: '/WebGLBuild/Build/FCLLP2.wasm',
+        dataUrl: '/WebGLBuild/Build/FCLLP3.data',
+        frameworkUrl: '/WebGLBuild/Build/FCLLP3.framework.js',
+        codeUrl: '/WebGLBuild/Build/FCLLP3.wasm',
         streamingAssetsUrl: '/WebGLBuild/TemplateData',
         companyName: 'YourCompany',
         productName: 'YourGame',
