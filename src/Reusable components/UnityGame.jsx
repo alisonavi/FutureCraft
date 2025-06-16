@@ -18,8 +18,8 @@ export default function UnityGame() {
         frameworkUrl: '/WebGLBuild/Build/FCLLP3.framework.js',
         codeUrl: '/WebGLBuild/Build/FCLLP3.wasm',
         streamingAssetsUrl: '/WebGLBuild/TemplateData',
-        companyName: 'YourCompany',
-        productName: 'YourGame',
+        companyName: 'ITSana',
+        productName: 'FutureCraft',
         productVersion: '1.0',
       };
 
